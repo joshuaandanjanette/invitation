@@ -1,13 +1,6 @@
 /* --- 1. CORE SETUP --- */
 * { box-sizing: border-box; }
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden; /* FIXES THE MOBILE SHIFTING */
-}
-
+html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
 body {
     min-height: 100vh;
     display: flex;
@@ -24,55 +17,38 @@ body {
 
 /* --- 2. CONTAINER & PHOTO --- */
 .container {
-    width: 90%;
-    max-width: 600px;
-    padding: 40px 20px;
-    background: rgba(18, 24, 45, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(181, 148, 16, 0.2);
-    border-radius: 15px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-    z-index: 2;
+    width: 90%; max-width: 600px; padding: 40px 20px;
+    background: rgba(18, 24, 45, 0.15); backdrop-filter: blur(10px);
+    border: 1px solid rgba(181, 148, 16, 0.2); border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 2;
 }
 
 .profile-photo {
-    width: 120px; 
-    height: 160px;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto 25px auto;
-    
-    /* THE PHYSICAL PAPER */
-    background: #fcfaf2; /* Antique paper color */
-    padding: 8px;
-    border-radius: 1px;
-    
-    /* THE VINTAGE PERFORATION: This creates real "punched holes" look */
+    width: 120px; height: 160px; object-fit: cover; display: block; margin: 0 auto 25px auto;
+    background: #fcfaf2; padding: 8px; border-radius: 1px;
     filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
-    background-image: 
-        radial-gradient(#000 0%, #000 70%, transparent 72%);
-    background-size: 18px 18px;
-    background-position: -9px -9px;
-    background-clip: content-box;
-    
-    /* This makes the "torn" edge look 3D */
-    box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+    background-image: radial-gradient(#000 0%, #000 70%, transparent 72%);
+    background-size: 18px 18px; background-position: -9px -9px;
+    background-clip: content-box; box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
 }
 
 /* --- 3. THE NAMES & TEXT --- */
 .names { display: flex; flex-direction: column; margin-bottom: 10px; }
 .top-name, .bottom-name {
-    font-family: 'Pinyon Script', cursive !important;
-    font-size: 5.5rem;
-    color: #f7e08a;
-    line-height: 1.1;
-    text-shadow: 0 0 15px #B59410;
+    font-family: 'Pinyon Script', cursive !important; font-size: 5.5rem;
+    color: #f7e08a; line-height: 1.1; text-shadow: 0 0 15px #B59410;
     animation: magicFlicker 3s infinite alternate;
 }
 .date { display: flex; flex-direction: column; margin-bottom: 10px; color: #B59410; }
 .middle-word { font-family: 'Pinyon Script', cursive !important; font-size: 2.2rem; margin: -20px 0; }
 .subtitle { font-size: 1.6rem; letter-spacing: 4px; text-transform: uppercase; color: #B59410; margin: 15px 0; }
+
+/* --- MAP LINKS STYLE --- */
+.venue-link {
+    color: #CBAC8D; text-decoration: none; border-bottom: 1px dashed rgba(181, 148, 16, 0.4);
+    transition: 0.3s; font-size: 0.9rem; letter-spacing: 1px;
+}
+.venue-link:hover { color: #f7e08a; border-bottom: 1px solid #f7e08a; }
 
 /* --- 4. HEARTBEAT COUNTDOWN --- */
 #countdown { display: flex; justify-content: center; gap: 12px; margin: 25px 0; }
@@ -81,24 +57,17 @@ body {
 .time-box small { font-size: 0.55rem; color: #E8DCC4; }
 .pulse-tick { animation: heartbeat 0.8s ease-out; }
 
-/* --- 🌹 NEW COLOR CUBES STYLES --- */
+/* --- 5. COLOR CUBES --- */
 .palette-wrap { margin: 20px 0; }
-.palette-label { font-size: 0.9rem; letter-spacing: 2px; color: #f7e08a; margin-bottom: 10px; opacity: 0.9; }
+.palette-label { font-size: 0.9rem; letter-spacing: 2px; color: #f7e08a; margin-bottom: 10px; }
 .color-cubes { display: flex; justify-content: center; gap: 10px; }
-.cube { 
-    width: 30px; 
-    height: 30px; 
-    /* A subtle gold-ish border helps the white cube stand out */
-    border: 1px solid rgba(181, 148, 16, 0.4); 
-    border-radius: 4px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
-}
+.cube { width: 30px; height: 30px; border: 1px solid rgba(181, 148, 16, 0.4); border-radius: 4px; }
 
-/* --- 5. RSVP BUTTON --- */
+/* --- 6. RSVP BUTTON --- */
 .rsvp-btn { display: inline-block; background: #6B0F1A; color: #E8DCC4; text-decoration: none; border: 1px solid #B59410; padding: 14px 45px; margin-top: 15px; letter-spacing: 2px; border-radius: 5px; transition: 0.3s; font-weight: bold; }
 .rsvp-btn:hover { background: #B59410; color: #12182d; }
 
-/* --- 6. MOBILE OVERRIDE --- */
+/* --- 7. MOBILE OVERRIDE --- */
 @media (max-width: 1000px) {
     .container { background: transparent !important; backdrop-filter: none !important; border: none !important; box-shadow: none !important; }
     .top-name, .bottom-name { font-size: 4rem; }
@@ -107,13 +76,12 @@ body {
     body { background-position: center 80%; }
 }
 
-/* --- 7. ANIMATIONS --- */
+/* --- 8. ANIMATIONS & PETALS --- */
 @keyframes magicFlicker { 0%, 100% { text-shadow: 0 0 10px #B59410; color: #f7e08a; } 50% { text-shadow: 0 0 25px #fcfaf2; color: #ffffff; } }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.1); text-shadow: 0 0 20px #f7e08a; color: #ffffff; } }
 
-/* --- THE ENCHANTED ROSE PETALS --- */
 #petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
-.petal { position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.8; box-shadow: 0 0 8px rgba(0,0,0,0.3); top: -100px; animation: fall linear forwards, drifting ease-in-out infinite alternate; }
+.petal { position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.8; top: -100px; animation: fall linear forwards, drifting ease-in-out infinite alternate; }
 .petal-dark { background: #61040a !important; }
 .petal-large { filter: blur(1.5px); opacity: 0.6; }
 @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
