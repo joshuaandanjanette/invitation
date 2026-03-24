@@ -24,6 +24,7 @@ const x = setInterval(function() {
 
 function updateElement(id, value) {
     let el = document.getElementById(id);
+    if(!el) return;
     let formattedValue = value < 10 ? "0" + value : value;
     if (el.innerHTML != formattedValue) {
         el.innerHTML = formattedValue;
@@ -33,18 +34,15 @@ function updateElement(id, value) {
     }
 }
 
-// 4. MUSIC
-window.addEventListener('click', function() {
+// 4. MUSIC TRIGGER
+const playMusic = function() {
     var audio = document.getElementById("myAudio");
-    if (audio.paused) { audio.play(); }
-}, { once: true });
+    if (audio && audio.paused) { audio.play(); }
+};
+window.addEventListener('click', playMusic, { once: true });
+window.addEventListener('touchstart', playMusic, { once: true });
 
-window.addEventListener('touchstart', function() {
-    var audio = document.getElementById("myAudio");
-    if (audio.paused) { audio.play(); }
-}, { once: true });
-
-// --- 5. ENCHANTED FALLING PETALS ---
+// 5. PETALS
 function createPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
@@ -57,12 +55,10 @@ function createPetal() {
     const startX = Math.random() * window.innerWidth;
     const baseSize = (Math.random() * 15) + 15;
     const finalSize = (baseSize * sizeMultiplier) + "px";
-    const fallDuration = (Math.random() * 5) + 10 + "s";
-    const swayDuration = (Math.random() * 2) + 3 + "s";
     petal.style.left = startX + 'px';
     petal.style.width = finalSize;
     petal.style.height = finalSize;
-    petal.style.animationDuration = fallDuration + ", " + swayDuration;
+    petal.style.animationDuration = ((Math.random() * 5) + 10) + "s, " + ((Math.random() * 2) + 3) + "s";
     container.appendChild(petal);
     setTimeout(() => { petal.remove(); }, 15000);
 }
