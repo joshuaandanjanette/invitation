@@ -45,3 +45,45 @@ window.addEventListener('touchstart', function() {
     var audio = document.getElementById("myAudio");
     if (audio.paused) { audio.play(); }
 }, { once: true });
+
+
+// --- 5. ENCHANTED FALLING PETALS LOGIC ---
+function createPetal() {
+    const container = document.getElementById('petal-container');
+    if (!container) return;
+
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+
+    // Randomly assign depth (Darker or Larger)
+    const randomDepth = Math.random();
+    let sizeMultiplier = 1;
+
+    if (randomDepth < 0.2) {
+        petal.classList.add('petal-dark');
+    } else if (randomDepth < 0.4) {
+        petal.classList.add('petal-large');
+        sizeMultiplier = 2.5; // This makes the "large" ones significantly bigger
+    }
+
+    // Randomize the petal look
+    const startX = Math.random() * window.innerWidth;
+    const baseSize = (Math.random() * 15) + 15; // Base size is already larger
+    const finalSize = (baseSize * sizeMultiplier) + "px";
+    
+    const fallDuration = (Math.random() * 5) + 10 + "s"; // Slow fall
+    const swayDuration = (Math.random() * 2) + 3 + "s";  // Random sway speed
+
+    petal.style.left = startX + 'px';
+    petal.style.width = finalSize;
+    petal.style.height = finalSize;
+    petal.style.animationDuration = fallDuration + ", " + swayDuration;
+
+    container.appendChild(petal);
+
+    // Clean up memory
+    setTimeout(() => { petal.remove(); }, 15000);
+}
+
+// Start the loop (One petal every 0.5 seconds)
+setInterval(createPetal, 500);
