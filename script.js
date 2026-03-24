@@ -22,20 +22,18 @@ const x = setInterval(function() {
     }
 }, 1000);
 
-// 3. PULSE BRAIN (Triggers only when number changes)
 function updateElement(id, value) {
     let el = document.getElementById(id);
-    let formattedValue = value < 10 ? "0" + value : value; // Keeps boxes stable
-
+    let formattedValue = value < 10 ? "0" + value : value;
     if (el.innerHTML != formattedValue) {
         el.innerHTML = formattedValue;
         el.classList.remove("pulse-tick");
-        void el.offsetWidth; // Magic reset for CSS animation
+        void el.offsetWidth;
         el.classList.add("pulse-tick");
     }
 }
 
-// 4. INVISIBLE MUSIC (Plays on first tap)
+// 4. MUSIC
 window.addEventListener('click', function() {
     var audio = document.getElementById("myAudio");
     if (audio.paused) { audio.play(); }
@@ -46,44 +44,26 @@ window.addEventListener('touchstart', function() {
     if (audio.paused) { audio.play(); }
 }, { once: true });
 
-
-// --- 5. ENCHANTED FALLING PETALS LOGIC ---
+// --- 5. ENCHANTED FALLING PETALS ---
 function createPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
-
     const petal = document.createElement('div');
     petal.classList.add('petal');
-
-    // Randomly assign depth (Darker or Larger)
     const randomDepth = Math.random();
     let sizeMultiplier = 1;
-
-    if (randomDepth < 0.2) {
-        petal.classList.add('petal-dark');
-    } else if (randomDepth < 0.4) {
-        petal.classList.add('petal-large');
-        sizeMultiplier = 2.5; // This makes the "large" ones significantly bigger
-    }
-
-    // Randomize the petal look
+    if (randomDepth < 0.2) { petal.classList.add('petal-dark'); } 
+    else if (randomDepth < 0.4) { petal.classList.add('petal-large'); sizeMultiplier = 2.5; }
     const startX = Math.random() * window.innerWidth;
-    const baseSize = (Math.random() * 15) + 15; // Base size is already larger
+    const baseSize = (Math.random() * 15) + 15;
     const finalSize = (baseSize * sizeMultiplier) + "px";
-    
-    const fallDuration = (Math.random() * 5) + 10 + "s"; // Slow fall
-    const swayDuration = (Math.random() * 2) + 3 + "s";  // Random sway speed
-
+    const fallDuration = (Math.random() * 5) + 10 + "s";
+    const swayDuration = (Math.random() * 2) + 3 + "s";
     petal.style.left = startX + 'px';
     petal.style.width = finalSize;
     petal.style.height = finalSize;
     petal.style.animationDuration = fallDuration + ", " + swayDuration;
-
     container.appendChild(petal);
-
-    // Clean up memory
     setTimeout(() => { petal.remove(); }, 15000);
 }
-
-// Start the loop (One petal every 0.5 seconds)
 setInterval(createPetal, 500);
