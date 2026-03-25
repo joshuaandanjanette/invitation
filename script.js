@@ -60,6 +60,6 @@ function createPetal() {
     petal.style.height = finalSize;
     petal.style.animationDuration = ((Math.random() * 5) + 10) + "s, " + ((Math.random() * 2) + 3) + "s";
     container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 15000);
+    setTimeout(() => { petal.remove(); }, 10000);
 }
-setInterval(createPetal, 500);
+setInterval(createPetal, 800);
