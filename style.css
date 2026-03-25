@@ -1,26 +1,52 @@
 /* --- 1. CORE SETUP --- */
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
 body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: 'Cinzel', serif !important;
     color: #fcfaf2;
+    background-color: #000; /* Fallback */
+    text-align: center;
+}
+
+/* NEW: This fixes the iPhone background issue */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('library-bg2.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
-    text-align: center;
+    z-index: -1; /* Keeps it behind everything */
+    will-change: transform; /* Helps iPhone performance */
 }
 
 /* --- 2. CONTAINER & PHOTO --- */
 .container {
-    width: 90%; max-width: 600px; padding: 40px 20px;
-    background: rgba(18, 24, 45, 0.15); backdrop-filter: blur(10px);
-    border: 1px solid rgba(181, 148, 16, 0.2); border-radius: 15px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 2;
+    width: 90%;
+    max-width: 600px;
+    padding: 40px 20px;
+    margin: 40px auto; /* Centers it vertically/horizontally */
+    background: rgba(18, 24, 45, 0.6); /* Increased opacity for iPhone */
+    
+    /* REMOVED: backdrop-filter: blur(10px); */
+    /* Blur is very "heavy" for iPhones and causes lag with petals */
+    
+    border: 1px solid rgba(181, 148, 16, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    z-index: 2;
+    position: relative;
 }
 
 .profile-photo {
@@ -81,7 +107,11 @@ body {
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.1); text-shadow: 0 0 20px #f7e08a; color: #ffffff; } }
 
 #petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
-.petal { position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.8; top: -100px; animation: fall linear forwards, drifting ease-in-out infinite alternate; }
+.petal { 
+    /* ... your other petal styles ... */
+    will-change: transform; /* Tells the phone to use the GPU */
+    pointer-events: none; /* Makes sure they don't block clicks */
+    position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.8; top: -100px; animation: fall linear forwards, drifting ease-in-out infinite alternate; }
 .petal-dark { background: #61040a !important; }
 .petal-large { filter: blur(1.5px); opacity: 0.6; }
 @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
