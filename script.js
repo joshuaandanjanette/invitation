@@ -34,15 +34,33 @@ function updateElement(id, value) {
     }
 }
 
-// 4. MUSIC TRIGGER
+// --- 4. YOUTUBE MUSIC INTEGRATION (6n9Cysnoxug) ---
+var player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '1',
+        width: '1',
+        videoId: '6n9Cysnoxug', // Your Beauty and the Beast ID
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'loop': 1,
+            'playlist': '6n9Cysnoxug' // Required for loop
+        }
+    });
+}
+
 const playMusic = function() {
-    var audio = document.getElementById("myAudio");
-    if (audio && audio.paused) { audio.play(); }
+    if (player && player.playVideo) {
+        player.playVideo();
+    }
 };
+
 window.addEventListener('click', playMusic, { once: true });
 window.addEventListener('touchstart', playMusic, { once: true });
 
-// 5. PETALS
+// 5. PETALS (Your Optimized Working Version)
 function createPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
