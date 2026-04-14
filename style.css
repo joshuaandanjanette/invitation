@@ -30,7 +30,7 @@ body::before {
     will-change: transform;
 }
 
-/* --- 2. *CONTAINER* & PHOTO --- */
+/* --- 2. CONTAINER & PHOTO --- */
 
 .profile-photo {
     width: 120px; height: 160px; object-fit: cover; display: block; margin: 0 auto 25px auto;
