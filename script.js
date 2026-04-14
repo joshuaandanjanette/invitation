@@ -44,10 +44,10 @@ function onYouTubeIframeAPIReady() {
         width: '1',
         videoId: '6n9Cysnoxug',
         playerVars: {
-            'autoplay': 1,       // Request autoplay (though browser may block)
+            'autoplay': 1,
             'controls': 0,
             'loop': 1,
-            'mute': 1,           // START MUTED (This often bypasses autoplay blocks!)
+            'mute': 1,
             'playlist': '6n9Cysnoxug'
         },
         events: {
@@ -58,22 +58,20 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
     playerReady = true;
-    // Pre-buffer the video
     event.target.playVideo(); 
 }
 
 const playMusic = function() {
     if (playerReady && player) {
-        player.unMute(); // Unmute now that user has interacted
+        player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
 };
 
-// Listen for the very first touch/click to trigger sound immediately
 window.addEventListener('click', playMusic, { once: true });
 window.addEventListener('touchstart', playMusic, { once: true });
-window.addEventListener('scroll', playMusic, { once: true }); // Adding scroll as a trigger
+window.addEventListener('scroll', playMusic, { once: true });
 
 // 5. PETALS (Your Optimized Working Version)
 function createPetal() {
