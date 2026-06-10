@@ -31,7 +31,6 @@ body::before {
 }
 
 /* --- 2. CONTAINER & PHOTO --- */
-
 .profile-photo {
     width: 120px; height: 160px; object-fit: cover; display: block; margin: 0 auto 25px auto;
     background: #fcfaf2; padding: 8px; border-radius: 1px;
@@ -97,3 +96,123 @@ body::before {
 .petal-large { filter: blur(1.5px); opacity: 0.6; }
 @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 @keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
+
+/* --- 9. STORYBOOK SCROLL & WAX SEAL OVERLAY --- */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(10, 5, 5, 0.96);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+/* Overlay Fade Out Classes */
+#intro-overlay.fade-out {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+}
+
+.scroll-wrapper {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    animation: floatScroll 4s ease-in-out infinite alternate;
+}
+
+/* Pure CSS Parchment Paper */
+.scroll-parchment {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #e1cdb5 0%, #f2e6ce 12%, #f2e6ce 88%, #e1cdb5 100%);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(139, 115, 85, 0.3);
+    border-left: 12px solid #8b7355;
+    border-right: 12px solid #8b7355;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.scroll-text {
+    font-family: 'Pinyon Script', cursive !important;
+    font-size: 2.8rem;
+    color: #4a2c0f;
+    margin: 0 0 10px 0;
+}
+
+.scroll-subtext {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #705335;
+    margin: 0;
+}
+
+/* Crimson Silk Ribbon */
+.scroll-ribbon {
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    right: -15px;
+    height: 45px;
+    background: #6B0F1A;
+    transform: translateY(-50%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Gold Wax Seal Button */
+#wax-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 75px;
+    background: radial-gradient(circle, #f7e08a 0%, #B59410 70%, #806605 100%);
+    border: 3px double #fcfaf2;
+    border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%; /* Intentionally slightly irregular like hand-pressed wax */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.4);
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    animation: sealPulse 2s infinite ease-in-out;
+    transition: transform 0.2s;
+}
+
+#wax-seal:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+#wax-seal:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+.seal-inner {
+    font-size: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    user-select: none;
+}
+
+/* Custom Scroll & Seal Animations */
+@keyframes floatScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-12px); }
+}
+
+@keyframes sealPulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 0 0px rgba(247, 224, 138, 0.4); }
+    50% { box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 15px 6px rgba(247, 224, 138, 0.6); }
+}
