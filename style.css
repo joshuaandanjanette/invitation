@@ -278,25 +278,34 @@ body::before {
 #wax-seal:active { transform: translateX(-50%) scale(0.95); }
 
 /* --- LIQUID GOLD FINGERPRINT VECTOR CONFIGURATION --- */
+/* --- FULL-BLEED SEAL FINGERPRINT --- */
 .seal-fingerprint {
-    width: 36px;
-    height: 36px;
+    width: 90%;
+    height: 90%;
     display: block;
-    /* Soft hardware-accelerated drop shadow to simulate a physical wax debossing */
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.85));
+    /* Softens the edges slightly to look molded/stamped rather than digitally sharp */
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9)) blur(0.2px);
     user-select: none;
-    transition: transform 0.2s ease, filter 0.2s ease;
+    transition: transform 0.25s ease, filter 0.25s ease;
     will-change: transform;
+    opacity: 0.9;
 }
 
-/* Subtle glow interaction when interacting with the biometric seal */
+/* Mask the button slightly so the ridges look organically stamped inside the wax rim */
+#wax-seal {
+    overflow: hidden;
+    padding: 0; /* Clear padding to let the fingerprint stretch fully */
+}
+
+/* Subtle depth shift on interaction */
 #wax-seal:hover .seal-fingerprint {
-    transform: scale(1.05);
-    filter: drop-shadow(0 2px 8px rgba(247, 224, 138, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+    transform: scale(1.03);
+    opacity: 1;
+    filter: drop-shadow(0 2px 6px rgba(247, 224, 138, 0.35)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
 }
 
 #wax-seal:active .seal-fingerprint {
-    transform: scale(0.95);
+    transform: scale(0.97);
 }
 
 /* Keyframe Core Physics */
