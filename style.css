@@ -208,6 +208,7 @@ body::before {
 
 .enchanted-rose-glow {
     width: 100%;
+    height: 180px; /* Forces the container to stay open */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,7 +219,7 @@ body::before {
 
 .enchanted-rose-img {
     width: 160px;
-    height: auto;
+    height: 160px; /* Keeps the aspect ratio locked */
     object-fit: contain;
     filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 35px #cc0022);
 }
