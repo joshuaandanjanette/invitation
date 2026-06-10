@@ -61,7 +61,7 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-// --- 4. OPEN INVITATION (BALANCED 300 VOLUME WITH THEATRICAL REVEAL DELAY) ---
+// --- 4. OPEN INVITATION (CINEMATIC PORTAL SEAMLESS EXECUTION) ---
 function openInvitation() {
     if (window.invitationOpened) return;
     window.invitationOpened = true;
@@ -86,18 +86,16 @@ function openInvitation() {
 
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
+        // Instantly trigger the Portal Zoom styling sequence
+        overlay.classList.add('portal-open');
+        
+        // Remove from memory once transition scales out completely past viewport
         setTimeout(() => {
-            overlay.classList.add('fade-out');
-            
-            setTimeout(() => {
-                overlay.remove();
-            }, 1600);
-            
+            overlay.remove();
         }, 2200);
     }
 }
 
-// --- HARDWARE-ACCELERATED IMMUNE INITIALIZATION ---
 function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
@@ -117,7 +115,6 @@ if (document.readyState === "loading") {
 }
 
 // --- 5. PARTICLE GENERATION ENGINE ---
-
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
