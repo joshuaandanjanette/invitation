@@ -275,29 +275,42 @@ body::before {
 #wax-seal:hover { transform: translateX(-50%) scale(1.06); }
 #wax-seal:active { transform: translateX(-50%) scale(0.95); }
 
-/* PERFECTLY ROUND FULL-BLEED SEAL FINGERPRINT */
-.seal-fingerprint {
-    width: 88%;
-    height: 88%;
+/* --- CUSTOM IMAGE GOLD MASK --- */
+.seal-fingerprint-custom {
+    width: 85%;
+    height: 85%;
     aspect-ratio: 1 / 1;
-    display: block;
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9)) blur(0.2px);
-    user-select: none;
-    transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+    
+    /* 1. This applies your exact wedding gold gradient across the asset */
+    background: linear-gradient(135deg, #ffffff 0%, #f7e08a 30%, #B59410 70%, #544403 100%);
+    
+    /* 2. This uses your picture as a stencil. It works best if your image has a transparent background, or is black lines on white */
+    -webkit-mask-image: url('my-fingerprint.png');
+    mask-image: url('my-fingerprint.png');
+    
+    /* 3. Perfect centering and containment */
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    
+    /* Elegant depth effects */
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
+    transition: transform 0.25s ease, filter 0.25s ease;
     will-change: transform;
-    opacity: 0.9;
 }
 
-#wax-seal:hover .seal-fingerprint {
+/* Hover & Active animations remain perfectly synced */
+#wax-seal:hover .seal-fingerprint-custom {
     transform: scale(1.04);
-    opacity: 1;
     filter: drop-shadow(0 2px 6px rgba(247, 224, 138, 0.35)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
 }
 
-#wax-seal:active .seal-fingerprint {
+#wax-seal:active .seal-fingerprint-custom {
     transform: scale(0.96);
 }
-
 /* --- CORE KEYFRAME SYSTEM --- */
 @keyframes floatMirror {
     0% { transform: translateY(0) rotate(-3.5deg); }
@@ -308,6 +321,7 @@ body::before {
     0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 12px #ff1a40) drop-shadow(0 0 25px #cc0022); }
     50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 18px #ff4d6d) drop-shadow(0 0 40px #ff002b); }
 }
+
 
 @keyframes sealGlowPulse {
     0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.65), 0 0 0 0px rgba(181, 148, 16, 0.3); }
