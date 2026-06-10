@@ -9,7 +9,7 @@ const x = setInterval(function() {
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const seconds = Math.floor((distance % (1000 * 60 * 60)) / 1000);
 
     updateElement("days", days);
     updateElement("hours", hours);
@@ -63,29 +63,29 @@ function onPlayerReady(event) {
 
 // --- 4. BREAK THE SEAL & OPEN INVITATION ---
 function openInvitation() {
-    // 1. Play & Unmute the audio track
+    // 1. Fire up background melody track
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
 
-    // 2. Trigger the magical rose petal storm mist
-    triggerPetalBurst(45);
+    // 2. Launch the majestic fountain gust effect from below
+    triggerUpwardFountain(50);
 
-    // 3. Fade out the introductory overlay
+    // 3. Vanish the initial card overlay smoothly
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
         overlay.classList.add('fade-out');
         
-        // Clean up DOM after animation completes to maximize performance
+        // Remove object node when fade transition completes
         setTimeout(() => {
             overlay.remove();
-        }, 1500);
+        }, 1200);
     }
 }
 
-// Attach the interaction handler securely to the Wax Seal element
+// Initialize seal click capability on window startup
 document.addEventListener("DOMContentLoaded", () => {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
@@ -93,8 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// --- 5. PETAL GENERATORS ---
-function createPetal(isBurst = false) {
+// --- 5. PETAL GENERATION STREAMS ---
+
+// Standard downward flowing petals
+function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
     
@@ -111,46 +113,66 @@ function createPetal(isBurst = false) {
         sizeMultiplier = 2.5; 
     }
     
-    // Position differently based on standard gentle fall or rapid burst
     const startX = Math.random() * window.innerWidth;
     const baseSize = (Math.random() * 15) + 15;
     const finalSize = (baseSize * sizeMultiplier) + "px";
     
+    petal.style.left = startX + 'px';
+    petal.style.width = finalSize;
+    petal.style.height = finalSize;
+    petal.style.animationDuration = ((Math.random() * 5) + 10) + "s, " + ((Math.random() * 2) + 3) + "s";
+    
+    container.appendChild(petal);
+    setTimeout(() => { petal.remove(); }, 10000);
+}
+
+// Upward blasting fountain gust petals
+function createFountainPetal() {
+    const container = document.getElementById('petal-container');
+    if (!container) return;
+
+    const petal = document.createElement('div');
+    petal.classList.add('petal-burst'); // Uses unique upward CSS physics
+
+    const randomDepth = Math.random();
+    let sizeMultiplier = 1;
+
+    if (randomDepth < 0.25) {
+        petal.classList.add('petal-dark');
+    } else if (randomDepth < 0.5) {
+        petal.classList.add('petal-large');
+        sizeMultiplier = 2.2;
+    }
+
+    // Spread coordinates evenly across the bottom width of the screen
+    const startX = Math.random() * window.innerWidth;
+    const baseSize = (Math.random() * 12) + 16;
+    const finalSize = (baseSize * sizeMultiplier) + "px";
+
+    petal.style.left = startX + 'px';
     petal.style.width = finalSize;
     petal.style.height = finalSize;
     
-    if (isBurst) {
-        // Center-focused layout during seal explosion
-        petal.style.left = (window.innerWidth / 2) + (Math.random() * 200 - 100) + 'px';
-        petal.style.top = (window.innerHeight / 2) + (Math.random() * 200 - 100) + 'px';
-        petal.style.animationDuration = ((Math.random() * 3) + 4) + "s, " + ((Math.random() * 1) + 1) + "s";
-    } else {
-        // Standard atmospheric layout
-        petal.style.left = startX + 'px';
-        petal.style.top = '-100px';
-        petal.style.animationDuration = ((Math.random() * 5) + 10) + "s, " + ((Math.random() * 2) + 3) + "s";
-    }
-    
+    // Varying speeds to give the gust organic texture and depth
+    petal.style.animationDuration = ((Math.random() * 2) + 2.5) + "s"; 
+
     container.appendChild(petal);
-    
-    setTimeout(() => { 
-        petal.remove(); 
-    }, isBurst ? 5000 : 10000);
+    setTimeout(() => { petal.remove(); }, 4000);
 }
 
-// Instantly generates a heavy density layer of flying petals on interaction
-function triggerPetalBurst(count) {
-    for (let i = 0; i < count; i++) {
+// Rapid stream distributor for the upward impact gust
+function triggerUpwardFountain(totalCount) {
+    for (let i = 0; i < totalCount; i++) {
         setTimeout(() => {
-            createPetal(true);
-        }, i * 15); // Slight stagger effect so they flash outwards smoothly
+            createFountainPetal();
+        }, i * 12); // Staggers the launch so they rise like a real wave of wind
     }
 }
 
-// Background atmospheric baseline loop
+// Baseline trickle atmospheric loops
 setInterval(() => {
-    // Only generate trickle background petals if overlay is already opened/removed
+    // Only drop down baseline top-petals once the main card is cleared away
     if (!document.getElementById('intro-overlay')) {
-        createPetal(false);
+        createFallingPetal();
     }
 }, 800);
