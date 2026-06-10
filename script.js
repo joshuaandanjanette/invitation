@@ -79,8 +79,8 @@ function openInvitation() {
         originY = rect.top + (rect.height / 2);
     }
 
-    // Deploys 600 petals (5x increase) in an elegant, non-jarring upward wave stream
-    triggerLushFountainStream(originX, originY, 600);
+    // Deploys 300 petals for a balanced, elegant upward wave stream
+    triggerLushFountainStream(originX, originY, 300);
 
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
@@ -130,7 +130,7 @@ function createFallingPetal() {
     setTimeout(() => { petal.remove(); }, 10000);
 }
 
-// Sophisticated upward swirling motion curves (not geometric explosions)
+// Upward swirling motion curves
 function createStreamBurstPetal(originX, originY) {
     const container = document.getElementById('petal-container');
     if (!container) return;
@@ -157,8 +157,7 @@ function createStreamBurstPetal(originX, originY) {
     petal.style.left = originX + 'px';
     petal.style.top = originY + 'px';
 
-    // Fluid Trajectory Calculations:
-    // Spreads fluidly across the horizontal axis while billing skyward smoothly
+    // Fluid Trajectory Calculations
     const horizontalSpread = (Math.random() * window.innerWidth) - (window.innerWidth / 2);
     const upwardLift = -(window.innerHeight + 150); // Fully clears the top viewport bounds
     
@@ -178,12 +177,12 @@ function createStreamBurstPetal(originX, originY) {
     setTimeout(() => { petal.remove(); }, 3500);
 }
 
-// Spreads out 600 particles smoothly over a 900ms window to protect system execution performance
+// Spreads out 300 particles smoothly over a 700ms window for a perfect organic flow
 function triggerLushFountainStream(originX, originY, totalCount) {
     for (let i = 0; i < totalCount; i++) {
         setTimeout(() => {
             createStreamBurstPetal(originX, originY);
-        }, Math.floor(Math.random() * 900));
+        }, Math.floor(Math.random() * 700));
     }
 }
 
