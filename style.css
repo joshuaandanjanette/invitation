@@ -86,7 +86,16 @@ body::before {
 @keyframes magicFlicker { 0%, 100% { text-shadow: 0 0 10px #B59410; color: #f7e08a; } 50% { text-shadow: 0 0 25px #fcfaf2; color: #ffffff; } }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.1); text-shadow: 0 0 20px #f7e08a; color: #ffffff; } }
 
-#petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+#petal-container { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+    z-index: 10005; /* Pushed higher than overlay to allow full visual blanket */
+    overflow: hidden; 
+}
 
 /* Gentle Downward Ambient Drift */
 .petal { 
@@ -154,9 +163,9 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: floatMirror 4s ease-in-out infinite alternate;
+    /* Extended timing loop for a heavier, cinematic sway */
+    animation: floatMirror 5s ease-in-out infinite alternate;
 }
-
 /* Ornate Antique Gold Frame */
 .magic-mirror {
     position: relative;
@@ -271,16 +280,26 @@ body::before {
 #wax-seal:active { transform: translateX(-50%) scale(0.95); }
 
 .seal-inner {
-    font-size: 1.6rem;
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.7));
-    color: rgba(247, 224, 138, 0.85); /* Deep rich embedded tint */
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    /* Clean metallic liquid gold core blend */
+    background: linear-gradient(to bottom, #ffffff 0%, #f7e08a 45%, #B59410 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
     user-select: none;
 }
 
 /* Keyframes */
 @keyframes floatMirror {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(-12px) rotate(1deg); }
+    0% { 
+        transform: translateY(0) rotate(-3.5deg); 
+    }
+    100% { 
+        transform: translateY(-22px) rotate(3.5deg); /* Wider angle & deeper drop */
+    }
 }
 
 @keyframes rosePulse {
