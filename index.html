@@ -11,19 +11,37 @@
 
     <!-- REFINED ENCHANTED MIRROR OVERLAY -->
     <div id="intro-overlay">
-        <div class="mirror-container">
-            <div class="magic-mirror">
-                <div class="mirror-glass">
-                    <div class="enchanted-rose-glow">🌹</div>
-                    <p class="mirror-text">Be Our Guest</p>
-                </div>
-                <button id="wax-seal" aria-label="Open Invitation">
-                    <span class="seal-inner">J&A</span>
-                </button>
+    <div class="mirror-container">
+        <div class="magic-mirror">
+            <div class="mirror-glass">
+                <div class="enchanted-rose-glow">🌹</div>
+                <p class="mirror-text">Be Our Guest</p>
             </div>
-            <div class="mirror-handle"></div>
+            <button id="wax-seal" aria-label="Open Invitation">
+                <svg class="seal-fingerprint" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gold-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="40%" stop-color="#f7e08a"/>
+                            <stop offset="100%" stop-color="#B59410"/>
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#gold-grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a10 10 0 0 0-7 2.9M19 4.9A10 10 0 0 0 12 2"/>
+                        <path d="M12 6a6 6 0 0 0-6 6v3"/>
+                        <path d="M18 12v-1a6 6 0 0 0-1.8-4.3"/>
+                        <path d="M12 9.5a2.5 2.5 0 0 0-2.5 2.5v5"/>
+                        <path d="M14.5 12v2.5"/>
+                        <path d="M8.5 12v3.5a3.5 3.5 0 0 0 7 0V12"/>
+                        <path d="M6 18.5a7.5 7.5 0 0 0 12 0"/>
+                        <path d="M9.5 21a5 5 0 0 0 5 0"/>
+                    </g>
+                </svg>
+            </button>
         </div>
+        <div class="mirror-handle"></div>
     </div>
+</div>
 
     <!-- PETAL CONTAINER PLACED FOR OVERLAY LAYER BLANKETING -->
     <div id="petal-container"></div>
