@@ -126,7 +126,7 @@ body::before {
     100% { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc)); opacity: 0; }
 }
 
-/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY & TRANSITIONS --- */
+/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY & FIXED PORTAL FADE --- */
 #intro-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -135,7 +135,10 @@ body::before {
     display: grid;
     place-items: center;
     z-index: 10000;
-    transition: background-color 2s ease;
+    /* FIX: Transition the entire layer's opacity and visibility natively */
+    transition: opacity 2s ease, visibility 2s ease;
+    opacity: 1;
+    visibility: visible;
 }
 
 .mirror-container {
@@ -144,24 +147,24 @@ body::before {
     flex-direction: column;
     align-items: center;
     transform-origin: center center;
-    transition: transform 2.2s cubic-bezier(0.7, 0, 0.3, 1), filter 2s ease, opacity 1.8s ease;
-    will-change: transform, filter, opacity;
+    transition: transform 2.2s cubic-bezier(0.7, 0, 0.3, 1), filter 2s ease;
+    will-change: transform, filter;
 }
 
 #intro-overlay:not(.portal-open) .mirror-container {
     animation: floatMirror 5s ease-in-out infinite alternate;
 }
 
-/* CINEMATIC PORTAL ZOOM */
+/* THE SEAMLESS FADE AND SCALE DISMISSAL */
 #intro-overlay.portal-open {
-    background-color: transparent;
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
 }
 
 #intro-overlay.portal-open .mirror-container {
     transform: scale(4.5);
     filter: blur(8px);
-    opacity: 0;
 }
 
 .magic-mirror {
