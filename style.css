@@ -7,126 +7,197 @@ html, body {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-    background-color: #000;
 }
 
 body {
     font-family: 'Cinzel', serif !important;
     color: #fcfaf2;
+    background-color: #000;
     text-align: center;
 }
 
 body::before {
     content: "";
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('library-bg2.png');
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('library-bg2.png');
     background-size: cover;
     background-position: center;
     z-index: -1;
+    will-change: transform;
 }
 
-/* --- 2. MAIN CONTAINER & PHOTO --- */
-.container {
-    padding: 40px 20px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
+/* --- 2. CONTAINER & PHOTO --- */
 .profile-photo {
     width: 120px; height: 160px; object-fit: cover; display: block; margin: 0 auto 25px auto;
     background: #fcfaf2; padding: 8px; border-radius: 1px;
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.6);
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
+    background-image: radial-gradient(#000 0%, #000 70%, transparent 72%);
+    background-size: 18px 18px; background-position: -9px -9px;
+    background-clip: content-box; box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
 }
 
-/* --- 3. TYPOGRAPHY --- */
+/* --- 3. THE NAMES & TEXT --- */
 .names { display: flex; flex-direction: column; margin-bottom: 10px; }
 .top-name, .bottom-name {
     font-family: 'Pinyon Script', cursive !important; font-size: 5.5rem;
-    color: #f7e08a; line-height: 1.1; text-shadow: 0 0 10px rgba(181, 148, 16, 0.6);
+    color: #f7e08a; line-height: 1.1; text-shadow: 0 0 15px #B59410;
+    animation: magicFlicker 3s infinite alternate;
 }
 .middle-word { font-family: 'Pinyon Script', cursive !important; font-size: 2.2rem; margin: -20px 0; }
 .subtitle { font-size: 1.6rem; letter-spacing: 4px; text-transform: uppercase; color: #B59410; margin: 15px 0; }
 
 .venue-link {
     color: #CBAC8D; text-decoration: none; border-bottom: 1px dashed rgba(181, 148, 16, 0.4);
-    font-size: 0.9rem; letter-spacing: 1px;
+    transition: 0.3s; font-size: 0.9rem; letter-spacing: 1px;
 }
+.venue-link:hover { color: #f7e08a; border-bottom: 1px solid #f7e08a; }
 
-/* --- 4. COUNTDOWN --- */
+/* --- 4. HEARTBEAT COUNTDOWN --- */
 #countdown { display: flex; justify-content: center; gap: 12px; margin: 25px 0; }
-.time-box { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(181, 148, 16, 0.3); padding: 10px; min-width: 65px; border-radius: 6px; }
+.time-box { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(181, 148, 16, 0.3); padding: 10px; min-width: 65px; border-radius: 8px; }
 .time-box span { display: block; font-size: 1.4rem; font-weight: bold; color: #f7e08a; }
 .time-box small { font-size: 0.55rem; color: #E8DCC4; }
+.pulse-tick { animation: heartbeat 0.8s ease-out; }
 
-/* --- 5. DRESS CODE --- */
+/* --- 5. COLOR CUBES --- */
 .palette-wrap { margin: 20px 0; }
 .palette-label { font-size: 0.9rem; letter-spacing: 2px; color: #f7e08a; margin-bottom: 10px; }
 .color-cubes { display: flex; justify-content: center; gap: 10px; }
 .cube { width: 30px; height: 30px; border: 1px solid rgba(181, 148, 16, 0.4); border-radius: 4px; }
 
 /* --- 6. RSVP BUTTON --- */
-.rsvp-btn { display: inline-block; background: #6B0F1A; color: #E8DCC4; text-decoration: none; border: 1px solid #B59410; padding: 14px 45px; margin-top: 15px; letter-spacing: 2px; border-radius: 5px; font-weight: bold; }
+.rsvp-btn { display: inline-block; background: #6B0F1A; color: #E8DCC4; text-decoration: none; border: 1px solid #B59410; padding: 14px 45px; margin-top: 15px; letter-spacing: 2px; border-radius: 5px; transition: 0.3s; font-weight: bold; }
+.rsvp-btn:hover { background: #B59410; color: #12182d; }
 
-/* --- 7. MOBILE OVERRIDES --- */
+/* --- 7. MOBILE OVERRIDE --- */
 @media (max-width: 1000px) {
+    .container { background: transparent !important; backdrop-filter: none !important; border: none !important; box-shadow: none !important; }
     .top-name, .bottom-name { font-size: 4rem; }
     .subtitle { font-size: 1.2rem; }
     .rsvp-btn { width: 85%; border-radius: 40px; }
+    body { background-position: center 80%; }
 }
 
-/* --- 8. FALLING PETALS --- */
-#petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
-.petal { position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.7; top: -50px; animation: fall linear forwards; }
-@keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.7; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0; } }
+/* --- 8. ANIMATIONS & HIGH-LAYER PETALS --- */
+@keyframes magicFlicker { 0%, 100% { text-shadow: 0 0 10px #B59410; color: #f7e08a; } 50% { text-shadow: 0 0 25px #fcfaf2; color: #ffffff; } }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.1); text-shadow: 0 0 20px #f7e08a; color: #ffffff; } }
 
-/* --- 9. ELEGANT REVEAL OVERLAY --- */
+#petal-container { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+    z-index: 10005;
+    overflow: hidden; 
+}
+
+/* Ambient Slow Fall */
+.petal { 
+    will-change: transform; 
+    pointer-events: none; 
+    position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.8; top: -100px; animation: fall linear forwards, drifting ease-in-out infinite alternate; 
+}
+@keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+@keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
+
+/* Luxury Fluid Upward Fountain Petals */
+.petal-burst {
+    will-change: transform, opacity;
+    pointer-events: none;
+    position: absolute;
+    background: linear-gradient(135deg, #b82333 0%, #8a1420 100%);
+    border-radius: 130% 0 150% 0;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: luxurySwirlAscent 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.petal-dark { background: linear-gradient(135deg, #5c050c 0%, #380105 100%) !important; }
+.petal-large { filter: blur(1px); opacity: 0.7; }
+
+@keyframes luxurySwirlAscent {
+    0% {
+        transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.4);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+        opacity: 0;
+    }
+}
+
+/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY --- */
 #intro-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background: radial-gradient(circle, #12050a 0%, #000000 100%);
-    display: grid;
-    place-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, #17070e 0%, #050103 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 10000;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.4s ease;
+    transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Elegant, seamless fade out */
-#intro-overlay.portal-open {
+#intro-overlay.fade-out {
     opacity: 0;
-    visibility: hidden;
     pointer-events: none;
 }
 
 .mirror-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: gentleFloat 4s ease-in-out infinite alternate;
-}
-
-@keyframes gentleFloat {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
+    animation: floatMirror 5s ease-in-out infinite alternate;
 }
 
 .magic-mirror {
     position: relative;
-    width: 280px;
-    height: 380px;
+    width: 290px;
+    height: 400px;
     background: #14090f;
-    border-radius: 140px 140px 100px 100px;
-    border: 5px double #B59410;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(181, 148, 16, 0.2);
+    border-radius: 150px 150px 110px 110px;
+    border: 6px double #B59410;
+    box-shadow: 
+        0 0 0 2px #544403,
+        0 25px 60px rgba(0, 0, 0, 0.95),
+        inset 0 0 35px rgba(181, 148, 16, 0.35);
     padding: 12px;
+    z-index: 2;
+}
+
+.magic-mirror::before {
+    content: "✦";
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #f7e08a;
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px #B59410;
 }
 
 .mirror-glass {
-    width: 100%; height: 100%;
-    background: #000000;
-    border-radius: 130px 130px 90px 90px;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #2b121e 0%, #0a0306 100%);
+    border-radius: 140px 140px 100px 100px;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.95);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -135,75 +206,110 @@ body::before {
     border: 1px solid rgba(181, 148, 16, 0.15);
 }
 
-.enchanted-rose-img {
-    width: 85%;
-    height: auto;
-    object-fit: contain;
-    margin-bottom: 5px;
-    filter: drop-shadow(0 0 12px rgba(163, 30, 43, 0.6));
+.enchanted-rose-glow {
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 25px;
+    animation: rosePulse 3s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 35px #cc0022);
+    user-select: none;
 }
 
 .mirror-text {
     font-family: 'Cinzel', serif;
     font-size: 0.85rem;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     text-transform: uppercase;
     color: #B59410;
-    margin: 5px 0 0 0;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .mirror-handle {
-    width: 22px; height: 90px;
-    background: linear-gradient(to right, #4a3c02, #B59410, #f7e08a, #B59410, #3b3002);
-    margin-top: -5px; border-radius: 0 0 10px 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    width: 24px;
+    height: 100px;
+    background: linear-gradient(to right, #4a3c02 0%, #B59410 30%, #f7e08a 50%, #B59410 70%, #3b3002 100%);
+    margin-top: -6px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.7);
+    z-index: 1;
+    position: relative;
 }
 
-/* --- 10. GOLD BIOMETRIC FINGERPRINT BUTTON --- */
-#fingerprint-btn {
+.mirror-handle::after {
+    content: "";
     position: absolute;
-    bottom: -25px; left: 50%; transform: translateX(-50%);
-    width: 72px; height: 72px;
-    background: #14090f;
-    border: 2px solid #B59410;
+    bottom: 8px; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 12px;
+    background: #6B0F1A;
     border-radius: 50%;
-    box-shadow: 0 0 15px rgba(181, 148, 16, 0.4), inset 0 0 10px rgba(181, 148, 16, 0.2);
+    border: 1px solid #B59410;
+}
+
+/* ANTI-CRUSH WAX SEAL BUTTON CONTAINER */
+#wax-seal {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 74px;
+    height: 74px;
+    background: radial-gradient(circle at 35% 35%, #9e1b29 0%, #610710 65%, #380106 100%);
+    border: 2px solid #8c7104;
+    border-radius: 44% 56% 46% 54% / 52% 44% 56% 48%;
+    box-shadow: 
+        0 8px 25px rgba(0,0,0,0.65), 
+        inset 2px 2px 6px rgba(255,255,255,0.15),
+        inset -3px -3px 8px rgba(0,0,0,0.6);
     cursor: pointer;
+    z-index: 10;
     display: grid;
     place-items: center;
-    padding: 8px;
-    outline: none;
+    padding: 0;
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    outline: none;
+    animation: sealGlowPulse 2.5s infinite ease-in-out;
+    transition: transform 0.2s;
 }
 
-#fingerprint-btn:hover {
-    transform: translateX(-50%) scale(1.05);
-    box-shadow: 0 0 25px rgba(247, 224, 138, 0.7);
+#wax-seal:hover { transform: translateX(-50%) scale(1.06); }
+#wax-seal:active { transform: translateX(-50%) scale(0.95); }
+
+/* PERFECTLY ROUND FULL-BLEED SEAL FINGERPRINT */
+.seal-fingerprint {
+    width: 88%;
+    height: 88%;
+    aspect-ratio: 1 / 1;
+    display: block;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9)) blur(0.2px);
+    user-select: none;
+    transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+    will-change: transform;
+    opacity: 0.9;
 }
 
-.fingerprint-svg {
-    width: 100%;
-    height: 100%;
-    opacity: 0.85;
-    transition: opacity 0.2s;
-}
-
-#fingerprint-btn:hover .fingerprint-svg {
+#wax-seal:hover .seal-fingerprint {
+    transform: scale(1.04);
     opacity: 1;
+    filter: drop-shadow(0 2px 6px rgba(247, 224, 138, 0.35)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
 }
 
-/* Subtle gold scanning effect overlay */
-.scan-line {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 2px;
-    background: linear-gradient(to right, transparent, #f7e08a, transparent);
-    animation: scan 2s linear infinite;
-    pointer-events: none;
+#wax-seal:active .seal-fingerprint {
+    transform: scale(0.96);
 }
 
-@keyframes scan {
-    0% { top: 0%; }
-    50% { top: 100%; }
-    100% { top: 0%; }
+/* --- CORE KEYFRAME SYSTEM --- */
+@keyframes floatMirror {
+    0% { transform: translateY(0) rotate(-3.5deg); }
+    100% { transform: translateY(-22px) rotate(3.5deg); }
+}
+
+@keyframes rosePulse {
+    0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 12px #ff1a40) drop-shadow(0 0 25px #cc0022); }
+    50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 18px #ff4d6d) drop-shadow(0 0 40px #ff002b); }
+}
+
+@keyframes sealGlowPulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.65), 0 0 0 0px rgba(181, 148, 16, 0.3); }
+    50% { box-shadow: 0 8px 30px rgba(0,0,0,0.65), 0 0 20px 8px rgba(181, 148, 16, 0.5); }
 }
