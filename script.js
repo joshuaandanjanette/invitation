@@ -1,7 +1,45 @@
-// 1. SET THE DATE
+// --- 1. SAFE BACKGROUND LOADING OF THE YOUTUBE API ---
+// This guarantees that the callback hook exists before the API runs, avoiding race crashes.
+var player;
+var playerReady = false;
+
+window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('player', {
+        height: '1',
+        width: '1',
+        videoId: '6n9Cysnoxug',
+        playerVars: {
+            'autoplay': 1,
+            'controls': 0,
+            'loop': 1,
+            'mute': 1,
+            'playlist': '6n9Cysnoxug'
+        },
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+};
+
+function onPlayerReady(event) {
+    playerReady = true;
+    try {
+        event.target.playVideo();
+    } catch(e) {
+        console.log("Autoplay context blocked initialization step safely.");
+    }
+}
+
+// Inject the script tag safely via JavaScript
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+// --- 2. WEDDING DATE COUNTDOWN ---
 const weddingDate = new Date("Sep 19, 2026 00:00:00").getTime();
 
-// 2. RUN COUNTDOWN
 const x = setInterval(function() {
     const now = new Date().getTime();
     const distance = weddingDate - now;
@@ -34,42 +72,21 @@ function updateElement(id, value) {
     }
 }
 
-// --- 3. YOUTUBE MUSIC CONTROLLER ---
-var player;
-var playerReady = false;
 
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        height: '1',
-        width: '1',
-        videoId: '6n9Cysnoxug',
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'loop': 1,
-            'mute': 1,
-            'playlist': '6n9Cysnoxug'
-        },
-        events: {
-            'onReady': onPlayerReady
-        }
-    });
-}
-
-function onPlayerReady(event) {
-    playerReady = true;
-    event.target.playVideo(); 
-}
-
-// --- 4. OPEN INVITATION (CINEMATIC PORTAL SEAMLESS EXECUTION) ---
+// --- 3. UN-CRASHABLE PORTAL REVEAL SYSTEM ---
 function openInvitation() {
     if (window.invitationOpened) return;
     window.invitationOpened = true;
 
-    if (playerReady && player) {
-        player.unMute();
-        player.setVolume(100);
-        player.playVideo();
+    // Isolate music playback within a try/catch loop so audio block errors never break the button response
+    try {
+        if (playerReady && player && typeof player.unMute === 'function') {
+            player.unMute();
+            player.setVolume(100);
+            player.playVideo();
+        }
+    } catch (musicError) {
+        console.warn("Audio processing caught safely, continuing transition:", musicError);
     }
 
     const sealBtn = document.getElementById('wax-seal');
@@ -82,25 +99,25 @@ function openInvitation() {
         originY = rect.top + (rect.height / 2);
     }
 
+    // Trigger visual petals
     triggerLushFountainStream(originX, originY, 300);
 
+    // Trigger screen transition
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
-        // Instantly trigger the Portal Zoom styling sequence
         overlay.classList.add('portal-open');
-        
-        // Remove from memory once transition scales out completely past viewport
         setTimeout(() => {
             overlay.remove();
         }, 2200);
     }
 }
 
+
+// --- 4. HARDWARE INPUT BINDINGS ---
 function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
         sealBtn.addEventListener('click', openInvitation);
-        
         sealBtn.addEventListener('touchstart', function(e) {
             e.preventDefault();
             openInvitation();
@@ -114,7 +131,8 @@ if (document.readyState === "loading") {
     initButtonBinding();
 }
 
-// --- 5. PARTICLE GENERATION ENGINE ---
+
+// --- 5. LUSH PARTICLE FOUNTAIN ENGINE ---
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
