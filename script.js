@@ -34,7 +34,7 @@ function updateElement(id, value) {
     }
 }
 
-// --- 4. YOUTUBE MUSIC (OPTIMIZED FOR SPEED) ---
+// --- 3. YOUTUBE MUSIC CONTROLLER ---
 var player;
 var playerReady = false;
 
@@ -61,36 +61,96 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-const playMusic = function() {
+// --- 4. BREAK THE SEAL & OPEN INVITATION ---
+function openInvitation() {
+    // 1. Play & Unmute the audio track
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
-};
 
-window.addEventListener('click', playMusic, { once: true });
-window.addEventListener('touchstart', playMusic, { once: true });
-window.addEventListener('scroll', playMusic, { once: true });
+    // 2. Trigger the magical rose petal storm mist
+    triggerPetalBurst(45);
 
-// 5. PETALS (Your Optimized Working Version)
-function createPetal() {
+    // 3. Fade out the introductory overlay
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay) {
+        overlay.classList.add('fade-out');
+        
+        // Clean up DOM after animation completes to maximize performance
+        setTimeout(() => {
+            overlay.remove();
+        }, 1500);
+    }
+}
+
+// Attach the interaction handler securely to the Wax Seal element
+document.addEventListener("DOMContentLoaded", () => {
+    const sealBtn = document.getElementById('wax-seal');
+    if (sealBtn) {
+        sealBtn.addEventListener('click', openInvitation);
+    }
+});
+
+// --- 5. PETAL GENERATORS ---
+function createPetal(isBurst = false) {
     const container = document.getElementById('petal-container');
     if (!container) return;
+    
     const petal = document.createElement('div');
     petal.classList.add('petal');
+    
     const randomDepth = Math.random();
     let sizeMultiplier = 1;
-    if (randomDepth < 0.2) { petal.classList.add('petal-dark'); } 
-    else if (randomDepth < 0.4) { petal.classList.add('petal-large'); sizeMultiplier = 2.5; }
+    
+    if (randomDepth < 0.2) { 
+        petal.classList.add('petal-dark'); 
+    } else if (randomDepth < 0.4) { 
+        petal.classList.add('petal-large'); 
+        sizeMultiplier = 2.5; 
+    }
+    
+    // Position differently based on standard gentle fall or rapid burst
     const startX = Math.random() * window.innerWidth;
     const baseSize = (Math.random() * 15) + 15;
     const finalSize = (baseSize * sizeMultiplier) + "px";
-    petal.style.left = startX + 'px';
+    
     petal.style.width = finalSize;
     petal.style.height = finalSize;
-    petal.style.animationDuration = ((Math.random() * 5) + 10) + "s, " + ((Math.random() * 2) + 3) + "s";
+    
+    if (isBurst) {
+        // Center-focused layout during seal explosion
+        petal.style.left = (window.innerWidth / 2) + (Math.random() * 200 - 100) + 'px';
+        petal.style.top = (window.innerHeight / 2) + (Math.random() * 200 - 100) + 'px';
+        petal.style.animationDuration = ((Math.random() * 3) + 4) + "s, " + ((Math.random() * 1) + 1) + "s";
+    } else {
+        // Standard atmospheric layout
+        petal.style.left = startX + 'px';
+        petal.style.top = '-100px';
+        petal.style.animationDuration = ((Math.random() * 5) + 10) + "s, " + ((Math.random() * 2) + 3) + "s";
+    }
+    
     container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 10000);
+    
+    setTimeout(() => { 
+        petal.remove(); 
+    }, isBurst ? 5000 : 10000);
 }
-setInterval(createPetal, 800);
+
+// Instantly generates a heavy density layer of flying petals on interaction
+function triggerPetalBurst(count) {
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            createPetal(true);
+        }, i * 15); // Slight stagger effect so they flash outwards smoothly
+    }
+}
+
+// Background atmospheric baseline loop
+setInterval(() => {
+    // Only generate trickle background petals if overlay is already opened/removed
+    if (!document.getElementById('intro-overlay')) {
+        createPetal(false);
+    }
+}, 800);
