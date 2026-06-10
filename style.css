@@ -150,11 +150,20 @@ body::before {
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Morphic transition variables for high performance depth scaling */
+    transition: 
+        opacity 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19), 
+        transform 1.8s cubic-bezier(0.215, 0.610, 0.355, 1), 
+        filter 1.8s ease-in-out;
+    transform: scale(1);
+    filter: blur(0px);
 }
 
+/* Looking-Glass Zoom Dissolve */
 #intro-overlay.fade-out {
     opacity: 0;
+    transform: scale(1.12);
+    filter: blur(15px);
     pointer-events: none;
 }
 
@@ -179,6 +188,7 @@ body::before {
         inset 0 0 35px rgba(181, 148, 16, 0.35);
     padding: 12px;
     z-index: 2;
+    transition: filter 0.5s ease-in-out;
 }
 
 .magic-mirror::before {
@@ -190,6 +200,33 @@ body::before {
     color: #f7e08a;
     font-size: 1.8rem;
     text-shadow: 0 0 10px #B59410;
+}
+
+/* Instant Frame Aura Buildup on Click */
+.magic-mirror.mirror-glow-out {
+    animation: intenseMirrorGlow 2.2s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes intenseMirrorGlow {
+    0% { 
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95); 
+    }
+    40% {
+        transform: scale(1.02);
+        box-shadow: 
+            0 0 40px #B59410, 
+            0 0 70px #ff1a40, 
+            inset 0 0 40px rgba(247, 224, 138, 0.5);
+        filter: brightness(1.15);
+    }
+    100% { 
+        transform: scale(1.05);
+        box-shadow: 
+            0 0 90px #f7e08a, 
+            0 0 160px #ff002b, 
+            inset 0 0 70px rgba(247, 224, 138, 0.8); 
+        filter: brightness(1.3); 
+    }
 }
 
 .mirror-glass {
@@ -208,7 +245,7 @@ body::before {
 
 .enchanted-rose-glow {
     width: 100%;
-    height: 180px; /* Forces the container to stay open */
+    height: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -219,7 +256,7 @@ body::before {
 
 .enchanted-rose-img {
     width: 160px;
-    height: 160px; /* Keeps the aspect ratio locked */
+    height: 160px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 35px #cc0022);
 }
@@ -234,10 +271,10 @@ body::before {
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-/* --- NEW PEDESTAL BASE PLATE STYLES --- */
+/* --- PEDESTAL BASE PLATE STYLES --- */
 .mirror-base {
     width: 36px;
-    height: 55px; /* The stem holding the mirror up */
+    height: 55px;
     background: linear-gradient(to right, #4a3c02 0%, #B59410 30%, #f7e08a 50%, #B59410 70%, #3b3002 100%);
     margin-top: -6px;
     position: relative;
@@ -245,14 +282,13 @@ body::before {
     box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
 }
 
-/* The wide, weighted bottom plate */
 .mirror-base::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 190px; /* Elegant wide base anchoring the mirror */
+    width: 190px;
     height: 22px;
     background: linear-gradient(to right, #3b3002 0%, #B59410 25%, #f7e08a 50%, #B59410 75%, #241d01 100%);
     border-radius: 14px 14px 4px 4px;
@@ -296,29 +332,20 @@ body::before {
     width: 85%;
     height: 85%;
     aspect-ratio: 1 / 1;
-    
-    /* 1. This applies your exact wedding gold gradient across the asset */
     background: linear-gradient(135deg, #ffffff 0%, #f7e08a 30%, #B59410 70%, #544403 100%);
-    
-    /* 2. This uses your picture as a stencil. It works best if your image has a transparent background, or is black lines on white */
     -webkit-mask-image: url('my-fingerprint.png');
     mask-image: url('my-fingerprint.png');
-    
-    /* 3. Perfect centering and containment */
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    
-    /* Elegant depth effects */
     filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
     transition: transform 0.25s ease, filter 0.25s ease;
     will-change: transform;
 }
 
-/* Hover & Active animations remain perfectly synced */
 #wax-seal:hover .seal-fingerprint-custom {
     transform: scale(1.04);
     filter: drop-shadow(0 2px 6px rgba(247, 224, 138, 0.35)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
@@ -327,6 +354,24 @@ body::before {
 #wax-seal:active .seal-fingerprint-custom {
     transform: scale(0.96);
 }
+
+/* --- ETHEREAL MAIN CONTENT UNVEILING --- */
+.container {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.94) translateY(25px);
+    transition: 
+        opacity 2.2s cubic-bezier(0.22, 1, 0.36, 1), 
+        transform 2.2s cubic-bezier(0.16, 1, 0.3, 1), 
+        filter 2.2s ease-out;
+}
+
+.container.reveal-main {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1) translateY(0);
+}
+
 /* --- CORE KEYFRAME SYSTEM --- */
 @keyframes floatMirror {
     0% { transform: translateY(0) rotate(-3.5deg); }
@@ -337,7 +382,6 @@ body::before {
     0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 12px #ff1a40) drop-shadow(0 0 25px #cc0022); }
     50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 18px #ff4d6d) drop-shadow(0 0 40px #ff002b); }
 }
-
 
 @keyframes sealGlowPulse {
     0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.65), 0 0 0 0px rgba(181, 148, 16, 0.3); }
