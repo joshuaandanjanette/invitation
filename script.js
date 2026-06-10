@@ -25,11 +25,11 @@ function onPlayerReady(event) {
     try {
         event.target.playVideo();
     } catch(e) {
-        console.log("Autoplay caught safely.");
+        console.log("Autoplay context ignored safely.");
     }
 }
 
-// Inject tag directly into head elements safely
+// Load script tag cleanly 
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 document.head.appendChild(tag);
@@ -71,12 +71,19 @@ function updateElement(id, value) {
 }
 
 
-// --- 3. UN-CRASHABLE PORTAL REVEAL SYSTEM ---
+// --- 3. RE-ENGINEERED PORTAL REVEAL SYSTEM ---
 function openInvitation() {
     if (window.invitationOpened) return;
     window.invitationOpened = true;
 
-    // Music try-catch block isolation
+    // Trigger instant overlay animation safely before anything else handles audio
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay) {
+        overlay.classList.add('portal-open');
+        setTimeout(() => { overlay.remove(); }, 1600);
+    }
+
+    // Isolate music initialization completely so blocks never freeze layout thread
     try {
         if (playerReady && player && typeof player.unMute === 'function') {
             player.unMute();
@@ -84,9 +91,10 @@ function openInvitation() {
             player.playVideo();
         }
     } catch (musicError) {
-        console.warn("Audio activation bypassed safely.");
+        console.warn("Audio skipped cleanly.");
     }
 
+    // Determine precise coordinates for particle fountain burst
     const sealBtn = document.getElementById('wax-seal');
     let originX = window.innerWidth / 2;
     let originY = window.innerHeight / 2 + 150;
@@ -97,21 +105,12 @@ function openInvitation() {
         originY = rect.top + (rect.height / 2);
     }
 
-    // Trigger visual petals fountain stream
-    triggerLushFountainStream(originX, originY, 300);
-
-    // Trigger screen transition
-    const overlay = document.getElementById('intro-overlay');
-    if (overlay) {
-        overlay.classList.add('portal-open');
-        setTimeout(() => {
-            overlay.remove();
-        }, 2200);
-    }
+    // PERFORMANCE UPGRADE: Lowered particle burst limit from 300 to a safe, optimized 40 elements
+    triggerLushFountainStream(originX, originY, 40);
 }
 
 
-// --- 4. INPUT BINDINGS ---
+// --- 4. BINDINGS ---
 function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
@@ -130,7 +129,7 @@ if (document.readyState === "loading") {
 }
 
 
-// --- 5. PARTICLE ENGINE ---
+// --- 5. ULTRA-LIGHT PERFORMANCE PARTICLE ENGINE ---
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
@@ -145,20 +144,20 @@ function createFallingPetal() {
         petal.classList.add('petal-dark'); 
     } else if (randomDepth < 0.4) { 
         petal.classList.add('petal-large'); 
-        sizeMultiplier = 2.5; 
+        sizeMultiplier = 2; 
     }
     
     const startX = Math.random() * window.innerWidth;
-    const baseSize = (Math.random() * 15) + 15;
+    const baseSize = (Math.random() * 12) + 12;
     const finalSize = (baseSize * sizeMultiplier) + "px";
     
     petal.style.left = startX + 'px';
     petal.style.width = finalSize;
     petal.style.height = finalSize;
-    petal.style.animationDuration = ((Math.random() * 5) + 10) + "s, " + ((Math.random() * 2) + 3) + "s";
+    petal.style.animationDuration = ((Math.random() * 5) + 9) + "s, " + ((Math.random() * 2) + 3) + "s";
     
     container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 10000);
+    setTimeout(() => { petal.remove(); }, 9000);
 }
 
 function createStreamBurstPetal(originX, originY) {
@@ -168,46 +167,39 @@ function createStreamBurstPetal(originX, originY) {
     const petal = document.createElement('div');
     petal.classList.add('petal-burst');
 
-    const randomDepth = Math.random();
-    let sizeMultiplier = 1;
-
-    if (randomDepth < 0.2) {
+    if (Math.random() < 0.25) {
         petal.classList.add('petal-dark');
-    } else if (randomDepth < 0.45) {
-        petal.classList.add('petal-large');
-        sizeMultiplier = 2.2;
     }
 
-    const baseSize = (Math.random() * 12) + 14;
-    const finalSize = (baseSize * sizeMultiplier) + 'px';
-    petal.style.width = finalSize;
-    petal.style.height = finalSize;
+    const baseSize = (Math.random() * 12) + 12;
+    petal.style.width = baseSize + 'px';
+    petal.style.height = baseSize + 'px';
 
     petal.style.left = originX + 'px';
     petal.style.top = originY + 'px';
 
     const horizontalSpread = (Math.random() * window.innerWidth) - (window.innerWidth / 2);
-    const upwardLift = -(window.innerHeight + 150); 
+    const upwardLift = -(window.innerHeight + 100); 
     
-    const targetRotation = Math.random() * 1080 - 540; 
-    const targetScale = (Math.random() * 0.7) + 0.7;
+    const targetRotation = Math.random() * 720 - 360; 
+    const targetScale = (Math.random() * 0.5) + 0.8;
 
     petal.style.setProperty('--tx', `${horizontalSpread}px`);
     petal.style.setProperty('--ty', `${upwardLift}px`);
     petal.style.setProperty('--rot', `${targetRotation}deg`);
     petal.style.setProperty('--sc', `${targetScale}`);
 
-    petal.style.animationDuration = ((Math.random() * 1.5) + 2.0) + "s";
+    petal.style.animationDuration = ((Math.random() * 1.2) + 1.5) + "s";
 
     container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 3500);
+    setTimeout(() => { petal.remove(); }, 2600);
 }
 
 function triggerLushFountainStream(originX, originY, totalCount) {
     for (let i = 0; i < totalCount; i++) {
         setTimeout(() => {
             createStreamBurstPetal(originX, originY);
-        }, Math.floor(Math.random() * 700));
+        }, Math.floor(Math.random() * 400));
     }
 }
 
@@ -215,4 +207,4 @@ setInterval(() => {
     if (!document.getElementById('intro-overlay')) {
         createFallingPetal();
     }
-}, 800);
+}, 900);
