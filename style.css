@@ -82,7 +82,7 @@ body::before {
     body { background-position: center 80%; }
 }
 
-/* --- 8. ANIMATIONS & HIGH-LAYER PETALS --- */
+/* --- 8. ANIMATIONS & HARDWARE-OPTIMIZED PETALS --- */
 @keyframes magicFlicker { 0%, 100% { text-shadow: 0 0 10px #B59410; color: #f7e08a; } 50% { text-shadow: 0 0 25px #fcfaf2; color: #ffffff; } }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.1); text-shadow: 0 0 20px #f7e08a; color: #ffffff; } }
 
@@ -105,19 +105,20 @@ body::before {
 @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 @keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
 
+/* PERFORMANCE UPGRADE: Removed performance-heavy CSS filters */
 .petal-burst {
     will-change: transform, opacity;
     pointer-events: none;
     position: absolute;
-    background: linear-gradient(135deg, #b82333 0%, #8a1420 100%);
+    background: #b82333;
     border-radius: 130% 0 150% 0;
     opacity: 0;
     transform: translate(-50%, -50%);
-    animation: luxurySwirlAscent 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: luxurySwirlAscent 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.petal-dark { background: linear-gradient(135deg, #5c050c 0%, #380105 100%) !important; }
-.petal-large { filter: blur(1px); opacity: 0.7; }
+.petal-dark { background: #4a0207 !important; }
+.petal-large { opacity: 0.7; }
 
 @keyframes luxurySwirlAscent {
     0% { transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.4); opacity: 0; }
@@ -126,7 +127,7 @@ body::before {
     100% { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc)); opacity: 0; }
 }
 
-/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY & FIXED PORTAL FADE --- */
+/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY & SEAMLESS FADE --- */
 #intro-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -135,8 +136,7 @@ body::before {
     display: grid;
     place-items: center;
     z-index: 10000;
-    /* FIX: Transition the entire layer's opacity and visibility natively */
-    transition: opacity 2s ease, visibility 2s ease;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
     opacity: 1;
     visibility: visible;
 }
@@ -147,15 +147,15 @@ body::before {
     flex-direction: column;
     align-items: center;
     transform-origin: center center;
-    transition: transform 2.2s cubic-bezier(0.7, 0, 0.3, 1), filter 2s ease;
-    will-change: transform, filter;
+    transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1);
+    will-change: transform;
 }
 
 #intro-overlay:not(.portal-open) .mirror-container {
     animation: floatMirror 5s ease-in-out infinite alternate;
 }
 
-/* THE SEAMLESS FADE AND SCALE DISMISSAL */
+/* HIGH ACCELERATION DISMISSAL */
 #intro-overlay.portal-open {
     opacity: 0;
     visibility: hidden;
@@ -163,8 +163,7 @@ body::before {
 }
 
 #intro-overlay.portal-open .mirror-container {
-    transform: scale(4.5);
-    filter: blur(8px);
+    transform: scale(3.5);
 }
 
 .magic-mirror {
@@ -213,7 +212,7 @@ body::before {
     filter: drop-shadow(0 0 15px rgba(255, 26, 64, 0.55));
     user-select: none;
     pointer-events: none;
-    will-change: transform, filter;
+    will-change: transform;
 }
 
 .mirror-text {
@@ -293,8 +292,8 @@ body::before {
 }
 
 @keyframes roseBreathe {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(255, 26, 64, 0.5)); }
-    50% { transform: scale(1.04); filter: drop-shadow(0 0 22px rgba(255, 26, 64, 0.85)); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
 }
 
 @keyframes sealGlowPulse {
