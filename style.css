@@ -148,12 +148,11 @@ body::before {
     will-change: transform, filter, opacity;
 }
 
-/* Float mirror only when portal is closed */
 #intro-overlay:not(.portal-open) .mirror-container {
     animation: floatMirror 5s ease-in-out infinite alternate;
 }
 
-/* CINEMATIC ZOOM ONCE OPENED */
+/* CINEMATIC PORTAL ZOOM */
 #intro-overlay.portal-open {
     background-color: transparent;
     pointer-events: none;
@@ -189,7 +188,7 @@ body::before {
 
 .mirror-glass {
     width: 100%; height: 100%;
-    background: #000000; /* Pure black backing to display your realistic rose cleanly */
+    background: #000000;
     border-radius: 140px 140px 100px 100px;
     box-shadow: inset 0 0 25px rgba(0,0,0,0.95);
     display: flex;
@@ -201,7 +200,6 @@ body::before {
     padding: 15px;
 }
 
-/* HIGH-END ANIMATED PHOTOGRAPHIC ROSE SETTINGS */
 .enchanted-rose-img {
     width: 75%;
     height: auto;
@@ -238,7 +236,6 @@ body::before {
     width: 12px; height: 12px; background: #6B0F1A; border-radius: 50%; border: 1px solid #B59410;
 }
 
-/* DISTORTION-PROOF WAX SEAL BUTTON CONTAINER */
 #wax-seal {
     position: absolute;
     bottom: -25px; left: 50%; transform: translateX(-50%);
@@ -264,7 +261,6 @@ body::before {
 #wax-seal:hover { transform: translateX(-50%) scale(1.06); }
 #wax-seal:active { transform: translateX(-50%) scale(0.95); }
 
-/* PERFECTLY ROUND GEOMETRIC FINGERPRINT COMPONENT */
 .seal-fingerprint {
     width: 82%;
     height: 82%;
@@ -287,7 +283,7 @@ body::before {
     transform: scale(0.96);
 }
 
-/* --- CORE KEYFRAME SYSTEM --- */
+/* --- KEYFRAMES --- */
 @keyframes floatMirror {
     0% { transform: translateY(0) rotate(-3.5deg); }
     100% { transform: translateY(-22px) rotate(3.5deg); }
