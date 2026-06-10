@@ -2,10 +2,12 @@
 const weddingDate = new Date("Sep 19, 2026 00:00:00").getTime();
 
 // 2. RUN COUNTDOWN
+// 2. RUN COUNTDOWN
 const x = setInterval(function() {
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
+    // Time calculations for days, hours, minutes and seconds
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -21,18 +23,6 @@ const x = setInterval(function() {
         document.getElementById("countdown").innerHTML = "THE TALE HAS BEGUN";
     }
 }, 1000);
-
-function updateElement(id, value) {
-    let el = document.getElementById(id);
-    if(!el) return;
-    let formattedValue = value < 10 ? "0" + value : value;
-    if (el.innerHTML != formattedValue) {
-        el.innerHTML = formattedValue;
-        el.classList.remove("pulse-tick");
-        void el.offsetWidth;
-        el.classList.add("pulse-tick");
-    }
-}
 
 
 // --- 3. YOUTUBE MUSIC CONTROLLER ---
