@@ -67,7 +67,7 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-// --- 4. OPEN INVITATION REVEAL ---
+// --- 4. OPEN INVITATION REVEAL (CINEMATIC TRANSITION) ---
 function openInvitation() {
     if (window.invitationOpened) return;
     window.invitationOpened = true;
@@ -77,6 +77,10 @@ function openInvitation() {
         player.setVolume(100);
         player.playVideo();
     }
+
+    // 1. Trigger the intense magical aura buildup on the mirror frame instantly
+    const mirror = document.querySelector('.magic-mirror');
+    if (mirror) mirror.classList.add('mirror-glow-out');
 
     const sealBtn = document.getElementById('wax-seal');
     let originX = window.innerWidth / 2;
@@ -93,13 +97,18 @@ function openInvitation() {
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
         setTimeout(() => {
+            // 2. Initiate the cinematic forward dissolve
             overlay.classList.add('fade-out');
+            
+            // 3. Smoothly unveil the main invitation content layer
+            const mainContainer = document.querySelector('.container');
+            if (mainContainer) mainContainer.classList.add('reveal-main');
             
             setTimeout(() => {
                 overlay.remove();
-            }, 1600);
+            }, 1800); // Gives the deep blur dissolve room to finish breathing
             
-        }, 2200);
+        }, 2200); // Holds perfectly during the particle explosion & aura buildup
     }
 }
 
