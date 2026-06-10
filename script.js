@@ -1,4 +1,4 @@
-// --- 1. SAFE BACKGROUND LOADING OF THE YOUTUBE API ---
+// --- 1. BACKGROUND AUDIO LAYER ---
 var player;
 var playerReady = false;
 
@@ -25,20 +25,19 @@ function onPlayerReady(event) {
     try {
         event.target.playVideo();
     } catch(e) {
-        console.log("Autoplay context ignored safely.");
+        console.log("Audio target prepared.");
     }
 }
 
-// Load script tag cleanly 
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 document.head.appendChild(tag);
 
 
-// --- 2. WEDDING DATE COUNTDOWN ---
+// --- 2. COUNTDOWN ---
 const weddingDate = new Date("Sep 19, 2026 00:00:00").getTime();
 
-const x = setInterval(function() {
+setInterval(function() {
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
@@ -47,75 +46,53 @@ const x = setInterval(function() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60 * 60)) / 1000);
 
-    updateElement("days", days);
-    updateElement("hours", hours);
-    updateElement("minutes", minutes);
-    updateElement("seconds", seconds);
-
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("countdown").innerHTML = "THE TALE HAS BEGUN";
-    }
+    updateText("days", days);
+    updateText("hours", hours);
+    updateText("minutes", minutes);
+    updateText("seconds", seconds);
 }, 1000);
 
-function updateElement(id, value) {
+function updateText(id, value) {
     let el = document.getElementById(id);
-    if(!el) return;
-    let formattedValue = value < 10 ? "0" + value : value;
-    if (el.innerHTML != formattedValue) {
-        el.innerHTML = formattedValue;
-        el.classList.remove("pulse-tick");
-        void el.offsetWidth;
-        el.classList.add("pulse-tick");
+    if (!el) return;
+    let formatted = value < 10 ? "0" + value : value;
+    if (el.innerHTML != formatted) {
+        el.innerHTML = formatted;
     }
 }
 
 
-// --- 3. RE-ENGINEERED PORTAL REVEAL SYSTEM ---
+// --- 3. ELEGANT PORTAL DISMISSAL ---
 function openInvitation() {
     if (window.invitationOpened) return;
     window.invitationOpened = true;
 
-    // Trigger instant overlay animation safely before anything else handles audio
+    // Trigger elegant CSS transition fade out
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
         overlay.classList.add('portal-open');
-        setTimeout(() => { overlay.remove(); }, 1600);
+        setTimeout(() => { overlay.remove(); }, 1500);
     }
 
-    // Isolate music initialization completely so blocks never freeze layout thread
+    // Unmute background music tracks smoothly
     try {
         if (playerReady && player && typeof player.unMute === 'function') {
             player.unMute();
             player.setVolume(100);
             player.playVideo();
         }
-    } catch (musicError) {
-        console.warn("Audio skipped cleanly.");
+    } catch (audioErr) {
+        console.warn("Audio Context Started cleanly.");
     }
-
-    // Determine precise coordinates for particle fountain burst
-    const sealBtn = document.getElementById('wax-seal');
-    let originX = window.innerWidth / 2;
-    let originY = window.innerHeight / 2 + 150;
-
-    if (sealBtn) {
-        const rect = sealBtn.getBoundingClientRect();
-        originX = rect.left + (rect.width / 2);
-        originY = rect.top + (rect.height / 2);
-    }
-
-    // PERFORMANCE UPGRADE: Lowered particle burst limit from 300 to a safe, optimized 40 elements
-    triggerLushFountainStream(originX, originY, 40);
 }
 
 
-// --- 4. BINDINGS ---
-function initButtonBinding() {
-    const sealBtn = document.getElementById('wax-seal');
-    if (sealBtn) {
-        sealBtn.addEventListener('click', openInvitation);
-        sealBtn.addEventListener('touchstart', function(e) {
+// --- 4. EVENT LISTENERS ---
+function bindEvents() {
+    const fingerprintBtn = document.getElementById('fingerprint-btn');
+    if (fingerprintBtn) {
+        fingerprintBtn.addEventListener('click', openInvitation);
+        fingerprintBtn.addEventListener('touchstart', function(e) {
             e.preventDefault();
             openInvitation();
         }, { passive: false });
@@ -123,88 +100,36 @@ function initButtonBinding() {
 }
 
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initButtonBinding);
+    document.addEventListener("DOMContentLoaded", bindEvents);
 } else {
-    initButtonBinding();
+    bindEvents();
 }
 
 
-// --- 5. ULTRA-LIGHT PERFORMANCE PARTICLE ENGINE ---
-function createFallingPetal() {
+// --- 5. BACKGROUND ENVIRONMENT ANIMATION ---
+function createSingleFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
-    
+
+    if (container.children.length > 25) return;
+
     const petal = document.createElement('div');
     petal.classList.add('petal');
-    
-    const randomDepth = Math.random();
-    let sizeMultiplier = 1;
-    
-    if (randomDepth < 0.2) { 
-        petal.classList.add('petal-dark'); 
-    } else if (randomDepth < 0.4) { 
-        petal.classList.add('petal-large'); 
-        sizeMultiplier = 2; 
-    }
-    
+
     const startX = Math.random() * window.innerWidth;
-    const baseSize = (Math.random() * 12) + 12;
-    const finalSize = (baseSize * sizeMultiplier) + "px";
-    
+    const size = (Math.random() * 12) + 12 + "px";
+
     petal.style.left = startX + 'px';
-    petal.style.width = finalSize;
-    petal.style.height = finalSize;
-    petal.style.animationDuration = ((Math.random() * 5) + 9) + "s, " + ((Math.random() * 2) + 3) + "s";
-    
-    container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 9000);
-}
-
-function createStreamBurstPetal(originX, originY) {
-    const container = document.getElementById('petal-container');
-    if (!container) return;
-
-    const petal = document.createElement('div');
-    petal.classList.add('petal-burst');
-
-    if (Math.random() < 0.25) {
-        petal.classList.add('petal-dark');
-    }
-
-    const baseSize = (Math.random() * 12) + 12;
-    petal.style.width = baseSize + 'px';
-    petal.style.height = baseSize + 'px';
-
-    petal.style.left = originX + 'px';
-    petal.style.top = originY + 'px';
-
-    const horizontalSpread = (Math.random() * window.innerWidth) - (window.innerWidth / 2);
-    const upwardLift = -(window.innerHeight + 100); 
-    
-    const targetRotation = Math.random() * 720 - 360; 
-    const targetScale = (Math.random() * 0.5) + 0.8;
-
-    petal.style.setProperty('--tx', `${horizontalSpread}px`);
-    petal.style.setProperty('--ty', `${upwardLift}px`);
-    petal.style.setProperty('--rot', `${targetRotation}deg`);
-    petal.style.setProperty('--sc', `${targetScale}`);
-
-    petal.style.animationDuration = ((Math.random() * 1.2) + 1.5) + "s";
+    petal.style.width = size;
+    petal.style.height = size;
+    petal.style.animationDuration = ((Math.random() * 4) + 6) + "s";
 
     container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 2600);
-}
-
-function triggerLushFountainStream(originX, originY, totalCount) {
-    for (let i = 0; i < totalCount; i++) {
-        setTimeout(() => {
-            createStreamBurstPetal(originX, originY);
-        }, Math.floor(Math.random() * 400));
-    }
+    setTimeout(() => { petal.remove(); }, 10000);
 }
 
 setInterval(() => {
     if (!document.getElementById('intro-overlay')) {
-        createFallingPetal();
+        createSingleFallingPetal();
     }
-}, 900);
+}, 800);
