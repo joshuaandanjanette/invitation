@@ -63,7 +63,11 @@ function onPlayerReady(event) {
 
 // --- 4. OPEN INVITATION (BALANCED 300 VOLUME WITH THEATRICAL REVEAL DELAY) ---
 function openInvitation() {
-    // Unmute track instantly on user button interaction
+    // Prevent double execution from combined touch/click actions
+    if (window.invitationOpened) return;
+    window.invitationOpened = true;
+
+    // Unmute track instantly on user interaction
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
@@ -97,12 +101,27 @@ function openInvitation() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+// --- HARDWARE-ACCELERATED IMMUNE INITIALIZATION ---
+function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
+        // Standard Desktop Click
         sealBtn.addEventListener('click', openInvitation);
+        
+        // Instant Mobile Touch (Bypasses tap delays and targets moving animated boundaries cleanly)
+        sealBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Silences default trailing emulation click ghosting
+            openInvitation();
+        }, { passive: false });
     }
-});
+}
+
+// Immediately checks execution state to anchor listeners safely under any loading speed
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initButtonBinding);
+} else {
+    initButtonBinding();
+}
 
 // --- 5. PARTICLE GENERATION ENGINE ---
 
