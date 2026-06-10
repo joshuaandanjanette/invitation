@@ -88,7 +88,7 @@ body::before {
 
 #petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
 
-/* Standard Ambient Falling Petals */
+/* Gentle Downward Ambient Drift */
 .petal { 
     will-change: transform; 
     pointer-events: none; 
@@ -97,32 +97,33 @@ body::before {
 @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 @keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
 
-/* Cinematic Firework Burst Petals */
+/* Luxury Swirling Upward Fountain Petals */
 .petal-burst {
     will-change: transform, opacity;
     pointer-events: none;
     position: absolute;
-    background: #a31e2b;
-    border-radius: 150% 0 150% 0;
+    background: linear-gradient(135deg, #b82333 0%, #8a1420 100%);
+    border-radius: 130% 0 150% 0;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.4);
-    /* Performance-optimized 3D transform acceleration curves */
-    animation: fireworkBlast 2.5s cubic-bezier(0.05, 0.8, 0.2, 1) forwards;
+    transform: translate(-50%, -50%);
+    animation: luxurySwirlAscent 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.petal-dark { background: #520308 !important; }
+.petal-dark { background: linear-gradient(135deg, #5c050c 0%, #380105 100%) !important; }
 .petal-large { filter: blur(1px); opacity: 0.7; }
 
-@keyframes fireworkBlast {
+@keyframes luxurySwirlAscent {
     0% {
-        transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.3);
+        transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.4);
         opacity: 0;
     }
-    5% {
-        opacity: 0.95;
+    10% {
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 0.8;
     }
     100% {
-        /* Injected dynamically via JS variables to handle real mathematical trajectories */
         transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
         opacity: 0;
     }
@@ -135,12 +136,12 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle, #1a0a10 0%, #050204 100%);
+    background: radial-gradient(circle, #17070e 0%, #050103 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #intro-overlay.fade-out {
@@ -148,7 +149,6 @@ body::before {
     pointer-events: none;
 }
 
-/* Mirror Rig Wrapper */
 .mirror-container {
     position: relative;
     display: flex;
@@ -157,23 +157,22 @@ body::before {
     animation: floatMirror 4s ease-in-out infinite alternate;
 }
 
-/* Ornate Victorian Mirror Frame */
+/* Ornate Antique Gold Frame */
 .magic-mirror {
     position: relative;
     width: 290px;
     height: 400px;
-    background: #11070c;
+    background: #14090f;
     border-radius: 150px 150px 110px 110px;
-    border: 7px double #B59410;
+    border: 6px double #B59410;
     box-shadow: 
-        0 0 0 3px #614e05,
-        0 20px 50px rgba(0, 0, 0, 0.9),
-        inset 0 0 30px rgba(181, 148, 16, 0.4);
+        0 0 0 2px #544403,
+        0 25px 60px rgba(0, 0, 0, 0.95),
+        inset 0 0 35px rgba(181, 148, 16, 0.35);
     padding: 12px;
     z-index: 2;
 }
 
-/* Ornate Crown Piece on Top of Mirror */
 .magic-mirror::before {
     content: "✦";
     position: absolute;
@@ -185,28 +184,27 @@ body::before {
     text-shadow: 0 0 10px #B59410;
 }
 
-/* Mirror Glass Core */
+/* Dark Glass Interior */
 .mirror-glass {
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, #26111b 0%, #0d0408 100%);
+    background: radial-gradient(circle at center, #2b121e 0%, #0a0306 100%);
     border-radius: 140px 140px 100px 100px;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.95);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border: 1px solid rgba(181, 148, 16, 0.2);
+    border: 1px solid rgba(181, 148, 16, 0.15);
 }
 
-/* Deep Glowing Mystical Rose Silhouette */
 .enchanted-rose-glow {
     font-size: 5rem;
     line-height: 1;
     margin-bottom: 25px;
     animation: rosePulse 3s infinite ease-in-out;
-    filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 30px #ff002b);
+    filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 35px #cc0022);
     user-select: none;
 }
 
@@ -220,14 +218,14 @@ body::before {
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-/* Ornate Mirror Handle */
+/* Handle Assembly */
 .mirror-handle {
     width: 24px;
     height: 100px;
-    background: linear-gradient(to right, #614e05 0%, #B59410 30%, #f7e08a 50%, #B59410 70%, #423502 100%);
-    margin-top: -5px;
+    background: linear-gradient(to right, #4a3c02 0%, #B59410 30%, #f7e08a 50%, #B59410 70%, #3b3002 100%);
+    margin-top: -6px;
     border-radius: 0 0 12px 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.7);
     z-index: 1;
     position: relative;
 }
@@ -239,53 +237,58 @@ body::before {
     width: 12px; height: 12px;
     background: #6B0F1A;
     border-radius: 50%;
-    border: 1px solid #f7e08a;
+    border: 1px solid #B59410;
 }
 
-/* Ornate Metallic Wax Seal Button */
+/* PREMIUM REWRITTEN WAX SEAL (No Cheap White Lines) */
 #wax-seal {
     position: absolute;
     bottom: -25px;
     left: 50%;
     transform: translateX(-50%);
-    width: 70px;
-    height: 70px;
-    background: radial-gradient(circle, #f7e08a 0%, #B59410 70%, #705b04 100%);
-    border: 3px double #fcfaf2;
-    border-radius: 46% 54% 48% 52% / 50% 46% 54% 50%; /* Irregular metal strike shape */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.5);
+    width: 72px;
+    height: 72px;
+    /* Deep multi-layered organic wax casting colors */
+    background: radial-gradient(circle at 35% 35%, #9e1b29 0%, #610710 65%, #380106 100%);
+    /* Swapped white borders for an authentic gold-dusted wax lip contour */
+    border: 2px solid #8c7104;
+    border-radius: 44% 56% 46% 54% / 52% 44% 56% 48%; /* Fluid hand-melted shape */
+    box-shadow: 
+        0 8px 25px rgba(0,0,0,0.65), 
+        inset 2px 2px 6px rgba(255,255,255,0.15),
+        inset -3px -3px 8px rgba(0,0,0,0.6);
     cursor: pointer;
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
     outline: none;
-    animation: sealGlowPulse 2s infinite ease-in-out;
+    animation: sealGlowPulse 2.5s infinite ease-in-out;
     transition: transform 0.2s;
 }
 
-#wax-seal:hover { transform: translateX(-50%) scale(1.08); }
-#wax-seal:active { transform: translateX(-50%) scale(0.94); }
+#wax-seal:hover { transform: translateX(-50%) scale(1.06); }
+#wax-seal:active { transform: translateX(-50%) scale(0.95); }
 
 .seal-inner {
     font-size: 1.6rem;
-    color: #fff;
-    text-shadow: 0 0 8px #fff, 0 0 15px #f7e08a;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.7));
+    color: rgba(247, 224, 138, 0.85); /* Deep rich embedded tint */
     user-select: none;
 }
 
-/* Fine-tuned UI Keyframes */
+/* Keyframes */
 @keyframes floatMirror {
     0% { transform: translateY(0) rotate(0deg); }
     100% { transform: translateY(-12px) rotate(1deg); }
 }
 
 @keyframes rosePulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px #ff1a40) drop-shadow(0 0 25px #ff002b); opacity: 0.85; }
-    50% { transform: scale(1.06); filter: drop-shadow(0 0 20px #ff4d6d) drop-shadow(0 0 40px #ff002b); opacity: 1; }
+    0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 12px #ff1a40) drop-shadow(0 0 25px #cc0022); }
+    50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 18px #ff4d6d) drop-shadow(0 0 40px #ff002b); }
 }
 
 @keyframes sealGlowPulse {
-    0%, 100% { box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 0 0px rgba(247, 224, 138, 0.4); }
-    50% { box-shadow: 0 8px 25px rgba(0,0,0,0.6), 0 0 18px 7px rgba(247, 224, 138, 0.7); }
+    0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.65), 0 0 0 0px rgba(181, 148, 16, 0.3); }
+    50% { box-shadow: 0 8px 30px rgba(0,0,0,0.65), 0 0 20px 8px rgba(181, 148, 16, 0.5); }
 }
