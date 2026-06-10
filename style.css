@@ -256,7 +256,7 @@ body::before {
     height: 74px;
     background: radial-gradient(circle at 35% 35%, #9e1b29 0%, #610710 65%, #380106 100%);
     border: 2px solid #8c7104;
-    border-radius: 44% 56% 46% 54% / 52% 44% 56% 48%;
+    border-radius: 50%;
     box-shadow: 
         0 8px 25px rgba(0,0,0,0.65), 
         inset 2px 2px 6px rgba(255,255,255,0.15),
