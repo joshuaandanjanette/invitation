@@ -88,158 +88,204 @@ body::before {
 
 #petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
 
-/* Standard Falling Petals */
+/* Standard Ambient Falling Petals */
 .petal { 
     will-change: transform; 
     pointer-events: none; 
     position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.8; top: -100px; animation: fall linear forwards, drifting ease-in-out infinite alternate; 
 }
+@keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+@keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
 
-/* New Fountain Burst Upward Petals */
+/* Cinematic Firework Burst Petals */
 .petal-burst {
-    will-change: transform;
+    will-change: transform, opacity;
     pointer-events: none;
     position: absolute;
     background: #a31e2b;
     border-radius: 150% 0 150% 0;
     opacity: 0;
-    bottom: -50px; /* Spawns off-screen at the bottom */
-    animation: fountainGust linear forwards;
+    transform: translate(-50%, -50%) scale(0.4);
+    /* Performance-optimized 3D transform acceleration curves */
+    animation: fireworkBlast 2.5s cubic-bezier(0.05, 0.8, 0.2, 1) forwards;
 }
 
-.petal-dark { background: #61040a !important; }
-.petal-large { filter: blur(1.5px); opacity: 0.6; }
+.petal-dark { background: #520308 !important; }
+.petal-large { filter: blur(1px); opacity: 0.7; }
 
-@keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
-@keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
-
-/* Fountain Gust Upward Animation */
-@keyframes fountainGust {
-    0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
-    15% { opacity: 0.9; }
-    85% { opacity: 0.9; }
-    100% { transform: translateY(-120vh) rotate(540deg) scale(1.1); opacity: 0; }
+@keyframes fireworkBlast {
+    0% {
+        transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.3);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.95;
+    }
+    100% {
+        /* Injected dynamically via JS variables to handle real mathematical trajectories */
+        transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+        opacity: 0;
+    }
 }
 
-/* --- 9. ROYAL MONOGRAM CARD OVERLAY --- */
+/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY --- */
 #intro-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(10, 5, 5, 0.96);
+    background: radial-gradient(circle, #1a0a10 0%, #050204 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+    transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #intro-overlay.fade-out {
     opacity: 0;
-    transform: scale(1.03);
     pointer-events: none;
 }
 
-.card-wrapper {
+/* Mirror Rig Wrapper */
+.mirror-container {
     position: relative;
-    width: 340px;
-    height: 460px;
-    padding: 15px;
-    animation: floatCard 4s ease-in-out infinite alternate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: floatMirror 4s ease-in-out infinite alternate;
 }
 
-/* Luxury Linen Invitation Card Styling */
-.monogram-card {
+/* Ornate Victorian Mirror Frame */
+.magic-mirror {
     position: relative;
+    width: 290px;
+    height: 400px;
+    background: #11070c;
+    border-radius: 150px 150px 110px 110px;
+    border: 7px double #B59410;
+    box-shadow: 
+        0 0 0 3px #614e05,
+        0 20px 50px rgba(0, 0, 0, 0.9),
+        inset 0 0 30px rgba(181, 148, 16, 0.4);
+    padding: 12px;
+    z-index: 2;
+}
+
+/* Ornate Crown Piece on Top of Mirror */
+.magic-mirror::before {
+    content: "✦";
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #f7e08a;
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px #B59410;
+}
+
+/* Mirror Glass Core */
+.mirror-glass {
     width: 100%;
     height: 100%;
-    background-color: #fffdf9; /* Rich off-white / ivory linen tone */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    background: radial-gradient(circle at center, #26111b 0%, #0d0408 100%);
+    border-radius: 140px 140px 100px 100px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(181, 148, 16, 0.2);
 }
 
-/* Delicate Fine Gold Border lines */
-.gold-inner-border {
-    position: absolute;
-    top: 15px; left: 15px; right: 15px; bottom: 15px;
-    border: 2px solid #B59410;
-    outline: 1px solid #B59410;
-    outline-offset: -5px;
-    pointer-events: none;
-}
-
-.monogram-initials {
-    font-family: 'Pinyon Script', cursive !important;
+/* Deep Glowing Mystical Rose Silhouette */
+.enchanted-rose-glow {
     font-size: 5rem;
-    color: #4a3711;
-    margin: 0 0 10px 0;
-    text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
-    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 25px;
+    animation: rosePulse 3s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 30px #ff002b);
+    user-select: none;
 }
 
-.card-tagline {
+.mirror-text {
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    letter-spacing: 3px;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: #7a6231;
-    margin: 0 0 5px 0;
-    font-weight: bold;
+    color: #B59410;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-.card-subtag {
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #a18854;
-    margin: 0 0 60px 0;
+/* Ornate Mirror Handle */
+.mirror-handle {
+    width: 24px;
+    height: 100px;
+    background: linear-gradient(to right, #614e05 0%, #B59410 30%, #f7e08a 50%, #B59410 70%, #423502 100%);
+    margin-top: -5px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    z-index: 1;
+    position: relative;
 }
 
-/* Gold Wax Seal Button */
+.mirror-handle::after {
+    content: "";
+    position: absolute;
+    bottom: 8px; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 12px;
+    background: #6B0F1A;
+    border-radius: 50%;
+    border: 1px solid #f7e08a;
+}
+
+/* Ornate Metallic Wax Seal Button */
 #wax-seal {
     position: absolute;
-    bottom: 40px;
+    bottom: -25px;
     left: 50%;
     transform: translateX(-50%);
-    width: 75px;
-    height: 75px;
-    background: radial-gradient(circle, #f7e08a 0%, #B59410 70%, #806605 100%);
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #f7e08a 0%, #B59410 70%, #705b04 100%);
     border: 3px double #fcfaf2;
-    border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%; /* Organic pressed shape */
-    box-shadow: 0 6px 15px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4);
+    border-radius: 46% 54% 48% 52% / 50% 46% 54% 50%; /* Irregular metal strike shape */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.5);
     cursor: pointer;
-    z-index: 5;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
     outline: none;
-    animation: sealPulse 2s infinite ease-in-out;
-    transition: transform 0.2s, bottom 0.2s;
+    animation: sealGlowPulse 2s infinite ease-in-out;
+    transition: transform 0.2s;
 }
 
-#wax-seal:hover { transform: translateX(-50%) scale(1.06); }
-#wax-seal:active { transform: translateX(-50%) scale(0.96); }
+#wax-seal:hover { transform: translateX(-50%) scale(1.08); }
+#wax-seal:active { transform: translateX(-50%) scale(0.94); }
 
 .seal-inner {
-    font-size: 2rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    font-size: 1.6rem;
+    color: #fff;
+    text-shadow: 0 0 8px #fff, 0 0 15px #f7e08a;
     user-select: none;
 }
 
-/* Card Motion Keyframes */
-@keyframes floatCard {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
+/* Fine-tuned UI Keyframes */
+@keyframes floatMirror {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-12px) rotate(1deg); }
 }
 
-@keyframes sealPulse {
-    0%, 100% { box-shadow: 0 6px 15px rgba(0,0,0,0.5), 0 0 0 0px rgba(247, 224, 138, 0.4); }
-    50% { box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 15px 6px rgba(247, 224, 138, 0.6); }
+@keyframes rosePulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px #ff1a40) drop-shadow(0 0 25px #ff002b); opacity: 0.85; }
+    50% { transform: scale(1.06); filter: drop-shadow(0 0 20px #ff4d6d) drop-shadow(0 0 40px #ff002b); opacity: 1; }
+}
+
+@keyframes sealGlowPulse {
+    0%, 100% { box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 0 0px rgba(247, 224, 138, 0.4); }
+    50% { box-shadow: 0 8px 25px rgba(0,0,0,0.6), 0 0 18px 7px rgba(247, 224, 138, 0.7); }
 }
