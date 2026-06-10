@@ -9,7 +9,7 @@ const x = setInterval(function() {
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const seconds = Math.floor((distance % (1000 * 60 * 60)) / 1000);
 
     updateElement("days", days);
     updateElement("hours", hours);
@@ -61,31 +61,39 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-// --- 4. BREAK THE SEAL & OPEN INVITATION ---
-function openInvitation() {
-    // 1. Fire up background melody track
+// --- 4. BREAK THE SEAL & TRIGGER DEFIANT BURST ---
+function openInvitation(event) {
+    // 1. Kick off the musical track unmuted
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
 
-    // 2. Launch the majestic fountain gust effect from below
-    triggerUpwardFountain(1000);
+    // 2. Discover origin location of the seal click for precise particle explosion positioning
+    const sealBtn = document.getElementById('wax-seal');
+    let originX = window.innerWidth / 2;
+    let originY = window.innerHeight / 2 + 150; // Approximated button rest location
 
-    // 3. Vanish the initial card overlay smoothly
+    if (sealBtn) {
+        const rect = sealBtn.getBoundingClientRect();
+        originX = rect.left + (rect.width / 2);
+        originY = rect.top + (rect.height / 2);
+    }
+
+    // 3. Detonate massive 125-particle explosive blast upward/outward
+    triggerExplosiveBurst(originX, originY, 125);
+
+    // 4. Smoothly collapse the introductory veil away
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
         overlay.classList.add('fade-out');
-        
-        // Remove object node when fade transition completes
         setTimeout(() => {
             overlay.remove();
-        }, 1200);
+        }, 1400);
     }
 }
 
-// Initialize seal click capability on window startup
 document.addEventListener("DOMContentLoaded", () => {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
@@ -93,9 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// --- 5. PETAL GENERATION STREAMS ---
+// --- 5. SYSTEM PARTICLE LOGIC ENGINE ---
 
-// Standard downward flowing petals
+// Core Ambient Flow (Downward Drop)
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
@@ -126,13 +134,13 @@ function createFallingPetal() {
     setTimeout(() => { petal.remove(); }, 10000);
 }
 
-// Upward blasting fountain gust petals
-function createFountainPetal() {
+// High-Fidelity Non-Linear Shockwave Burst (Explodes Out and Sweeps Skyward)
+function createBurstPetal(originX, originY) {
     const container = document.getElementById('petal-container');
     if (!container) return;
 
     const petal = document.createElement('div');
-    petal.classList.add('petal-burst'); // Uses unique upward CSS physics
+    petal.classList.add('petal-burst');
 
     const randomDepth = Math.random();
     let sizeMultiplier = 1;
@@ -144,34 +152,53 @@ function createFountainPetal() {
         sizeMultiplier = 2.2;
     }
 
-    // Spread coordinates evenly across the bottom width of the screen
-    const startX = Math.random() * window.innerWidth;
-    const baseSize = (Math.random() * 12) + 16;
-    const finalSize = (baseSize * sizeMultiplier) + "px";
-
-    petal.style.left = startX + 'px';
+    const baseSize = (Math.random() * 12) + 14;
+    const finalSize = (baseSize * sizeMultiplier) + 'px';
     petal.style.width = finalSize;
     petal.style.height = finalSize;
+
+    // Anchor baseline location safely at the exact seal location coordinate
+    petal.style.left = originX + 'px';
+    petal.style.top = originY + 'px';
+
+    // MATHEMATICAL RADIAL physics calculations:
+    // Generate full 360 radial angle, but warp the thrust heavily into negative Y space (Upward velocity)
+    const angle = Math.random() * Math.PI * 2; 
+    const blastForce = Math.random() * 350 + 150; // Radial power vector
     
-    // Varying speeds to give the gust organic texture and depth
-    petal.style.animationDuration = ((Math.random() * 2) + 2.5) + "s"; 
+    const targetX = Math.cos(angle) * blastForce * 1.5; 
+    // Skyward vacuum suction vector (pulls them fiercely up past view line)
+    const targetY = (Math.sin(angle) * blastForce) - (Math.random() * 600 + 500); 
+    
+    const targetRotation = Math.random() * 1440 - 720; // High frequency violent spins
+    const targetScale = (Math.random() * 0.6) + 0.8;
+
+    // Inject vector arrays natively straight into CSS parsing space
+    petal.style.setProperty('--tx', `${targetX}px`);
+    petal.style.setProperty('--ty', `${targetY}px`);
+    petal.style.setProperty('--rot', `${targetRotation}deg`);
+    petal.style.setProperty('--sc', `${targetScale}`);
+
+    // Vary duration cycles slightly so shockwave feels textured instead of geometric
+    petal.style.animationDuration = ((Math.random() * 1.2) + 1.6) + "s";
 
     container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 4000);
+    setTimeout(() => { petal.remove(); }, 2600);
 }
 
-// Rapid stream distributor for the upward impact gust
-function triggerUpwardFountain(totalCount) {
-    for (let i = 0; i < totalCount; i++) {
+// Dispatches a highly dense volume cluster instantaneously
+function triggerExplosiveBurst(originX, originY, count) {
+    for (let i = 0; i < count; i++) {
+        // Micro-stagger distribution creates an organic shockwave blast pattern
         setTimeout(() => {
-            createFountainPetal();
-        }, i * 12); // Staggers the launch so they rise like a real wave of wind
+            createBurstPetal(originX, originY);
+        }, Math.floor(Math.random() * 40));
     }
 }
 
-// Baseline trickle atmospheric loops
+// Baseline trickle atmosphere loop
 setInterval(() => {
-    // Only drop down baseline top-petals once the main card is cleared away
+    // Only cascade top falling petals when main mirror has cleared from space
     if (!document.getElementById('intro-overlay')) {
         createFallingPetal();
     }
