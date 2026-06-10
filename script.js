@@ -71,7 +71,7 @@ function openInvitation() {
     }
 
     // 2. Launch the majestic fountain gust effect from below
-    triggerUpwardFountain(50);
+    triggerUpwardFountain(1000);
 
     // 3. Vanish the initial card overlay smoothly
     const overlay = document.getElementById('intro-overlay');
