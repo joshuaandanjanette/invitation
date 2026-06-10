@@ -61,19 +61,17 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-// --- 4. BREAK THE SEAL & TRIGGER DEFIANT BURST ---
-function openInvitation(event) {
-    // 1. Kick off the musical track unmuted
+// --- 4. OPEN INVITATION & TRIGGER LUSH PETAL STREAM ---
+function openInvitation() {
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
 
-    // 2. Discover origin location of the seal click for precise particle explosion positioning
     const sealBtn = document.getElementById('wax-seal');
     let originX = window.innerWidth / 2;
-    let originY = window.innerHeight / 2 + 150; // Approximated button rest location
+    let originY = window.innerHeight / 2 + 150;
 
     if (sealBtn) {
         const rect = sealBtn.getBoundingClientRect();
@@ -81,16 +79,15 @@ function openInvitation(event) {
         originY = rect.top + (rect.height / 2);
     }
 
-    // 3. Detonate massive 125-particle explosive blast upward/outward
-    triggerExplosiveBurst(originX, originY, 125);
+    // Deploys 600 petals (5x increase) in an elegant, non-jarring upward wave stream
+    triggerLushFountainStream(originX, originY, 600);
 
-    // 4. Smoothly collapse the introductory veil away
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
         overlay.classList.add('fade-out');
         setTimeout(() => {
             overlay.remove();
-        }, 1400);
+        }, 1600);
     }
 }
 
@@ -101,9 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// --- 5. SYSTEM PARTICLE LOGIC ENGINE ---
+// --- 5. RE-ENGINEERED FLUID PARTICLE ENGINE ---
 
-// Core Ambient Flow (Downward Drop)
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
@@ -134,8 +130,8 @@ function createFallingPetal() {
     setTimeout(() => { petal.remove(); }, 10000);
 }
 
-// High-Fidelity Non-Linear Shockwave Burst (Explodes Out and Sweeps Skyward)
-function createBurstPetal(originX, originY) {
+// Sophisticated upward swirling motion curves (not geometric explosions)
+function createStreamBurstPetal(originX, originY) {
     const container = document.getElementById('petal-container');
     if (!container) return;
 
@@ -145,9 +141,9 @@ function createBurstPetal(originX, originY) {
     const randomDepth = Math.random();
     let sizeMultiplier = 1;
 
-    if (randomDepth < 0.25) {
+    if (randomDepth < 0.2) {
         petal.classList.add('petal-dark');
-    } else if (randomDepth < 0.5) {
+    } else if (randomDepth < 0.45) {
         petal.classList.add('petal-large');
         sizeMultiplier = 2.2;
     }
@@ -157,48 +153,42 @@ function createBurstPetal(originX, originY) {
     petal.style.width = finalSize;
     petal.style.height = finalSize;
 
-    // Anchor baseline location safely at the exact seal location coordinate
+    // Anchor precisely over the custom styled wax seal location
     petal.style.left = originX + 'px';
     petal.style.top = originY + 'px';
 
-    // MATHEMATICAL RADIAL physics calculations:
-    // Generate full 360 radial angle, but warp the thrust heavily into negative Y space (Upward velocity)
-    const angle = Math.random() * Math.PI * 2; 
-    const blastForce = Math.random() * 350 + 150; // Radial power vector
+    // Fluid Trajectory Calculations:
+    // Spreads fluidly across the horizontal axis while billing skyward smoothly
+    const horizontalSpread = (Math.random() * window.innerWidth) - (window.innerWidth / 2);
+    const upwardLift = -(window.innerHeight + 150); // Fully clears the top viewport bounds
     
-    const targetX = Math.cos(angle) * blastForce * 1.5; 
-    // Skyward vacuum suction vector (pulls them fiercely up past view line)
-    const targetY = (Math.sin(angle) * blastForce) - (Math.random() * 600 + 500); 
-    
-    const targetRotation = Math.random() * 1440 - 720; // High frequency violent spins
-    const targetScale = (Math.random() * 0.6) + 0.8;
+    const targetRotation = Math.random() * 1080 - 540; // Soft romantic spins
+    const targetScale = (Math.random() * 0.7) + 0.7;
 
-    // Inject vector arrays natively straight into CSS parsing space
-    petal.style.setProperty('--tx', `${targetX}px`);
-    petal.style.setProperty('--ty', `${targetY}px`);
+    // Set variable anchors securely into CSS runtime storage
+    petal.style.setProperty('--tx', `${horizontalSpread}px`);
+    petal.style.setProperty('--ty', `${upwardLift}px`);
     petal.style.setProperty('--rot', `${targetRotation}deg`);
     petal.style.setProperty('--sc', `${targetScale}`);
 
-    // Vary duration cycles slightly so shockwave feels textured instead of geometric
-    petal.style.animationDuration = ((Math.random() * 1.2) + 1.6) + "s";
+    // Textured timeline offsets to build fluid environmental cloud thickness
+    petal.style.animationDuration = ((Math.random() * 1.5) + 2.0) + "s";
 
     container.appendChild(petal);
-    setTimeout(() => { petal.remove(); }, 2600);
+    setTimeout(() => { petal.remove(); }, 3500);
 }
 
-// Dispatches a highly dense volume cluster instantaneously
-function triggerExplosiveBurst(originX, originY, count) {
-    for (let i = 0; i < count; i++) {
-        // Micro-stagger distribution creates an organic shockwave blast pattern
+// Spreads out 600 particles smoothly over a 900ms window to protect system execution performance
+function triggerLushFountainStream(originX, originY, totalCount) {
+    for (let i = 0; i < totalCount; i++) {
         setTimeout(() => {
-            createBurstPetal(originX, originY);
-        }, Math.floor(Math.random() * 40));
+            createStreamBurstPetal(originX, originY);
+        }, Math.floor(Math.random() * 900));
     }
 }
 
-// Baseline trickle atmosphere loop
+// Ambient environment loop configuration
 setInterval(() => {
-    // Only cascade top falling petals when main mirror has cleared from space
     if (!document.getElementById('intro-overlay')) {
         createFallingPetal();
     }
