@@ -1,5 +1,4 @@
 // --- 1. SAFE BACKGROUND LOADING OF THE YOUTUBE API ---
-// This guarantees that the callback hook exists before the API runs, avoiding race crashes.
 var player;
 var playerReady = false;
 
@@ -26,15 +25,14 @@ function onPlayerReady(event) {
     try {
         event.target.playVideo();
     } catch(e) {
-        console.log("Autoplay context blocked initialization step safely.");
+        console.log("Autoplay caught safely.");
     }
 }
 
-// Inject the script tag safely via JavaScript
+// Inject tag directly into head elements safely
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+document.head.appendChild(tag);
 
 
 // --- 2. WEDDING DATE COUNTDOWN ---
@@ -78,7 +76,7 @@ function openInvitation() {
     if (window.invitationOpened) return;
     window.invitationOpened = true;
 
-    // Isolate music playback within a try/catch loop so audio block errors never break the button response
+    // Music try-catch block isolation
     try {
         if (playerReady && player && typeof player.unMute === 'function') {
             player.unMute();
@@ -86,7 +84,7 @@ function openInvitation() {
             player.playVideo();
         }
     } catch (musicError) {
-        console.warn("Audio processing caught safely, continuing transition:", musicError);
+        console.warn("Audio activation bypassed safely.");
     }
 
     const sealBtn = document.getElementById('wax-seal');
@@ -99,7 +97,7 @@ function openInvitation() {
         originY = rect.top + (rect.height / 2);
     }
 
-    // Trigger visual petals
+    // Trigger visual petals fountain stream
     triggerLushFountainStream(originX, originY, 300);
 
     // Trigger screen transition
@@ -113,7 +111,7 @@ function openInvitation() {
 }
 
 
-// --- 4. HARDWARE INPUT BINDINGS ---
+// --- 4. INPUT BINDINGS ---
 function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
@@ -132,7 +130,7 @@ if (document.readyState === "loading") {
 }
 
 
-// --- 5. LUSH PARTICLE FOUNTAIN ENGINE ---
+// --- 5. PARTICLE ENGINE ---
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
