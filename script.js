@@ -63,11 +63,9 @@ function onPlayerReady(event) {
 
 // --- 4. OPEN INVITATION (BALANCED 300 VOLUME WITH THEATRICAL REVEAL DELAY) ---
 function openInvitation() {
-    // Prevent double execution from combined touch/click actions
     if (window.invitationOpened) return;
     window.invitationOpened = true;
 
-    // Unmute track instantly on user interaction
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
@@ -84,12 +82,10 @@ function openInvitation() {
         originY = rect.top + (rect.height / 2);
     }
 
-    // Deploy perfectly balanced fluid stream calculation (exactly 300 pieces)
     triggerLushFountainStream(originX, originY, 300);
 
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
-        // Hold system reveal visibility state until the full cloud surges up across the mirror
         setTimeout(() => {
             overlay.classList.add('fade-out');
             
@@ -97,7 +93,7 @@ function openInvitation() {
                 overlay.remove();
             }, 1600);
             
-        }, 2200); // 2.2-second scenic wait barrier
+        }, 2200);
     }
 }
 
@@ -105,18 +101,15 @@ function openInvitation() {
 function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
-        // Standard Desktop Click
         sealBtn.addEventListener('click', openInvitation);
         
-        // Instant Mobile Touch (Bypasses tap delays and targets moving animated boundaries cleanly)
         sealBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault(); // Silences default trailing emulation click ghosting
+            e.preventDefault();
             openInvitation();
         }, { passive: false });
     }
 }
 
-// Immediately checks execution state to anchor listeners safely under any loading speed
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initButtonBinding);
 } else {
