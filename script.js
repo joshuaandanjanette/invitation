@@ -9,7 +9,7 @@ const x = setInterval(function() {
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60 * 60)) / 1000);
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     updateElement("days", days);
     updateElement("hours", hours);
@@ -33,6 +33,7 @@ function updateElement(id, value) {
         el.classList.add("pulse-tick");
     }
 }
+
 
 // --- 3. YOUTUBE MUSIC CONTROLLER ---
 var player;
