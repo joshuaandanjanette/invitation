@@ -97,7 +97,6 @@ body::before {
     overflow: hidden; 
 }
 
-/* Ambient Slow Fall */
 .petal { 
     will-change: transform; 
     pointer-events: none; 
@@ -106,7 +105,6 @@ body::before {
 @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 @keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
 
-/* Luxury Fluid Upward Fountain Petals */
 .petal-burst {
     will-change: transform, opacity;
     pointer-events: none;
@@ -122,40 +120,22 @@ body::before {
 .petal-large { filter: blur(1px); opacity: 0.7; }
 
 @keyframes luxurySwirlAscent {
-    0% {
-        transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.4);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.9;
-    }
-    90% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
-        opacity: 0;
-    }
+    0% { transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.4); opacity: 0; }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc)); opacity: 0; }
 }
 
-/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY --- */
+/* --- 9. ENCHANTED MAGIC MIRROR OVERLAY & TRANSITIONS --- */
 #intro-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background: radial-gradient(circle, #17070e 0%, #050103 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
     z-index: 10000;
-    transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-#intro-overlay.fade-out {
-    opacity: 0;
-    pointer-events: none;
+    transition: background-color 2s ease;
 }
 
 .mirror-container {
@@ -163,7 +143,26 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transform-origin: center center;
+    transition: transform 2.2s cubic-bezier(0.7, 0, 0.3, 1), filter 2s ease, opacity 1.8s ease;
+    will-change: transform, filter, opacity;
+}
+
+/* Float mirror only when portal is closed */
+#intro-overlay:not(.portal-open) .mirror-container {
     animation: floatMirror 5s ease-in-out infinite alternate;
+}
+
+/* CINEMATIC ZOOM ONCE OPENED */
+#intro-overlay.portal-open {
+    background-color: transparent;
+    pointer-events: none;
+}
+
+#intro-overlay.portal-open .mirror-container {
+    transform: scale(4.5);
+    filter: blur(8px);
+    opacity: 0;
 }
 
 .magic-mirror {
@@ -184,18 +183,13 @@ body::before {
 .magic-mirror::before {
     content: "✦";
     position: absolute;
-    top: -24px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #f7e08a;
-    font-size: 1.8rem;
-    text-shadow: 0 0 10px #B59410;
+    top: -24px; left: 50%; transform: translateX(-50%);
+    color: #f7e08a; font-size: 1.8rem; text-shadow: 0 0 10px #B59410;
 }
 
 .mirror-glass {
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, #2b121e 0%, #0a0306 100%);
+    width: 100%; height: 100%;
+    background: #000000; /* Pure black backing to display your realistic rose cleanly */
     border-radius: 140px 140px 100px 100px;
     box-shadow: inset 0 0 25px rgba(0,0,0,0.95);
     display: flex;
@@ -204,15 +198,21 @@ body::before {
     align-items: center;
     overflow: hidden;
     border: 1px solid rgba(181, 148, 16, 0.15);
+    padding: 15px;
 }
 
-.enchanted-rose-glow {
-    font-size: 5rem;
-    line-height: 1;
-    margin-bottom: 25px;
-    animation: rosePulse 3s infinite ease-in-out;
-    filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 35px #cc0022);
+/* HIGH-END ANIMATED PHOTOGRAPHIC ROSE SETTINGS */
+.enchanted-rose-img {
+    width: 75%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
+    margin-top: -10px;
+    animation: roseBreathe 4s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(255, 26, 64, 0.55));
     user-select: none;
+    pointer-events: none;
+    will-change: transform, filter;
 }
 
 .mirror-text {
@@ -221,42 +221,31 @@ body::before {
     letter-spacing: 4px;
     text-transform: uppercase;
     color: #B59410;
-    margin: 0;
+    margin: 5px 0 0 0;
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .mirror-handle {
-    width: 24px;
-    height: 100px;
+    width: 24px; height: 100px;
     background: linear-gradient(to right, #4a3c02 0%, #B59410 30%, #f7e08a 50%, #B59410 70%, #3b3002 100%);
-    margin-top: -6px;
-    border-radius: 0 0 12px 12px;
+    margin-top: -6px; border-radius: 0 0 12px 12px;
     box-shadow: 0 12px 25px rgba(0,0,0,0.7);
-    z-index: 1;
-    position: relative;
+    z-index: 1; position: relative;
 }
 
 .mirror-handle::after {
-    content: "";
-    position: absolute;
-    bottom: 8px; left: 50%; transform: translateX(-50%);
-    width: 12px; height: 12px;
-    background: #6B0F1A;
-    border-radius: 50%;
-    border: 1px solid #B59410;
+    content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 12px; background: #6B0F1A; border-radius: 50%; border: 1px solid #B59410;
 }
 
-/* ANTI-CRUSH WAX SEAL BUTTON CONTAINER */
+/* DISTORTION-PROOF WAX SEAL BUTTON CONTAINER */
 #wax-seal {
     position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 74px;
-    height: 74px;
+    bottom: -25px; left: 50%; transform: translateX(-50%);
+    width: 74px; height: 74px;
     background: radial-gradient(circle at 35% 35%, #9e1b29 0%, #610710 65%, #380106 100%);
     border: 2px solid #8c7104;
-    border-radius: 50%;
+    border-radius: 44% 56% 46% 54% / 52% 44% 56% 48%;
     box-shadow: 
         0 8px 25px rgba(0,0,0,0.65), 
         inset 2px 2px 6px rgba(255,255,255,0.15),
@@ -275,51 +264,38 @@ body::before {
 #wax-seal:hover { transform: translateX(-50%) scale(1.06); }
 #wax-seal:active { transform: translateX(-50%) scale(0.95); }
 
-/* --- CUSTOM IMAGE GOLD MASK --- */
-.seal-fingerprint-custom {
-    width: 85%;
-    height: 85%;
+/* PERFECTLY ROUND GEOMETRIC FINGERPRINT COMPONENT */
+.seal-fingerprint {
+    width: 82%;
+    height: 82%;
     aspect-ratio: 1 / 1;
-    
-    /* 1. This applies your exact wedding gold gradient across the asset */
-    background: linear-gradient(135deg, #ffffff 0%, #f7e08a 30%, #B59410 70%, #544403 100%);
-    
-    /* 2. This uses your picture as a stencil. It works best if your image has a transparent background, or is black lines on white */
-    -webkit-mask-image: url('my-fingerprint.png');
-    mask-image: url('my-fingerprint.png');
-    
-    /* 3. Perfect centering and containment */
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-    
-    /* Elegant depth effects */
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
-    transition: transform 0.25s ease, filter 0.25s ease;
+    display: block;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.85));
+    user-select: none;
+    transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
     will-change: transform;
+    opacity: 0.9;
 }
 
-/* Hover & Active animations remain perfectly synced */
-#wax-seal:hover .seal-fingerprint-custom {
+#wax-seal:hover .seal-fingerprint {
     transform: scale(1.04);
+    opacity: 1;
     filter: drop-shadow(0 2px 6px rgba(247, 224, 138, 0.35)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
 }
 
-#wax-seal:active .seal-fingerprint-custom {
+#wax-seal:active .seal-fingerprint {
     transform: scale(0.96);
 }
+
 /* --- CORE KEYFRAME SYSTEM --- */
 @keyframes floatMirror {
     0% { transform: translateY(0) rotate(-3.5deg); }
     100% { transform: translateY(-22px) rotate(3.5deg); }
 }
 
-@keyframes rosePulse {
-    0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 12px #ff1a40) drop-shadow(0 0 25px #cc0022); }
-    50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 18px #ff4d6d) drop-shadow(0 0 40px #ff002b); }
+@keyframes roseBreathe {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(255, 26, 64, 0.5)); }
+    50% { transform: scale(1.04); filter: drop-shadow(0 0 22px rgba(255, 26, 64, 0.85)); }
 }
 
 @keyframes sealGlowPulse {
