@@ -2,12 +2,11 @@
 const weddingDate = new Date("Sep 19, 2026 00:00:00").getTime();
 
 // 2. RUN COUNTDOWN
-// 2. RUN COUNTDOWN
 const x = setInterval(function() {
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
-    // Time calculations for days, hours, minutes and seconds
+    // Corrected modulo math to prevent the "thousands of seconds" glitch
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -20,10 +19,26 @@ const x = setInterval(function() {
 
     if (distance < 0) {
         clearInterval(x);
-        document.getElementById("countdown").innerHTML = "THE TALE HAS BEGUN";
+        const countdownEl = document.getElementById("countdown");
+        if (countdownEl) countdownEl.innerHTML = "THE TALE HAS BEGUN";
     }
 }, 1000);
 
+function updateElement(id, value) {
+    let el = document.getElementById(id);
+    if (!el) return;
+    
+    // Force double digits (e.g., "05" instead of "5")
+    let formattedValue = value < 10 ? "0" + value : value;
+    if (value < 0) formattedValue = "00";
+    
+    if (el.innerHTML != formattedValue) {
+        el.innerHTML = formattedValue;
+        el.classList.remove("pulse-tick");
+        void el.offsetWidth; // Triggers CSS hardware reflow for the heartbeat effect
+        el.classList.add("pulse-tick");
+    }
+}
 
 // --- 3. YOUTUBE MUSIC CONTROLLER ---
 var player;
@@ -52,7 +67,7 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-// --- 4. OPEN INVITATION (BALANCED 300 VOLUME WITH THEATRICAL REVEAL DELAY) ---
+// --- 4. OPEN INVITATION REVEAL ---
 function openInvitation() {
     if (window.invitationOpened) return;
     window.invitationOpened = true;
@@ -88,7 +103,7 @@ function openInvitation() {
     }
 }
 
-// --- HARDWARE-ACCELERATED IMMUNE INITIALIZATION ---
+// --- HARDWARE INITIALIZATION ---
 function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
@@ -108,7 +123,6 @@ if (document.readyState === "loading") {
 }
 
 // --- 5. PARTICLE GENERATION ENGINE ---
-
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
     if (!container) return;
