@@ -277,17 +277,26 @@ body::before {
 #wax-seal:hover { transform: translateX(-50%) scale(1.06); }
 #wax-seal:active { transform: translateX(-50%) scale(0.95); }
 
-/* LIQUID GOLD J&A MONOGRAM INNER GLOW */
-.seal-inner {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    background: linear-gradient(to bottom, #ffffff 0%, #f7e08a 45%, #B59410 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+/* --- LIQUID GOLD FINGERPRINT VECTOR CONFIGURATION --- */
+.seal-fingerprint {
+    width: 36px;
+    height: 36px;
+    display: block;
+    /* Soft hardware-accelerated drop shadow to simulate a physical wax debossing */
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.85));
     user-select: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    will-change: transform;
+}
+
+/* Subtle glow interaction when interacting with the biometric seal */
+#wax-seal:hover .seal-fingerprint {
+    transform: scale(1.05);
+    filter: drop-shadow(0 2px 8px rgba(247, 224, 138, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+}
+
+#wax-seal:active .seal-fingerprint {
+    transform: scale(0.95);
 }
 
 /* Keyframe Core Physics */
