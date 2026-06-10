@@ -207,12 +207,20 @@ body::before {
 }
 
 .enchanted-rose-glow {
-    font-size: 5rem;
-    line-height: 1;
-    margin-bottom: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
     animation: rosePulse 3s infinite ease-in-out;
-    filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 35px #cc0022);
     user-select: none;
+}
+
+.enchanted-rose-img {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px #ff1a40) drop-shadow(0 0 35px #cc0022);
 }
 
 .mirror-text {
