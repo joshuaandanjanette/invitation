@@ -61,16 +61,15 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-// --- 4. OPEN INVITATION & TRIGGER LUSH PETAL STREAM WITH DELAYED REVEAL ---
+// --- 4. OPEN INVITATION (BALANCED 300 VOLUME WITH THEATRICAL REVEAL DELAY) ---
 function openInvitation() {
-    // 1. Immediately kick off the musical score track unmuted
+    // Unmute track instantly on user button interaction
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
 
-    // 2. Map coordinates of the monogram wax stamp seal
     const sealBtn = document.getElementById('wax-seal');
     let originX = window.innerWidth / 2;
     let originY = window.innerHeight / 2 + 150;
@@ -81,25 +80,31 @@ function openInvitation() {
         originY = rect.top + (rect.height / 2);
     }
 
-    // 3. Deploy the balanced 300 petal stream instantly over the mirror
+    // Deploy perfectly balanced fluid stream calculation (exactly 300 pieces)
     triggerLushFountainStream(originX, originY, 300);
 
-    // 4. HOLD PAGE REVEAL: Wait until the bursting petals are out across the screen
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
+        // Hold system reveal visibility state until the full cloud surges up across the mirror
         setTimeout(() => {
-            // Mirror gracefully dissolves under the heavy blanket of roses
             overlay.classList.add('fade-out');
             
             setTimeout(() => {
                 overlay.remove();
-            }, 1600); // Matches the long CSS fade transition time
+            }, 1600);
             
-        }, 2200); // 2.2 second delay window allows full petal deployment before reveal
+        }, 2200); // 2.2-second scenic wait barrier
     }
 }
 
-// --- 5. RE-ENGINEERED FLUID PARTICLE ENGINE ---
+document.addEventListener("DOMContentLoaded", () => {
+    const sealBtn = document.getElementById('wax-seal');
+    if (sealBtn) {
+        sealBtn.addEventListener('click', openInvitation);
+    }
+});
+
+// --- 5. PARTICLE GENERATION ENGINE ---
 
 function createFallingPetal() {
     const container = document.getElementById('petal-container');
@@ -131,7 +136,6 @@ function createFallingPetal() {
     setTimeout(() => { petal.remove(); }, 10000);
 }
 
-// Upward swirling motion curves
 function createStreamBurstPetal(originX, originY) {
     const container = document.getElementById('petal-container');
     if (!container) return;
@@ -154,31 +158,26 @@ function createStreamBurstPetal(originX, originY) {
     petal.style.width = finalSize;
     petal.style.height = finalSize;
 
-    // Anchor precisely over the custom styled wax seal location
     petal.style.left = originX + 'px';
     petal.style.top = originY + 'px';
 
-    // Fluid Trajectory Calculations
     const horizontalSpread = (Math.random() * window.innerWidth) - (window.innerWidth / 2);
-    const upwardLift = -(window.innerHeight + 150); // Fully clears the top viewport bounds
+    const upwardLift = -(window.innerHeight + 150); 
     
-    const targetRotation = Math.random() * 1080 - 540; // Soft romantic spins
+    const targetRotation = Math.random() * 1080 - 540; 
     const targetScale = (Math.random() * 0.7) + 0.7;
 
-    // Set variable anchors securely into CSS runtime storage
     petal.style.setProperty('--tx', `${horizontalSpread}px`);
     petal.style.setProperty('--ty', `${upwardLift}px`);
     petal.style.setProperty('--rot', `${targetRotation}deg`);
     petal.style.setProperty('--sc', `${targetScale}`);
 
-    // Textured timeline offsets to build fluid environmental cloud thickness
     petal.style.animationDuration = ((Math.random() * 1.5) + 2.0) + "s";
 
     container.appendChild(petal);
     setTimeout(() => { petal.remove(); }, 3500);
 }
 
-// Spreads out 300 particles smoothly over a 700ms window for a perfect organic flow
 function triggerLushFountainStream(originX, originY, totalCount) {
     for (let i = 0; i < totalCount; i++) {
         setTimeout(() => {
@@ -187,7 +186,6 @@ function triggerLushFountainStream(originX, originY, totalCount) {
     }
 }
 
-// Ambient environment loop configuration
 setInterval(() => {
     if (!document.getElementById('intro-overlay')) {
         createFallingPetal();
