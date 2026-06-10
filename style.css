@@ -234,25 +234,32 @@ body::before {
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-.mirror-handle {
-    width: 24px;
-    height: 100px;
+/* --- NEW PEDESTAL BASE PLATE STYLES --- */
+.mirror-base {
+    width: 36px;
+    height: 55px; /* The stem holding the mirror up */
     background: linear-gradient(to right, #4a3c02 0%, #B59410 30%, #f7e08a 50%, #B59410 70%, #3b3002 100%);
     margin-top: -6px;
-    border-radius: 0 0 12px 12px;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.7);
-    z-index: 1;
     position: relative;
+    z-index: 1;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
 }
 
-.mirror-handle::after {
+/* The wide, weighted bottom plate */
+.mirror-base::after {
     content: "";
     position: absolute;
-    bottom: 8px; left: 50%; transform: translateX(-50%);
-    width: 12px; height: 12px;
-    background: #6B0F1A;
-    border-radius: 50%;
-    border: 1px solid #B59410;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 190px; /* Elegant wide base anchoring the mirror */
+    height: 22px;
+    background: linear-gradient(to right, #3b3002 0%, #B59410 25%, #f7e08a 50%, #B59410 75%, #241d01 100%);
+    border-radius: 14px 14px 4px 4px;
+    border-bottom: 4px solid #241d01;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.95),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
 }
 
 /* ANTI-CRUSH WAX SEAL BUTTON CONTAINER */
