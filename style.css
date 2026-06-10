@@ -87,17 +87,41 @@ body::before {
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.1); text-shadow: 0 0 20px #f7e08a; color: #ffffff; } }
 
 #petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+
+/* Standard Falling Petals */
 .petal { 
     will-change: transform; 
     pointer-events: none; 
     position: absolute; background: #a31e2b; border-radius: 150% 0 150% 0; opacity: 0.8; top: -100px; animation: fall linear forwards, drifting ease-in-out infinite alternate; 
 }
+
+/* New Fountain Burst Upward Petals */
+.petal-burst {
+    will-change: transform;
+    pointer-events: none;
+    position: absolute;
+    background: #a31e2b;
+    border-radius: 150% 0 150% 0;
+    opacity: 0;
+    bottom: -50px; /* Spawns off-screen at the bottom */
+    animation: fountainGust linear forwards;
+}
+
 .petal-dark { background: #61040a !important; }
 .petal-large { filter: blur(1.5px); opacity: 0.6; }
+
 @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 @keyframes drifting { 0% { margin-left: -60px; } 100% { margin-left: 60px; } }
 
-/* --- 9. STORYBOOK SCROLL & WAX SEAL OVERLAY --- */
+/* Fountain Gust Upward Animation */
+@keyframes fountainGust {
+    0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+    15% { opacity: 0.9; }
+    85% { opacity: 0.9; }
+    100% { transform: translateY(-120vh) rotate(540deg) scale(1.1); opacity: 0; }
+}
+
+/* --- 9. ROYAL MONOGRAM CARD OVERLAY --- */
 #intro-overlay {
     position: fixed;
     top: 0;
@@ -109,32 +133,30 @@ body::before {
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
 }
 
-/* Overlay Fade Out Classes */
 #intro-overlay.fade-out {
     opacity: 0;
-    transform: scale(1.05);
+    transform: scale(1.03);
     pointer-events: none;
 }
 
-.scroll-wrapper {
+.card-wrapper {
     position: relative;
-    width: 320px;
-    height: 420px;
-    animation: floatScroll 4s ease-in-out infinite alternate;
+    width: 340px;
+    height: 460px;
+    padding: 15px;
+    animation: floatCard 4s ease-in-out infinite alternate;
 }
 
-/* Pure CSS Parchment Paper */
-.scroll-parchment {
+/* Luxury Linen Invitation Card Styling */
+.monogram-card {
+    position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, #e1cdb5 0%, #f2e6ce 12%, #f2e6ce 88%, #e1cdb5 100%);
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(139, 115, 85, 0.3);
-    border-left: 12px solid #8b7355;
-    border-right: 12px solid #8b7355;
+    background-color: #fffdf9; /* Rich off-white / ivory linen tone */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,77 +164,82 @@ body::before {
     padding: 30px;
 }
 
-.scroll-text {
-    font-family: 'Pinyon Script', cursive !important;
-    font-size: 2.8rem;
-    color: #4a2c0f;
-    margin: 0 0 10px 0;
+/* Delicate Fine Gold Border lines */
+.gold-inner-border {
+    position: absolute;
+    top: 15px; left: 15px; right: 15px; bottom: 15px;
+    border: 2px solid #B59410;
+    outline: 1px solid #B59410;
+    outline-offset: -5px;
+    pointer-events: none;
 }
 
-.scroll-subtext {
-    font-size: 0.9rem;
+.monogram-initials {
+    font-family: 'Pinyon Script', cursive !important;
+    font-size: 5rem;
+    color: #4a3711;
+    margin: 0 0 10px 0;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+    letter-spacing: -2px;
+}
+
+.card-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #705335;
-    margin: 0;
+    color: #7a6231;
+    margin: 0 0 5px 0;
+    font-weight: bold;
 }
 
-/* Crimson Silk Ribbon */
-.scroll-ribbon {
-    position: absolute;
-    top: 50%;
-    left: -15px;
-    right: -15px;
-    height: 45px;
-    background: #6B0F1A;
-    transform: translateY(-50%);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+.card-subtag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a18854;
+    margin: 0 0 60px 0;
 }
 
 /* Gold Wax Seal Button */
 #wax-seal {
     position: absolute;
-    top: 50%;
+    bottom: 40px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 75px;
     height: 75px;
     background: radial-gradient(circle, #f7e08a 0%, #B59410 70%, #806605 100%);
     border: 3px double #fcfaf2;
-    border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%; /* Intentionally slightly irregular like hand-pressed wax */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.4);
+    border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%; /* Organic pressed shape */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4);
     cursor: pointer;
-    z-index: 2;
+    z-index: 5;
     display: flex;
     justify-content: center;
     align-items: center;
     outline: none;
     animation: sealPulse 2s infinite ease-in-out;
-    transition: transform 0.2s;
+    transition: transform 0.2s, bottom 0.2s;
 }
 
-#wax-seal:hover {
-    transform: translate(-50%, -50%) scale(1.08);
-}
-
-#wax-seal:active {
-    transform: translate(-50%, -50%) scale(0.95);
-}
+#wax-seal:hover { transform: translateX(-50%) scale(1.06); }
+#wax-seal:active { transform: translateX(-50%) scale(0.96); }
 
 .seal-inner {
     font-size: 2rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
     user-select: none;
 }
 
-/* Custom Scroll & Seal Animations */
-@keyframes floatScroll {
+/* Card Motion Keyframes */
+@keyframes floatCard {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-12px); }
+    100% { transform: translateY(-10px); }
 }
 
 @keyframes sealPulse {
-    0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 0 0px rgba(247, 224, 138, 0.4); }
-    50% { box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 15px 6px rgba(247, 224, 138, 0.6); }
+    0%, 100% { box-shadow: 0 6px 15px rgba(0,0,0,0.5), 0 0 0 0px rgba(247, 224, 138, 0.4); }
+    50% { box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 15px 6px rgba(247, 224, 138, 0.6); }
 }
