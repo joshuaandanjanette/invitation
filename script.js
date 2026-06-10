@@ -61,14 +61,16 @@ function onPlayerReady(event) {
     event.target.playVideo(); 
 }
 
-// --- 4. OPEN INVITATION & TRIGGER LUSH PETAL STREAM ---
+// --- 4. OPEN INVITATION & TRIGGER LUSH PETAL STREAM WITH DELAYED REVEAL ---
 function openInvitation() {
+    // 1. Immediately kick off the musical score track unmuted
     if (playerReady && player) {
         player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
 
+    // 2. Map coordinates of the monogram wax stamp seal
     const sealBtn = document.getElementById('wax-seal');
     let originX = window.innerWidth / 2;
     let originY = window.innerHeight / 2 + 150;
@@ -79,24 +81,23 @@ function openInvitation() {
         originY = rect.top + (rect.height / 2);
     }
 
-    // Deploys 300 petals for a balanced, elegant upward wave stream
+    // 3. Deploy the balanced 300 petal stream instantly over the mirror
     triggerLushFountainStream(originX, originY, 300);
 
+    // 4. HOLD PAGE REVEAL: Wait until the bursting petals are out across the screen
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
-        overlay.classList.add('fade-out');
         setTimeout(() => {
-            overlay.remove();
-        }, 1600);
+            // Mirror gracefully dissolves under the heavy blanket of roses
+            overlay.classList.add('fade-out');
+            
+            setTimeout(() => {
+                overlay.remove();
+            }, 1600); // Matches the long CSS fade transition time
+            
+        }, 2200); // 2.2 second delay window allows full petal deployment before reveal
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const sealBtn = document.getElementById('wax-seal');
-    if (sealBtn) {
-        sealBtn.addEventListener('click', openInvitation);
-    }
-});
 
 // --- 5. RE-ENGINEERED FLUID PARTICLE ENGINE ---
 
