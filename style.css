@@ -30,68 +30,140 @@ body::before {
     will-change: transform;
 }
 
-/* --- 2. CONTAINER & PHOTO (Absolute Frame Stack Fix) --- */
+/* --- 2. CONTAINER & PHOTO (Luxury Ornate Gallery Frame) --- */
 .profile-photo {
-    position: relative;          /* Absolute anchor for the internal stack layers */
-    width: 136px;                /* 120px content area + 16px frame padding */
-    height: 176px;               /* 160px content area + 16px frame padding */
-    margin: 0 auto 30px auto;    /* Perfectly centered with breathing room below */
-    background: #fcfaf2;         /* Matte wedding frame color */
-    border-radius: 2px;
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.6);
-    overflow: hidden;            /* Ensures flawless image edge clipping */
+    position: relative;
+    width: 145px;
+    height: 190px;
+    margin: 0 auto 35px auto;
+    
+    /* Luxury Ivory Parchment Texture Matting */
+    background: linear-gradient(135deg, #fffdf7 0%, #f2ebd9 100%);
+    padding: 12px; /* Elegant thick border padding */
+    
+    /* Royal Antique Framing: Soft corners, solid gold rim, and heavy dimension shadows */
+    border-radius: 6px;
+    border: 2px solid #B59410;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.6),
+        0 16px 35px rgba(0, 0, 0, 0.5),
+        inset 0 0 12px rgba(181, 148, 16, 0.25);
+    overflow: hidden;
 }
 
-/* Polka Dot Pattern: Rendered via a clean CSS layout mask layer */
-.profile-photo::before {
+/* High-End Gallery Inset: Creates a thin gold accent line inside the frame */
+.profile-photo::after {
     content: "";
     position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    background-color: #000;
-    background-image: radial-gradient(rgba(255,255,255,0.15) 15%, transparent 20%);
-    background-size: 10px 10px;
-    background-position: center;
-    z-index: 1;                  /* Sits safely directly behind your photo layers */
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    border: 1px solid rgba(181, 148, 16, 0.45);
+    pointer-events: none;
+    z-index: 5; /* Pins cleanly over the photographs */
 }
 
-/* Forcing both images to lock perfectly to the 8px inner margins */
+/* Photo Configurations */
 .profile-photo img {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    width: calc(100% - 16px);    /* Perfect 8px padding gap math on both sides */
-    height: calc(100% - 16px);   /* Perfect 8px padding gap math on top/bottom */
-    object-fit: cover;           /* Keeps your aspect ratio completely pristine */
+    top: 12px;
+    left: 12px;
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
+    object-fit: cover;
+    border-radius: 2px;
     pointer-events: none;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    
+    /* Hardware acceleration hooks for buttery smooth frame transitions */
+    will-change: transform, opacity, filter;
 }
 
-/* Base static visibility rules */
-.photo-1 { opacity: 1; z-index: 3; }
-.photo-2 { opacity: 0; z-index: 2; }
+/* Initial structural visibility layered depths */
+.photo-1 { opacity: 1; z-index: 3; transform: scale(1); filter: blur(0px); }
+.photo-2 { opacity: 0; z-index: 2; transform: scale(0.96); filter: blur(4px); }
 
-/* The crossfade animation loop runs smoothly only after reveal-main triggers */
+/* Cinematic Slow-Motion Hand-offs (Triggered after breaking the seal) */
 .reveal-main .photo-1 {
-    animation: crossFadeFirst 10s infinite ease-in-out;
+    animation: luxuryLensFirst 12s infinite ease-in-out;
 }
 
 .reveal-main .photo-2 {
-    animation: crossFadeSecond 10s infinite ease-in-out;
+    animation: luxuryLensSecond 12s infinite ease-in-out;
 }
 
-/* Mathematical cross-fade opacity timelines */
-@keyframes crossFadeFirst {
-    0%, 45%, 100% { opacity: 1; z-index: 3; }
-    55%, 90% { opacity: 0; z-index: 2; }
+/* THE SECRET TO AN EXPENSIVE TRANSITION:
+   Instead of just fading opacity, the active photo slowly drifts forward (Ken Burns effect). 
+   When it switches, the outgoing photo dissolves outward and gets a soft focus blur, 
+   while the incoming photo scales up from a distance and snaps beautifully into crisp focus.
+*/
+@keyframes luxuryLensFirst {
+    0% { 
+        opacity: 1; 
+        transform: scale(1); 
+        filter: blur(0px); 
+        z-index: 3; 
+    }
+    42% { 
+        opacity: 1; 
+        transform: scale(1.04); /* Ultra-slow cinematic drift forward */
+        filter: blur(0px); 
+        z-index: 3; 
+    }
+    50% { 
+        opacity: 0; 
+        transform: scale(1.08); /* Dissolves smoothly outward */
+        filter: blur(5px);      /* Soft camera lens blur */
+        z-index: 2; 
+    }
+    92% { 
+        opacity: 0; 
+        transform: scale(0.96); 
+        filter: blur(5px); 
+        z-index: 2; 
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1); 
+        filter: blur(0px); 
+        z-index: 3; 
+    }
 }
 
-@keyframes crossFadeSecond {
-    0%, 45%, 100% { opacity: 0; z-index: 2; }
-    55%, 90% { opacity: 1; z-index: 3; }
+@keyframes luxuryLensSecond {
+    0% { 
+        opacity: 0; 
+        transform: scale(0.96); /* Starts slightly smaller in the background */
+        filter: blur(5px); 
+        z-index: 2; 
+    }
+    42% { 
+        opacity: 0; 
+        transform: scale(0.96); 
+        filter: blur(5px); 
+        z-index: 2; 
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1); /* Snaps cleanly into primary focus */
+        filter: blur(0px); 
+        z-index: 3; 
+    }
+    92% { 
+        opacity: 1; 
+        transform: scale(1.04); /* Continues its slow romantic forward drift */
+        filter: blur(0px); 
+        z-index: 3; 
+    }
+    100% { 
+        opacity: 0; 
+        transform: scale(1.08); 
+        filter: blur(5px); 
+        z-index: 2; 
+    }
 }
+
+
 /* --- 3. THE NAMES & TEXT --- */
 .names { display: flex; flex-direction: column; margin-bottom: 10px; }
 .top-name, .bottom-name {
