@@ -30,70 +30,66 @@ body::before {
     will-change: transform;
 }
 
-/* --- 2. CONTAINER & PHOTO (Updated for Cross-Fade) --- */
-
-/* 1. The Wrapper: Now holds the physical frame/padding styles */
+/* --- 2. CONTAINER & PHOTO (Fixed Frame & Sync) --- */
 .profile-photo-frame {
     width: 120px;
     height: 160px;
     display: block;
     margin: 0 auto 25px auto;
-    position: relative; /* Essential for stacking images inside */
-    background: #fcfaf2; /* Frame color */
+    position: relative; /* Anchor for absolute images */
+    background: #fcfaf2; /* Elegant cream frame color */
     padding: 8px;
     border-radius: 1px;
     box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
     filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
-    overflow: hidden; /* Keeps the cross-fade neat */
 }
 
-/* 2. The custom mask background (your fingerprint pattern) is now applied here */
+/* Custom overlay texture */
 .profile-photo-frame::after {
     content: "";
     position: absolute;
-    top: 8px; left: 8px; right: 8px; bottom: 8px; /* Match the padding of wrapper */
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
     background-image: radial-gradient(#000 0%, #000 70%, transparent 72%);
     background-size: 18px 18px;
     background-position: -9px -9px;
     pointer-events: none;
-    z-index: 3; /* Lays over the images */
+    z-index: 3;
 }
 
-/* 3. Common styles for both images */
+/* Core image sizing - perfectly fits inside the 8px padding */
 .frame-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures photos fill the frame nicely */
     position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0; /* Hidden by default */
-    transition: opacity 1.5s ease-in-out; /* Smooth transition when loading */
+    top: 8px;
+    left: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    object-fit: cover;
+    pointer-events: none;
     z-index: 1;
 }
 
-/* 4. Assign the looping animation (total duration 10s) */
-.photo-1 {
-    animation: imageCrossFade 10s infinite;
-    opacity: 1; /* Start visible */
+/* Default States: Photo 1 is awake, Photo 2 is asleep until revealed */
+.photo-1 { opacity: 1; }
+.photo-2 { opacity: 0; }
+
+/* CINEMATIC SYNC: Only loops AFTER .reveal-main class is applied */
+.reveal-main .photo-1 {
+    animation: fadeFirstPhoto 10s infinite ease-in-out;
 }
 
-.photo-2 {
-    animation: imageCrossFade 10s infinite;
-    animation-delay: 5s; /* Wait exactly half the cycle to appear */
+.reveal-main .photo-2 {
+    animation: fadeSecondPhoto 10s infinite ease-in-out;
 }
 
-/* --- Phase 3: Add new keyframe animation to the bottom of style.css --- */
-@keyframes imageCrossFade {
-    0% { opacity: 0; }
-    /* Quick fade in */
-    10% { opacity: 1; } 
-    /* Stay visible until half the animation is done (5s) */
-    50% { opacity: 1; } 
-    /* Softly fade out */
-    60% { opacity: 0; } 
-    /* Stay invisible until cycle restarts */
-    100% { opacity: 0; } 
+/* Perfect mathematical cross-fade timelines */
+@keyframes fadeFirstPhoto {
+    0%, 45%, 100% { opacity: 1; }
+    55%, 90% { opacity: 0; }
+}
+
+@keyframes fadeSecondPhoto {
+    0%, 45%, 100% { opacity: 0; }
+    55%, 90% { opacity: 1; }
 }
 
 /* --- 3. THE NAMES & TEXT --- */
