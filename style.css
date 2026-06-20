@@ -30,139 +30,157 @@ body::before {
     will-change: transform;
 }
 
-/* --- 2. CONTAINER & PHOTO (Luxury Ornate Gallery Frame) --- */
+/* --- 2. CONTAINER & PHOTO (Enchanted Royal Gallery Frame) --- */
 .profile-photo {
     position: relative;
-    width: 145px;
-    height: 190px;
+    width: 150px;
+    height: 200px;
     margin: 0 auto 35px auto;
     
-    /* Luxury Ivory Parchment Texture Matting */
-    background: linear-gradient(135deg, #fffdf7 0%, #f2ebd9 100%);
-    padding: 12px; /* Elegant thick border padding */
+    /* 3D Polished Antique Gold Casing */
+    background: linear-gradient(135deg, #4a3b0a 0%, #b99333 25%, #fcf3c5 50%, #b99333 75%, #312604 100%);
+    padding: 6px; /* Outer gold metallic rim */
+    border-radius: 4px;
     
-    /* Royal Antique Framing: Soft corners, solid gold rim, and heavy dimension shadows */
-    border-radius: 6px;
-    border: 2px solid #B59410;
+    /* Layered Drop Shadows to Float the Frame in 3D Space */
     box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.6),
-        0 16px 35px rgba(0, 0, 0, 0.5),
-        inset 0 0 12px rgba(181, 148, 16, 0.25);
+        0 2px 4px rgba(0,0,0,0.8),
+        0 15px 35px rgba(0, 0, 0, 0.65),
+        inset 0 1px 2px rgba(255,255,255,0.4);
     overflow: hidden;
 }
 
-/* High-End Gallery Inset: Creates a thin gold accent line inside the frame */
+/* Deep Royal Velvet Inner Matting & Shadow Recess */
+.profile-photo::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    /* Rich, dark enchanted burgundy velvet texture */
+    background: radial-gradient(circle, #2d040a 0%, #120103 100%);
+    border: 2px solid #8a6f27; /* Inner gold leaf accent rim */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.95);
+    z-index: 1;
+}
+
+/* THE MAGIC FX LAYER: Sweeping Golden Light Glint */
 .profile-photo::after {
     content: "";
     position: absolute;
-    top: 16px;
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
-    border: 1px solid rgba(181, 148, 16, 0.45);
+    top: -50%;
+    left: -150%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        rgba(255, 243, 197, 0) 30%, 
+        rgba(255, 243, 197, 0.7) 50%, 
+        rgba(255, 243, 197, 0) 70%, 
+        transparent 100%
+    );
+    transform: rotate(25deg);
     pointer-events: none;
-    z-index: 5; /* Pins cleanly over the photographs */
+    z-index: 10; /* Rides high over the photos */
 }
 
-/* Photo Configurations */
+/* Sync the golden glint flare with the photo swap */
+.reveal-main.profile-photo::after,
+.reveal-main .profile-photo::after {
+    animation: goldenGlintLoop 12s infinite ease-in-out;
+}
+
+/* Photograph Placement & Canvas Clip */
 .profile-photo img {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    width: calc(100% - 24px);
-    height: calc(100% - 24px);
+    top: 20px;  /* Pushes the photo safely inside the velvet matting */
+    left: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
     object-fit: cover;
-    border-radius: 2px;
+    border: 1px solid #000;
     pointer-events: none;
-    
-    /* Hardware acceleration hooks for buttery smooth frame transitions */
     will-change: transform, opacity, filter;
 }
 
-/* Initial structural visibility layered depths */
-.photo-1 { opacity: 1; z-index: 3; transform: scale(1); filter: blur(0px); }
-.photo-2 { opacity: 0; z-index: 2; transform: scale(0.96); filter: blur(4px); }
+/* Core Stack Visibility depths */
+.photo-1 { opacity: 1; z-index: 3; transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+.photo-2 { opacity: 0; z-index: 2; transform: scale(0.92); filter: brightness(0.4); }
 
 /* Cinematic Slow-Motion Hand-offs (Triggered after breaking the seal) */
 .reveal-main .photo-1 {
-    animation: luxuryLensFirst 12s infinite ease-in-out;
+    animation: deepCinemaFirst 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .reveal-main .photo-2 {
-    animation: luxuryLensSecond 12s infinite ease-in-out;
+    animation: deepCinemaSecond 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* THE SECRET TO AN EXPENSIVE TRANSITION:
-   Instead of just fading opacity, the active photo slowly drifts forward (Ken Burns effect). 
-   When it switches, the outgoing photo dissolves outward and gets a soft focus blur, 
-   while the incoming photo scales up from a distance and snaps beautifully into crisp focus.
+/* THE MOVIE-GRADE TRANSITION MECHANICS:
+   Instead of a cheap crossfade, the outgoing image slowly sinks backwards and drops contrast,
+   becoming a silhouette. Exactly when the golden flare blinds the center pane (46%-54%), 
+   the incoming image surges forward from the darkness, scaling up into razor-sharp clarity.
 */
-@keyframes luxuryLensFirst {
-    0% { 
+@keyframes deepCinemaFirst {
+    0%, 40% { 
         opacity: 1; 
-        transform: scale(1); 
-        filter: blur(0px); 
+        transform: scale(1.05); /* Continuous slow dream-drift */
+        filter: brightness(1) contrast(1);
         z-index: 3; 
     }
-    42% { 
-        opacity: 1; 
-        transform: scale(1.04); /* Ultra-slow cinematic drift forward */
-        filter: blur(0px); 
-        z-index: 3; 
-    }
-    50% { 
+    48%, 92% { 
         opacity: 0; 
-        transform: scale(1.08); /* Dissolves smoothly outward */
-        filter: blur(5px);      /* Soft camera lens blur */
-        z-index: 2; 
-    }
-    92% { 
-        opacity: 0; 
-        transform: scale(0.96); 
-        filter: blur(5px); 
+        transform: scale(0.95); /* Deep recession collapse */
+        filter: brightness(0.2) contrast(1.2);
         z-index: 2; 
     }
     100% { 
         opacity: 1; 
-        transform: scale(1); 
-        filter: blur(0px); 
+        transform: scale(1.05); 
+        filter: brightness(1) contrast(1);
         z-index: 3; 
     }
 }
 
-@keyframes luxuryLensSecond {
-    0% { 
+@keyframes deepCinemaSecond {
+    0%, 40% { 
         opacity: 0; 
-        transform: scale(0.96); /* Starts slightly smaller in the background */
-        filter: blur(5px); 
+        transform: scale(0.95); 
+        filter: brightness(0.2) contrast(1.2);
         z-index: 2; 
     }
-    42% { 
-        opacity: 0; 
-        transform: scale(0.96); 
-        filter: blur(5px); 
-        z-index: 2; 
+    48% {
+        opacity: 1;
+        transform: scale(1);
+        filter: brightness(1) contrast(1);
+        z-index: 3;
     }
-    50% { 
+    84% { 
         opacity: 1; 
-        transform: scale(1); /* Snaps cleanly into primary focus */
-        filter: blur(0px); 
+        transform: scale(1.05); 
+        filter: brightness(1) contrast(1);
         z-index: 3; 
     }
-    92% { 
-        opacity: 1; 
-        transform: scale(1.04); /* Continues its slow romantic forward drift */
-        filter: blur(0px); 
-        z-index: 3; 
-    }
-    100% { 
+    92%, 100% { 
         opacity: 0; 
-        transform: scale(1.08); 
-        filter: blur(5px); 
+        transform: scale(0.95); 
+        filter: brightness(0.2) contrast(1.2);
         z-index: 2; 
     }
 }
 
+/* Magic Golden Glint Flash Timing */
+@keyframes goldenGlintLoop {
+    0%, 40% { left: -150%; opacity: 0; }
+    44% { opacity: 1; }
+    48% { left: 150%; opacity: 0; } /* Sweeps perfectly across right during the switch */
+    84% { left: -150%; opacity: 0; }
+    88% { opacity: 1; }
+    92% { left: 150%; opacity: 0; } /* Secondary loop sweep on the tail-end transition */
+    100% { left: -150%; opacity: 0; }
+}
 
 /* --- 3. THE NAMES & TEXT --- */
 .names { display: flex; flex-direction: column; margin-bottom: 10px; }
