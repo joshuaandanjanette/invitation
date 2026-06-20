@@ -50,10 +50,10 @@ function onYouTubeIframeAPIReady() {
         width: '1',
         videoId: '6n9Cysnoxug',
         playerVars: {
-            'autoplay': 1,
+            'autoplay': 0,        // Changed to 0: Do not play on page load
             'controls': 0,
             'loop': 1,
-            'mute': 1,
+            'mute': 0,            // Changed to 0: Start unmuted
             'playlist': '6n9Cysnoxug'
         },
         events: {
@@ -64,7 +64,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
     playerReady = true;
-    event.target.playVideo(); 
+    // Removed event.target.playVideo(); to ensure it remains completely paused until clicked
 }
 
 // --- 4. OPEN INVITATION REVEAL (CINEMATIC TRANSITION) ---
