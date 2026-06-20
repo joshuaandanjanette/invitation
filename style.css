@@ -30,41 +30,50 @@ body::before {
     will-change: transform;
 }
 
-/* --- 2. CONTAINER & PHOTO (CSS Grid Stack Reset) --- */
+/* --- 2. CONTAINER & PHOTO (Absolute Frame Stack Fix) --- */
 .profile-photo {
-    width: 120px; 
-    height: 160px; 
-    margin: 0 auto 25px auto;
-    background: #fcfaf2; 
-    padding: 8px; 
-    border-radius: 1px;
-    filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
-    background-image: radial-gradient(#000 0%, #000 70%, transparent 72%);
-    background-size: 18px 18px; 
-    background-position: -9px -9px;
-    background-clip: content-box; 
-    box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
-    
-    /* The Secret Sauce: Stacks elements perfectly inside the padding box */
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    overflow: hidden;
+    position: relative;          /* Absolute anchor for the internal stack layers */
+    width: 136px;                /* 120px content area + 16px frame padding */
+    height: 176px;               /* 160px content area + 16px frame padding */
+    margin: 0 auto 30px auto;    /* Perfectly centered with breathing room below */
+    background: #fcfaf2;         /* Matte wedding frame color */
+    border-radius: 2px;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.6);
+    overflow: hidden;            /* Ensures flawless image edge clipping */
 }
 
+/* Polka Dot Pattern: Rendered via a clean CSS layout mask layer */
+.profile-photo::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    background-color: #000;
+    background-image: radial-gradient(rgba(255,255,255,0.15) 15%, transparent 20%);
+    background-size: 10px 10px;
+    background-position: center;
+    z-index: 1;                  /* Sits safely directly behind your photo layers */
+}
+
+/* Forcing both images to lock perfectly to the 8px inner margins */
 .profile-photo img {
-    grid-area: 1 / 1; /* Forces both photos onto the exact same grid space */
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: calc(100% - 16px);    /* Perfect 8px padding gap math on both sides */
+    height: calc(100% - 16px);   /* Perfect 8px padding gap math on top/bottom */
+    object-fit: cover;           /* Keeps your aspect ratio completely pristine */
     pointer-events: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-/* Base static states before the reveal */
-.photo-1 { opacity: 1; z-index: 2; }
-.photo-2 { opacity: 0; z-index: 1; }
+/* Base static visibility rules */
+.photo-1 { opacity: 1; z-index: 3; }
+.photo-2 { opacity: 0; z-index: 2; }
 
-/* The loop starts synchronized ONLY after the wax seal is pressed */
+/* The crossfade animation loop runs smoothly only after reveal-main triggers */
 .reveal-main .photo-1 {
     animation: crossFadeFirst 10s infinite ease-in-out;
 }
@@ -73,17 +82,16 @@ body::before {
     animation: crossFadeSecond 10s infinite ease-in-out;
 }
 
-/* Flawless depth-controlled blending timelines */
+/* Mathematical cross-fade opacity timelines */
 @keyframes crossFadeFirst {
-    0%, 45%, 100% { opacity: 1; z-index: 2; }
-    55%, 90% { opacity: 0; z-index: 1; }
+    0%, 45%, 100% { opacity: 1; z-index: 3; }
+    55%, 90% { opacity: 0; z-index: 2; }
 }
 
 @keyframes crossFadeSecond {
-    0%, 45%, 100% { opacity: 0; z-index: 1; }
-    55%, 90% { opacity: 1; z-index: 2; }
+    0%, 45%, 100% { opacity: 0; z-index: 2; }
+    55%, 90% { opacity: 1; z-index: 3; }
 }
-
 /* --- 3. THE NAMES & TEXT --- */
 .names { display: flex; flex-direction: column; margin-bottom: 10px; }
 .top-name, .bottom-name {
@@ -399,8 +407,21 @@ body::before {
     transform: scale(0.96);
 }
 
-/* --- ETHEREAL MAIN CONTENT UNVEILING --- */
+/* --- ETHEREAL MAIN CONTENT UNVEILING (Centered Layout Reset) --- */
 .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px 24px;
+    
+    /* The Center Alignment Engine: Prevents vertical stacking collapse */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;          /* Spans the full height of the viewport */
+    box-sizing: border-box;
+
+    /* Cinematic transition hooks */
     opacity: 0;
     filter: blur(10px);
     transform: scale(0.94) translateY(25px);
