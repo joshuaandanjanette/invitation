@@ -30,66 +30,58 @@ body::before {
     will-change: transform;
 }
 
-/* --- 2. CONTAINER & PHOTO (Fixed Frame & Sync) --- */
-.profile-photo-frame {
-    width: 120px;
-    height: 160px;
-    display: block;
+/* --- 2. CONTAINER & PHOTO (CSS Grid Stack Reset) --- */
+.profile-photo {
+    width: 120px; 
+    height: 160px; 
     margin: 0 auto 25px auto;
-    position: relative; /* Anchor for absolute images */
-    background: #fcfaf2; /* Elegant cream frame color */
-    padding: 8px;
+    background: #fcfaf2; 
+    padding: 8px; 
     border-radius: 1px;
-    box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
     filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
-}
-
-/* Custom overlay texture */
-.profile-photo-frame::after {
-    content: "";
-    position: absolute;
-    top: 8px; left: 8px; right: 8px; bottom: 8px;
     background-image: radial-gradient(#000 0%, #000 70%, transparent 72%);
-    background-size: 18px 18px;
+    background-size: 18px 18px; 
     background-position: -9px -9px;
-    pointer-events: none;
-    z-index: 3;
+    background-clip: content-box; 
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+    
+    /* The Secret Sauce: Stacks elements perfectly inside the padding box */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
 }
 
-/* Core image sizing - perfectly fits inside the 8px padding */
-.frame-photo {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
+.profile-photo img {
+    grid-area: 1 / 1; /* Forces both photos onto the exact same grid space */
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     pointer-events: none;
-    z-index: 1;
 }
 
-/* Default States: Photo 1 is awake, Photo 2 is asleep until revealed */
-.photo-1 { opacity: 1; }
-.photo-2 { opacity: 0; }
+/* Base static states before the reveal */
+.photo-1 { opacity: 1; z-index: 2; }
+.photo-2 { opacity: 0; z-index: 1; }
 
-/* CINEMATIC SYNC: Only loops AFTER .reveal-main class is applied */
+/* The loop starts synchronized ONLY after the wax seal is pressed */
 .reveal-main .photo-1 {
-    animation: fadeFirstPhoto 10s infinite ease-in-out;
+    animation: crossFadeFirst 10s infinite ease-in-out;
 }
 
 .reveal-main .photo-2 {
-    animation: fadeSecondPhoto 10s infinite ease-in-out;
+    animation: crossFadeSecond 10s infinite ease-in-out;
 }
 
-/* Perfect mathematical cross-fade timelines */
-@keyframes fadeFirstPhoto {
-    0%, 45%, 100% { opacity: 1; }
-    55%, 90% { opacity: 0; }
+/* Flawless depth-controlled blending timelines */
+@keyframes crossFadeFirst {
+    0%, 45%, 100% { opacity: 1; z-index: 2; }
+    55%, 90% { opacity: 0; z-index: 1; }
 }
 
-@keyframes fadeSecondPhoto {
-    0%, 45%, 100% { opacity: 0; }
-    55%, 90% { opacity: 1; }
+@keyframes crossFadeSecond {
+    0%, 45%, 100% { opacity: 0; z-index: 1; }
+    55%, 90% { opacity: 1; z-index: 2; }
 }
 
 /* --- 3. THE NAMES & TEXT --- */
