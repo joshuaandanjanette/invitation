@@ -184,11 +184,24 @@ body::before {
 
 /* --- 3. THE NAMES & TEXT --- */
 .names { display: flex; flex-direction: column; margin-bottom: 10px; }
-.top-name, .bottom-name {
+.top-name, {
     font-family: 'Pinyon Script', cursive !important; font-size: 5.5rem;
     color: #f7e08a; line-height: 1.1; text-shadow: 0 0 15px #B59410;
     animation: magicFlicker 3s infinite alternate;
 }
+
+.bottom-name {
+    font-family: 'Cinzel', serif !important; 
+    font-weight: 700;
+    font-size: 3.5rem; /* Slightly smaller to balance with the script */
+    text-transform: uppercase;
+    letter-spacing: 6px; /* Spaced out like a movie poster */
+    color: #f7e08a; 
+    line-height: 1.1; 
+    text-shadow: 0 0 15px #B59410;
+    animation: magicFlicker 3s infinite alternate;
+}
+
 .middle-word { font-family: 'Pinyon Script', cursive !important; font-size: 2.2rem; margin: -20px 0; }
 .subtitle { font-size: 1.6rem; letter-spacing: 4px; text-transform: uppercase; color: #B59410; margin: 15px 0; }
 
