@@ -36,13 +36,9 @@ body::before {
     width: 150px;
     height: 200px;
     margin: 0 auto 35px auto;
-    
-    /* 3D Polished Antique Gold Casing */
     background: linear-gradient(135deg, #4a3b0a 0%, #b99333 25%, #fcf3c5 50%, #b99333 75%, #312604 100%);
-    padding: 6px; /* Outer gold metallic rim */
+    padding: 6px; 
     border-radius: 4px;
-    
-    /* Layered Drop Shadows to Float the Frame in 3D Space */
     box-shadow: 
         0 2px 4px rgba(0,0,0,0.8),
         0 15px 35px rgba(0, 0, 0, 0.65),
@@ -58,9 +54,8 @@ body::before {
     left: 6px;
     right: 6px;
     bottom: 6px;
-    /* Rich, dark enchanted burgundy velvet texture */
     background: radial-gradient(circle, #2d040a 0%, #120103 100%);
-    border: 2px solid #8a6f27; /* Inner gold leaf accent rim */
+    border: 2px solid #8a6f27; 
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.95);
     z-index: 1;
 }
@@ -83,11 +78,10 @@ body::before {
     );
     transform: rotate(25deg);
     pointer-events: none;
-    z-index: 10; /* Rides high over the photos */
+    z-index: 10; 
 }
 
 /* Sync the golden glint flare with the photo swap */
-.reveal-main.profile-photo::after,
 .reveal-main .profile-photo::after {
     animation: goldenGlintLoop 12s infinite ease-in-out;
 }
@@ -95,10 +89,10 @@ body::before {
 /* Photograph Placement & Canvas Clip */
 .profile-photo img {
     position: absolute;
-    top: 20px;  /* Pushes the photo safely inside the velvet matting */
-    left: 20px;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
+    top: 15px;  
+    left: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
     object-fit: cover;
     border: 1px solid #000;
     pointer-events: none;
@@ -106,10 +100,10 @@ body::before {
 }
 
 /* Core Stack Visibility depths */
-.photo-1 { opacity: 1; z-index: 3; transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+.photo-1 { opacity: 1; z-index: 3; transform: scale(1); }
 .photo-2 { opacity: 0; z-index: 2; transform: scale(0.92); filter: brightness(0.4); }
 
-/* Cinematic Slow-Motion Hand-offs (Triggered after breaking the seal) */
+/* Cinematic Slow-Motion Hand-offs */
 .reveal-main .photo-1 {
     animation: deepCinemaFirst 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -118,21 +112,16 @@ body::before {
     animation: deepCinemaSecond 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* THE MOVIE-GRADE TRANSITION MECHANICS:
-   Instead of a cheap crossfade, the outgoing image slowly sinks backwards and drops contrast,
-   becoming a silhouette. Exactly when the golden flare blinds the center pane (46%-54%), 
-   the incoming image surges forward from the darkness, scaling up into razor-sharp clarity.
-*/
 @keyframes deepCinemaFirst {
     0%, 40% { 
         opacity: 1; 
-        transform: scale(1.05); /* Continuous slow dream-drift */
+        transform: scale(1.05); 
         filter: brightness(1) contrast(1);
         z-index: 3; 
     }
     48%, 92% { 
         opacity: 0; 
-        transform: scale(0.95); /* Deep recession collapse */
+        transform: scale(0.95); 
         filter: brightness(0.2) contrast(1.2);
         z-index: 2; 
     }
@@ -175,10 +164,10 @@ body::before {
 @keyframes goldenGlintLoop {
     0%, 40% { left: -150%; opacity: 0; }
     44% { opacity: 1; }
-    48% { left: 150%; opacity: 0; } /* Sweeps perfectly across right during the switch */
+    48% { left: 150%; opacity: 0; } 
     84% { left: -150%; opacity: 0; }
     88% { opacity: 1; }
-    92% { left: 150%; opacity: 0; } /* Secondary loop sweep on the tail-end transition */
+    92% { left: 150%; opacity: 0; } 
     100% { left: -150%; opacity: 0; }
 }
 
@@ -190,14 +179,15 @@ body::before {
     animation: magicFlicker 3s infinite alternate;
 }
 
-
-
 .middle-word { font-family: 'Pinyon Script', cursive !important; font-size: 2.2rem; margin: -20px 0; }
 .subtitle { font-size: 1.6rem; letter-spacing: 4px; text-transform: uppercase; color: #B59410; margin: 15px 0; }
 
+.event-details { margin: 20px 0; }
+.event-details p { margin: 8px 0; }
 .venue-link {
     color: #CBAC8D; text-decoration: none; border-bottom: 1px dashed rgba(181, 148, 16, 0.4);
     transition: 0.3s; font-size: 0.9rem; letter-spacing: 1px;
+    display: inline-block;
 }
 .venue-link:hover { color: #f7e08a; border-bottom: 1px solid #f7e08a; }
 
@@ -220,7 +210,7 @@ body::before {
 
 /* --- 7. MOBILE OVERRIDE --- */
 @media (max-width: 1000px) {
-    .container { background: transparent !important; backdrop-filter: none !important; border: none !important; box-shadow: none !important; }
+    .container { background: transparent !important; backdrop-filter: none !important; border: none !important; box-shadow: none !important; padding: 30px 16px; }
     .top-name, .bottom-name { font-size: 4rem; }
     .subtitle { font-size: 1.2rem; }
     .rsvp-btn { width: 85%; border-radius: 40px; }
@@ -295,7 +285,6 @@ body::before {
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    /* Morphic transition variables for high performance depth scaling */
     transition: 
         opacity 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19), 
         transform 1.8s cubic-bezier(0.215, 0.610, 0.355, 1), 
@@ -500,21 +489,18 @@ body::before {
     transform: scale(0.96);
 }
 
-/* --- ETHEREAL MAIN CONTENT UNVEILING (Centered Layout Reset) --- */
+/* --- ETHEREAL MAIN CONTENT UNVEILING --- */
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 50px 24px;
-    
-    /* The Center Alignment Engine: Prevents vertical stacking collapse */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;          /* Spans the full height of the viewport */
+    min-height: 100vh;          
     box-sizing: border-box;
 
-    /* Cinematic transition hooks */
     opacity: 0;
     filter: blur(10px);
     transform: scale(0.94) translateY(25px);
