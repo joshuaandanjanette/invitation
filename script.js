@@ -6,7 +6,6 @@ const x = setInterval(function() {
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
-    // Corrected modulo math to prevent the "thousands of seconds" glitch
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -28,14 +27,13 @@ function updateElement(id, value) {
     let el = document.getElementById(id);
     if (!el) return;
     
-    // Force double digits (e.g., "05" instead of "5")
     let formattedValue = value < 10 ? "0" + value : value;
     if (value < 0) formattedValue = "00";
     
     if (el.innerHTML != formattedValue) {
         el.innerHTML = formattedValue;
         el.classList.remove("pulse-tick");
-        void el.offsetWidth; // Triggers CSS hardware reflow for the heartbeat effect
+        void el.offsetWidth; // Triggers reflow for heartbeat tick
         el.classList.add("pulse-tick");
     }
 }
@@ -50,10 +48,10 @@ function onYouTubeIframeAPIReady() {
         width: '1',
         videoId: '6n9Cysnoxug',
         playerVars: {
-            'autoplay': 0,        // Changed to 0: Do not play on page load
+            'autoplay': 0,        
             'controls': 0,
             'loop': 1,
-            'mute': 0,            // Changed to 0: Start unmuted
+            'mute': 0,            
             'playlist': '6n9Cysnoxug'
         },
         events: {
@@ -64,21 +62,26 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
     playerReady = true;
-    // Removed event.target.playVideo(); to ensure it remains completely paused until clicked
 }
 
 // --- 4. OPEN INVITATION REVEAL (CINEMATIC TRANSITION) ---
-function openInvitation() {
+function openInvitation(e) {
+    // Stop mobile hybrid devices from running click handlers immediately after touchstart
+    if (e) {
+        if (e.type === 'touchstart') window.touchFired = true;
+        if (e.type === 'click' && window.touchFired) return;
+    }
+
     if (window.invitationOpened) return;
     window.invitationOpened = true;
 
-    if (playerReady && player) {
+    // Safety structural validation for YouTube object loading asynchronously
+    if (playerReady && player && typeof player.playVideo === 'function') {
         player.unMute();
         player.setVolume(100);
         player.playVideo();
     }
 
-    // 1. Trigger the intense magical aura buildup on the mirror frame instantly
     const mirror = document.querySelector('.magic-mirror');
     if (mirror) mirror.classList.add('mirror-glow-out');
 
@@ -97,18 +100,16 @@ function openInvitation() {
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
         setTimeout(() => {
-            // 2. Initiate the cinematic forward dissolve
             overlay.classList.add('fade-out');
             
-            // 3. Smoothly unveil the main invitation content layer
             const mainContainer = document.querySelector('.container');
             if (mainContainer) mainContainer.classList.add('reveal-main');
             
             setTimeout(() => {
                 overlay.remove();
-            }, 1800); // Gives the deep blur dissolve room to finish breathing
+            }, 1800); 
             
-        }, 2200); // Holds perfectly during the particle explosion & aura buildup
+        }, 2200); 
     }
 }
 
@@ -117,11 +118,7 @@ function initButtonBinding() {
     const sealBtn = document.getElementById('wax-seal');
     if (sealBtn) {
         sealBtn.addEventListener('click', openInvitation);
-        
-        sealBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            openInvitation();
-        }, { passive: false });
+        sealBtn.addEventListener('touchstart', openInvitation, { passive: true });
     }
 }
 
