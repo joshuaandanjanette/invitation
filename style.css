@@ -184,7 +184,7 @@ body::before {
 
 /* --- 3. THE NAMES & TEXT --- */
 .names { display: flex; flex-direction: column; margin-bottom: 10px; }
-.top-name, .bottom-name  {
+.top-name, .bottom-name {
     font-family: 'Pinyon Script', cursive !important; font-size: 5.5rem;
     color: #f7e08a; line-height: 1.1; text-shadow: 0 0 15px #B59410;
     animation: magicFlicker 3s infinite alternate;
