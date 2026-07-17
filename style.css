@@ -662,7 +662,7 @@ body::before {
     }
 
     100%{
-        transform:translateY(-180px) translateX(var(--drift))
+        transform:translateY(-420px) translateX(var(--drift))
                   scale(1.4);
 
         opacity:0;
