@@ -31,15 +31,22 @@ body::before {
 }
 
 /* --- 2. CONTAINER & PHOTO (Enchanted Royal Gallery Frame) --- */
+/* ==========================================
+   ANTIQUE PORTRAIT HOLDER
+========================================== */
+
 .profile-photo{
 
     position:relative;
 
     width:340px;
+    height:340px;
 
-    aspect-ratio:1/1;
+    margin:0 auto 45px;
 
-    margin:0 auto 40px;
+    overflow:hidden;
+
+    isolation:isolate;
 
 }
 /* ===.profile-photo{
@@ -140,61 +147,106 @@ body::before {
 ====*/
 
 /* Photograph Placement & Canvas Clip */
+/* ==========================================
+   PHOTO LAYER
+========================================== */
+
 .profile-photo img{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    object-fit:cover;
+
+    backface-visibility:hidden;
+
+    will-change:transform,opacity;
+
+}
+
+.portrait-frame{
 
     position:absolute;
 
     inset:0;
 
     width:100%;
-
     height:100%;
-
-    object-fit:cover;
-
-}
-
-.portrait-frame{
-
-    z-index:30;
-
-    pointer-events:none;
 
     object-fit:contain;
 
-    filter:
-        sepia(1)
-        hue-rotate(-12deg)
-        saturate(1.8)
-        brightness(.95)
-        contrast(1.15)
-        drop-shadow(0 8px 18px rgba(0,0,0,.45));
+    z-index:50;
 
-    mix-blend-mode:screen;
+    pointer-events:none;
+
+    filter:
+        sepia(.95)
+        saturate(1.65)
+        hue-rotate(-8deg)
+        brightness(.88)
+        contrast(1.18)
+        drop-shadow(0 12px 20px rgba(0,0,0,.45));
+
+}
+
+/* ==========================================
+   FRAME INNER SHADOW
+========================================== */
+
+.profile-photo::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            transparent 47%,
+            rgba(20,10,0,.08) 52%,
+            rgba(0,0,0,.30) 61%,
+            rgba(0,0,0,.55) 70%
+        );
+
+    pointer-events:none;
+
+    z-index:25;
 
 }
 
 /* Core Stack Visibility depths */
+/* ==========================================
+   PORTRAIT MASK
+========================================== */
+
 .photo-1,
 .photo-2{
 
     position:absolute;
 
-    width:68% !important;
+    width:66%;
 
-    height:74% !important;
+    height:73%;
 
-    left:16% !important;
+    left:50%;
+    top:48.8%;
 
-    top:13% !important;
+    transform:
+        translate(-50%,-50%);
 
     object-fit:cover;
 
-    border-radius:48% / 55%;
+    clip-path:
+        ellipse(43% 49% at 50% 50%);
 
-    overflow:hidden;
-
-    z-index:5;
+    z-index:4;
 
 }
 
@@ -208,52 +260,69 @@ body::before {
     animation: deepCinemaSecond 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes deepCinemaFirst {
-    0%, 40% { 
-        opacity: 1; 
-        transform: scale(1.05); 
-        filter: brightness(1) contrast(1);
-        z-index: 3; 
+@keyframes deepCinemaFirst{
+
+    0%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.06);
+        filter:brightness(1);
     }
-    48%, 92% { 
-        opacity: 0; 
-        transform: scale(0.95); 
-        filter: brightness(0.2) contrast(1.2);
-        z-index: 2; 
+
+    40%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.10);
+        filter:brightness(1);
     }
-    100% { 
-        opacity: 1; 
-        transform: scale(1.05); 
-        filter: brightness(1) contrast(1);
-        z-index: 3; 
+
+    46%{
+        opacity:.85;
+        transform:translate(-50%,-50%) scale(1.08);
     }
+
+    52%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(1.02);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(1.02);
+    }
+
 }
 
-@keyframes deepCinemaSecond {
-    0%, 40% { 
-        opacity: 0; 
-        transform: scale(0.95); 
-        filter: brightness(0.2) contrast(1.2);
-        z-index: 2; 
+@keyframes deepCinemaSecond{
+
+    0%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(1.02);
     }
-    48% {
-        opacity: 1;
-        transform: scale(1);
-        filter: brightness(1) contrast(1);
-        z-index: 3;
+
+    44%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(1.02);
     }
-    84% { 
-        opacity: 1; 
-        transform: scale(1.05); 
-        filter: brightness(1) contrast(1);
-        z-index: 3; 
+
+    50%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.06);
     }
-    92%, 100% { 
-        opacity: 0; 
-        transform: scale(0.95); 
-        filter: brightness(0.2) contrast(1.2);
-        z-index: 2; 
+
+    84%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.10);
     }
+
+    92%{
+        opacity:.85;
+        transform:translate(-50%,-50%) scale(1.08);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(1.02);
+    }
+
 }
 
 /* Magic Golden Glint Flash Timing */
