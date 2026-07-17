@@ -162,6 +162,16 @@ body::before {
 
     object-fit:contain;
 
+    filter:
+        sepia(1)
+        hue-rotate(-12deg)
+        saturate(1.8)
+        brightness(.95)
+        contrast(1.15)
+        drop-shadow(0 8px 18px rgba(0,0,0,.45));
+
+    mix-blend-mode:screen;
+
 }
 
 /* Core Stack Visibility depths */
@@ -174,7 +184,7 @@ body::before {
 
     left:18% !important;
 
-    top:18% !important;
+    top:21% !important;
 
     border-radius:50%;
 
