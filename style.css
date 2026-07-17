@@ -31,7 +31,7 @@ body::before {
 }
 
 /* --- 2. CONTAINER & PHOTO (Enchanted Royal Gallery Frame) --- */
-.profile-photo{
+/* ===.profile-photo{
     position:relative;
 
     width:190px;
@@ -57,9 +57,9 @@ body::before {
 
     overflow:visible;
 }
-
+===*/
 /* Deep Royal Velvet Inner Matting & Shadow Recess */
-.profile-photo::before{
+/* ==.profile-photo::before{
 
     content:"";
 
@@ -81,9 +81,9 @@ body::before {
     filter:
     drop-shadow(0 12px 24px rgba(0,0,0,.55));
 }
-
+====*/
 /* THE MAGIC FX LAYER: Sweeping Golden Light Glint */
-.profile-photo::after{
+/*===.profile-photo::after{
 
     content:"";
 
@@ -126,6 +126,7 @@ body::before {
 
     animation:antiqueFrameShine 8s infinite;
 }
+====*/
 
 /* Photograph Placement & Canvas Clip */
 .profile-photo img {
