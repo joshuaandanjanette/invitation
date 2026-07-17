@@ -44,7 +44,7 @@ body::before {
 }
 
 /* Deep Royal Velvet Inner Matting & Shadow Recess */
-.profile-photo::before {
+/*====.profile-photo::before {
     content: "";
     position: absolute;
     top: 6px;
@@ -56,9 +56,10 @@ body::before {
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.95);
     z-index: 1;
 }
+====*/
 
 /* THE MAGIC FX LAYER: Sweeping Golden Light Glint */
-.profile-photo::after {
+/*====.profile-photo::after {
     content: "";
     position: absolute;
     top: -50%;
@@ -77,6 +78,7 @@ body::before {
     pointer-events: none;
     z-index: 10; 
 }
+====*/
 
 /* Sync the golden glint flare with the photo swap */
 .reveal-main .profile-photo::after {
