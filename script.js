@@ -214,3 +214,40 @@ setInterval(() => {
         createFallingPetal();
     }
 }, 800);
+
+
+/* ===========================
+   INTRO FLOATING LIGHTS
+=========================== */
+
+function createIntroParticle(){
+
+    if(!document.getElementById("intro-overlay")) return;
+
+    const container=document.getElementById("intro-particles");
+    if(!container) return;
+
+    const p=document.createElement("div");
+    p.className="intro-particle";
+
+    const size=Math.random()*4+2;
+
+    p.style.width=size+"px";
+    p.style.height=size+"px";
+
+    p.style.left=Math.random()*100+"%";
+    p.style.top=(60+Math.random()*40)+"%";
+
+    p.style.setProperty("--drift",(Math.random()*120-60)+"px");
+
+    p.style.animationDuration=(Math.random()*5+6)+"s";
+
+    container.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },12000);
+
+}
+
+setInterval(createIntroParticle,180);
