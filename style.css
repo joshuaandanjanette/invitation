@@ -178,19 +178,27 @@ body::before {
 .photo-1,
 .photo-2{
 
-    width:64% !important;
+    position:absolute;
 
-    height:64% !important;
+    width:68% !important;
 
-    left:18% !important;
+    height:74% !important;
 
-    top:21% !important;
+    left:16% !important;
 
-    border-radius:50%;
+    top:13% !important;
 
     object-fit:cover;
 
+    border-radius:48% / 55%;
+
+    overflow:hidden;
+
+    z-index:5;
+
 }
+
+
 /* Cinematic Slow-Motion Hand-offs */
 .reveal-main .photo-1 {
     animation: deepCinemaFirst 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
