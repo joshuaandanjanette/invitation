@@ -230,7 +230,7 @@ function createIntroParticle(){
 
     p.className = "intro-particle";
 
-    const size = Math.random()*4 + 2;
+    const size = Math.random()*8 + 4;
 
     p.style.width = size + "px";
     p.style.height = size + "px";
@@ -266,4 +266,4 @@ const introParticleLoop = setInterval(()=>{
 
     }
 
-},250);
+},80);
