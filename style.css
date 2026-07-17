@@ -274,23 +274,28 @@ body::before {
 }
 
 /* --- 9. ENCHANTED MAGIC MIRROR OVERLAY --- */
-#intro-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(circle, #17070e 0%, #050103 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    transition: 
-        opacity 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19), 
-        transform 1.8s cubic-bezier(0.215, 0.610, 0.355, 1), 
-        filter 1.8s ease-in-out;
-    transform: scale(1);
-    filter: blur(0px);
+#intro-overlay{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+    isolation:isolate;
+
+    background:
+    radial-gradient(circle at center,
+    #1b0a12 0%,
+    #050103 100%);
+
+    z-index:10000;
+
+    transition:
+    opacity 1.8s cubic-bezier(.55,.055,.675,.19),
+    transform 1.8s cubic-bezier(.215,.61,.355,1),
+    filter 1.8s ease-in-out;
 }
 
 /* Looking-Glass Zoom Dissolve */
@@ -560,11 +565,11 @@ body::before {
 
     background:
     radial-gradient(circle,
-    rgba(255,255,255,.07) 0%,
-    rgba(255,255,255,.04) 30%,
+    rgba(255,255,255,.18) 0%,
+    rgba(255,255,255,.10) 30%,
     rgba(255,255,255,0) 70%);
 
-    filter:blur(90px);
+    filter:blur(45px);
 
     animation:fogDriftOne 34s linear infinite;
 }
