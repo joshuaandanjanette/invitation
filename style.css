@@ -531,3 +531,136 @@ body::before {
     0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.65), 0 0 0 0px rgba(181, 148, 16, 0.3); }
     50% { box-shadow: 0 8px 30px rgba(0,0,0,0.65), 0 0 20px 8px rgba(181, 148, 16, 0.5); }
 }
+
+
+
+/* ===========================================================
+   INTRO ATMOSPHERIC MIST
+=========================================================== */
+
+.intro-mist{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:1;
+}
+
+.intro-mist::before,
+.intro-mist::after{
+
+    content:"";
+    position:absolute;
+
+    width:170%;
+    height:170%;
+
+    top:-35%;
+    left:-35%;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,255,255,.07) 0%,
+    rgba(255,255,255,.04) 30%,
+    rgba(255,255,255,0) 70%);
+
+    filter:blur(90px);
+
+    animation:fogDriftOne 34s linear infinite;
+}
+
+.intro-mist::after{
+
+    animation:fogDriftTwo 46s linear infinite;
+    opacity:.55;
+}
+
+@keyframes fogDriftOne{
+
+    0%{
+        transform:translateX(-8%) translateY(0);
+    }
+
+    50%{
+        transform:translateX(8%) translateY(-3%);
+    }
+
+    100%{
+        transform:translateX(-8%) translateY(0);
+    }
+
+}
+
+@keyframes fogDriftTwo{
+
+    0%{
+        transform:translateX(10%) translateY(4%);
+    }
+
+    50%{
+        transform:translateX(-6%) translateY(-2%);
+    }
+
+    100%{
+        transform:translateX(10%) translateY(4%);
+    }
+
+}
+
+/* ===========================================================
+   INTRO MAGIC DUST
+=========================================================== */
+
+#intro-particles{
+
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:2;
+}
+
+.intro-particle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:#fff4be;
+
+    box-shadow:
+    0 0 6px #fff6cf,
+    0 0 12px #f7e08a,
+    0 0 18px #f7e08a;
+
+    opacity:0;
+
+    animation:introDust linear forwards;
+}
+
+@keyframes introDust{
+
+    0%{
+        transform:translateY(0) scale(.4);
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    80%{
+        opacity:.8;
+    }
+
+    100%{
+        transform:translateY(-180px) translateX(var(--drift))
+                  scale(1.4);
+
+        opacity:0;
+    }
+
+}
