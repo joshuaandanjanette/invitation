@@ -267,3 +267,6 @@ const introParticleLoop = setInterval(()=>{
     }
 
 },80);
+
+
+console.log("SCRIPT IS RUNNING");
