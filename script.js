@@ -214,3 +214,56 @@ setInterval(() => {
         createFallingPetal();
     }
 }, 800);
+
+
+/* ===========================================================
+   INTRO MAGIC PARTICLES
+=========================================================== */
+
+function createIntroParticle(){
+
+    const container = document.getElementById("intro-particles");
+
+    if(!container) return;
+
+    const p = document.createElement("div");
+
+    p.className = "intro-particle";
+
+    const size = Math.random()*4 + 2;
+
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+
+    p.style.left = Math.random()*100 + "%";
+    p.style.top = (Math.random()*100) + "%";
+
+    p.style.setProperty(
+        "--drift",
+        ((Math.random()*80)-40)+"px"
+    );
+
+    p.style.animationDuration =
+        (4 + Math.random()*4)+"s";
+
+    container.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },8000);
+
+}
+
+const introParticleLoop = setInterval(()=>{
+
+    if(document.getElementById("intro-overlay")){
+
+        createIntroParticle();
+
+    }else{
+
+        clearInterval(introParticleLoop);
+
+    }
+
+},250);
