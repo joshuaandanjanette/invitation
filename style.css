@@ -531,3 +531,110 @@ body::before {
     0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.65), 0 0 0 0px rgba(181, 148, 16, 0.3); }
     50% { box-shadow: 0 8px 30px rgba(0,0,0,0.65), 0 0 20px 8px rgba(181, 148, 16, 0.5); }
 }
+
+
+/* ===========================
+   CINEMATIC INTRO MIST
+=========================== */
+
+#intro-mist{
+    position:absolute;
+    inset:-20%;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:1;
+}
+
+#intro-mist::before,
+#intro-mist::after{
+    content:"";
+    position:absolute;
+    width:180%;
+    height:180%;
+    left:-40%;
+    top:-40%;
+    background:
+        radial-gradient(circle at 20% 40%, rgba(255,255,255,.08), transparent 18%),
+        radial-gradient(circle at 65% 55%, rgba(255,255,255,.06), transparent 22%),
+        radial-gradient(circle at 85% 25%, rgba(255,255,255,.05), transparent 20%);
+    filter:blur(90px);
+    animation:mistFloat1 26s linear infinite;
+}
+
+#intro-mist::after{
+    opacity:.7;
+    animation:mistFloat2 34s linear infinite;
+}
+
+@keyframes mistFloat1{
+    0%{
+        transform:translate(-6%,0) scale(1);
+    }
+    50%{
+        transform:translate(6%,-3%) scale(1.08);
+    }
+    100%{
+        transform:translate(-6%,0) scale(1);
+    }
+}
+
+@keyframes mistFloat2{
+    0%{
+        transform:translate(8%,4%) scale(1.05);
+    }
+    50%{
+        transform:translate(-8%,-5%) scale(.95);
+    }
+    100%{
+        transform:translate(8%,4%) scale(1.05);
+    }
+}
+
+/* ===========================
+   FLOATING LIGHT PARTICLES
+=========================== */
+
+#intro-particles{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:2;
+}
+
+.intro-particle{
+    position:absolute;
+    border-radius:50%;
+    background:#ffe9a8;
+    box-shadow:
+        0 0 8px #fff6d0,
+        0 0 18px #ffe79a,
+        0 0 35px #b59410;
+    opacity:0;
+    animation:particleFloat linear forwards;
+}
+
+@keyframes particleFloat{
+
+    0%{
+        opacity:0;
+        transform:translateY(0) scale(.2);
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    90%{
+        opacity:.6;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+        translateY(-180px)
+        translateX(var(--drift))
+        scale(1);
+    }
+
+}
