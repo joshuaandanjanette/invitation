@@ -220,7 +220,7 @@ setInterval(() => {
    INTRO MAGIC PARTICLES
 =========================================================== */
 
-function createIntroParticle(){
+/*============= function createIntroParticle(){
 
     const container = document.getElementById("intro-particles");
 
@@ -264,7 +264,27 @@ const introParticleLoop = setInterval(()=>{
 
         clearInterval(introParticleLoop);
 
-    }
+    } ========= */
+
+function createIntroParticle(){
+
+    const container = document.getElementById("intro-particles");
+
+    if(!container) return;
+
+    const p = document.createElement("div");
+
+    p.style.position = "absolute";
+    p.style.width = "20px";
+    p.style.height = "20px";
+    p.style.borderRadius = "50%";
+    p.style.background = "red";
+
+    p.style.left = Math.random()*window.innerWidth + "px";
+    p.style.top = Math.random()*window.innerHeight + "px";
+
+    container.appendChild(p);
+}
 
 },80);
 
