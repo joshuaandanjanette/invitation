@@ -662,3 +662,77 @@ body::before {
     }
 
 }
+
+
+/*==============================
+PORTRAIT RIPPLE
+==============================*/
+
+.portrait-ripple{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:0;
+    height:0;
+
+    border-radius:50%;
+
+    transform:translate(-50%,-50%);
+
+    pointer-events:none;
+
+    z-index:25;
+
+}
+
+.portrait-ripple.active{
+
+    animation:portraitRipple .95s ease-out forwards;
+
+}
+
+@keyframes portraitRipple{
+
+    0%{
+
+        width:0;
+        height:0;
+
+        opacity:.85;
+
+        box-shadow:
+        0 0 0 0 rgba(255,255,255,.45),
+        inset 0 0 25px rgba(255,255,255,.35);
+
+    }
+
+    45%{
+
+        width:140px;
+        height:140px;
+
+        opacity:.6;
+
+        box-shadow:
+        0 0 25px rgba(255,255,255,.45),
+        inset 0 0 35px rgba(255,255,255,.35);
+
+    }
+
+    100%{
+
+        width:340px;
+        height:340px;
+
+        opacity:0;
+
+        box-shadow:
+        0 0 55px rgba(255,255,255,0),
+        inset 0 0 0 rgba(255,255,255,0);
+
+    }
+
+}
