@@ -136,7 +136,54 @@ body::before {
     animation: deepCinemaSecond 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes deepCinemaFirst {
+@keyframes deepCinemaFirst{
+
+    0%,48%{
+
+        opacity:1;
+        transform:scale(1);
+        filter:brightness(1);
+
+    }
+
+    50%,98%{
+
+        opacity:0;
+        transform:scale(1);
+        filter:brightness(1);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes deepCinemaSecond{
+
+    0%,48%{
+
+        opacity:0;
+
+    }
+
+    50%,98%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+    }
+
+}
+/*====@keyframes deepCinemaFirst {
     0%, 40% { 
         opacity: 1; 
         transform: scale(1.05); 
