@@ -298,16 +298,30 @@ async function initPortraitRipple(){
 
 
 
-    photo1 = PIXI.Sprite.from("backgogogo.png");
-    photo2 = PIXI.Sprite.from("backgroundpro.png");
+    photo1 = PIXI.Sprite.from("./backgogogo.png");
+    photo2 = PIXI.Sprite.from("./backgroundpro.png");
+    photo1.texture.baseTexture.on("loaded",()=>{
+    console.log("PHOTO 1 LOADED");
+    });
 
+    photo2.texture.baseTexture.on("loaded",()=>{
+    console.log("PHOTO 2 LOADED");
+    });
+
+    photo1.texture.baseTexture.on("error",()=>{
+    console.log("PHOTO 1 FAILED");
+    });
+
+    photo2.texture.baseTexture.on("error",()=>{
+    console.log("PHOTO 2 FAILED");
+    });
 
     photo1.anchor.set(0.5);
     photo2.anchor.set(0.5);
 
 
     photo1.alpha = 1;
-    photo2.alpha = 0;
+    photo2.alpha = 1;
 
 
     portraitContainer.addChild(photo1);
