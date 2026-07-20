@@ -254,28 +254,3 @@ setInterval(createIntroParticle,180);
 
 
 
-/*==================================================
-PORTRAIT SIMPLE TEST
-==================================================*/
-
-window.addEventListener("load",()=>{
-
-    const canvas = document.getElementById("portrait-canvas");
-
-    if(!canvas) return;
-
-
-    const img = document.createElement("img");
-
-    img.src = "backgogogo.png";
-
-    img.style.position = "absolute";
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
-    img.style.borderRadius = "50%";
-
-
-    canvas.appendChild(img);
-
-});
