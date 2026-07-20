@@ -253,4 +253,73 @@ function createIntroParticle(){
 setInterval(createIntroParticle,180);
 
 
+/*==================================================
+PORTRAIT ENGINE
+==================================================*/
 
+const portraitCanvas = document.getElementById("portrait-canvas");
+
+const img1 = document.createElement("img");
+img1.src = "backgogogo.png";
+img1.className = "photo-1";
+
+const img2 = document.createElement("img");
+img2.src = "backgroundpro.png";
+img2.className = "photo-2";
+
+portraitCanvas.appendChild(img1);
+portraitCanvas.appendChild(img2);
+
+img2.style.opacity = "0";
+
+let showingFirst = true;
+
+const turbulence = document.getElementById("turbulence");
+const displacement = document.getElementById("displacement");
+
+function rippleTransition(){
+
+    let frame = 0;
+
+    const ripple = setInterval(()=>{
+
+        frame++;
+
+        const amount = Math.sin(frame/20*Math.PI)*45;
+
+        displacement.setAttribute("scale", amount);
+
+        turbulence.setAttribute(
+            "baseFrequency",
+            0.010 + frame*0.00025 + " " +
+            (0.010 + frame*0.00025)
+        );
+
+        if(showingFirst){
+
+            img1.style.opacity = 1 - frame/40;
+            img2.style.opacity = frame/40;
+
+        }else{
+
+            img1.style.opacity = frame/40;
+            img2.style.opacity = 1 - frame/40;
+
+        }
+
+        if(frame>=40){
+
+            clearInterval(ripple);
+
+            displacement.setAttribute("scale","0");
+            turbulence.setAttribute("baseFrequency","0.010 0.010");
+
+            showingFirst=!showingFirst;
+
+        }
+
+    },16);
+
+}
+
+setInterval(rippleTransition,6000);
