@@ -347,8 +347,12 @@ function createDisplacement(){
 
 function resizePortraits(){
 
-    const w = app.screen.width;
-    const h = app.screen.height;
+    const holder = document.getElementById("portrait-canvas");
+
+    const w = holder.clientWidth;
+    const h = holder.clientHeight;
+
+    app.renderer.resize(w,h);
 
     photo1.width = w;
     photo1.height = h;
@@ -356,14 +360,13 @@ function resizePortraits(){
     photo2.width = w;
     photo2.height = h;
 
-    photo1.x = 0;
-    photo1.y = 0;
+    photo1.position.set(0,0);
+    photo2.position.set(0,0);
 
-    photo2.x = 0;
-    photo2.y = 0;
+    displacementSprite.width = w;
+    displacementSprite.height = h;
 
-    photo1.anchor.set(0);
-    photo2.anchor.set(0);
+    displacementSprite.position.set(w/2,h/2);
 
 }
 
