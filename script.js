@@ -359,15 +359,27 @@ function resizePortraits(){
     app.renderer.resize(w,h);
 
 
-    photo1.width = w;
-    photo1.height = h;
+    const scale1 = Math.max(
+        w / photo1.texture.width,
+        h / photo1.texture.height
+    );
 
-    photo2.width = w;
-    photo2.height = h;
+    const scale2 = Math.max(
+        w / photo2.texture.width,
+        h / photo2.texture.height
+    );
+
+
+    photo1.scale.set(scale1);
+    photo2.scale.set(scale2);
 
 
     photo1.position.set(w/2,h/2);
     photo2.position.set(w/2,h/2);
+
+
+    photo1.anchor.set(0.5);
+    photo2.anchor.set(0.5);
 
 }
 
@@ -375,39 +387,47 @@ function resizePortraits(){
 
 function playRippleTransition(){
 
-    displacementSprite.visible = true;
-
-    displacementFilter.scale.set(220,220);
-
     let progress = 0;
 
-    const startAlpha = showingFirst ? 1 : 0;
-    const endAlpha   = showingFirst ? 0 : 1;
+    displacementSprite.visible = true;
+
+    displacementFilter.scale.set(0,0);
+
 
     app.ticker.add(rippleFrame);
 
+
     function rippleFrame(delta){
 
-        progress += delta * 0.02;
+        progress += delta * 0.025;
 
-        displacementFilter.scale.x *= 0.94;
-        displacementFilter.scale.y *= 0.94;
 
-        displacementSprite.rotation += 0.02;
+        let wave = Math.sin(progress * Math.PI);
 
-        photo1.alpha = startAlpha + (endAlpha - startAlpha) * progress;
-        photo2.alpha = 1 - photo1.alpha;
+
+        displacementFilter.scale.set(
+            wave * 80,
+            wave * 80
+        );
+
+
+        photo1.alpha = 1 - progress;
+        photo2.alpha = progress;
+
+
+        displacementSprite.rotation += 0.01;
+
 
         if(progress >= 1){
 
-            photo1.alpha = showingFirst ? 0 : 1;
-            photo2.alpha = showingFirst ? 1 : 0;
+            photo1.alpha = 0;
+            photo2.alpha = 1;
+
 
             displacementFilter.scale.set(0,0);
 
-            displacementSprite.visible = false;
+            displacementSprite.visible=false;
 
-            showingFirst = !showingFirst;
 
             app.ticker.remove(rippleFrame);
 
