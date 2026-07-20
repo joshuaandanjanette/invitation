@@ -283,7 +283,8 @@ async function initPortraitRipple(){
     height: holder.clientHeight,
     transparent: true,
     antialias: true,
-    autoDensity: true
+    autoDensity: true,
+    resolution: window.devicePixelRatio || 2
 
 });
 
@@ -305,6 +306,8 @@ async function initPortraitRipple(){
 
     photo1.alpha = 1;
     photo2.alpha = 0;
+    photo1.texture.source.scaleMode = "linear";
+    photo2.texture.source.scaleMode = "linear";
 
 
     portraitContainer.addChild(photo1);
@@ -356,13 +359,20 @@ function resizePortraits(){
     const h = holder.clientHeight;
 
 
-    app.renderer.resize(w,h);
+    app.renderer.resize(
+        w * 2,
+        h * 2
+    );
+
+
+    app.stage.scale.set(2);
 
 
     const scale1 = Math.max(
         w / photo1.texture.width,
         h / photo1.texture.height
     );
+
 
     const scale2 = Math.max(
         w / photo2.texture.width,
@@ -374,12 +384,12 @@ function resizePortraits(){
     photo2.scale.set(scale2);
 
 
-    photo1.position.set(w/2,h/2);
-    photo2.position.set(w/2,h/2);
-
-
     photo1.anchor.set(0.5);
     photo2.anchor.set(0.5);
+
+
+    photo1.position.set(w/2,h/2);
+    photo2.position.set(w/2,h/2);
 
 }
 
