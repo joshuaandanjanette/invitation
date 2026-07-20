@@ -601,18 +601,18 @@ body::before{
     box-sizing: border-box;
 
     opacity: 0;
-    filter: blur(10px);
+    /*filter: blur(10px);
     transform: scale(0.94) translateY(25px);
     transition: 
         opacity 2.2s cubic-bezier(0.22, 1, 0.36, 1), 
         transform 2.2s cubic-bezier(0.16, 1, 0.3, 1), 
-        filter 2.2s ease-out;
+        filter 2.2s ease-out;*/
 }
 
 .container.reveal-main {
     opacity: 1;
-    filter: blur(0px);
-    transform: scale(1) translateY(0);
+    /*filter: blur(0px);
+    transform: scale(1) translateY(0);*/
 }
 
 /* --- CORE KEYFRAME SYSTEM --- */
