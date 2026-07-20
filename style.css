@@ -32,15 +32,16 @@ body::before {
 
 /* --- 2. CONTAINER & PHOTO (Enchanted Royal Gallery Frame) --- */
 .profile-photo{
-
     position:relative;
 
     width:340px;
-
-    aspect-ratio:1/1;
+    height:340px;
 
     margin:0 auto 40px;
 
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 /* Deep Royal Velvet Inner Matting & Shadow Recess */
@@ -98,27 +99,27 @@ body::before {
 
 
 .portrait-stage{
-
     position:absolute;
 
-    left:18%;
+    inset:0;
 
-    top:18%;
-
-    width:64%;
-
-    height:64%;
+    width:100%;
+    height:100%;
 
     overflow:hidden;
 
     border-radius:50%;
 
-    z-index:5;
-
-    filter:url(#waterRipple);
-
+    z-index:10;
 }
 
+#portrait-canvas{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+}
 
 .portrait-stage img{
 
@@ -143,17 +144,21 @@ body::before {
 
 
 .portrait-frame{
+    position:absolute;
+    inset:0;
 
-    z-index:30;
-
-    pointer-events:none;
+    width:100%;
+    height:100%;
 
     object-fit:contain;
 
+    pointer-events:none;
+
+    z-index:50;
 }
 
 /* Core Stack Visibility depths */
-.photo-1,
+/*.photo-1,
 .photo-2{
 
     width:100% !important;
