@@ -762,3 +762,15 @@ body::before {
 #portrait-canvas img{
     display:block;
 }
+
+
+.wordmark{
+    width:min(92vw,620px);
+    margin:20px auto 35px;
+}
+
+.wordmark img{
+    display:block;
+    width:100%;
+    height:auto;
+}
