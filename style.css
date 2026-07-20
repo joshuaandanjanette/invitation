@@ -86,7 +86,41 @@ body::before {
 }
 
 /* Photograph Placement & Canvas Clip */
-.profile-photo img{
+.ripple-svg{
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+}
+
+
+.portrait-stage{
+
+    position:absolute;
+
+    left:18%;
+
+    top:18%;
+
+    width:64%;
+
+    height:64%;
+
+    overflow:hidden;
+
+    border-radius:50%;
+
+    z-index:5;
+
+    filter:url(#waterRipple);
+
+}
+
+
+.portrait-stage img{
 
     position:absolute;
 
@@ -98,7 +132,15 @@ body::before {
 
     object-fit:cover;
 
+    backface-visibility:hidden;
+
+    will-change:
+    opacity,
+    transform,
+    filter;
+
 }
+
 
 .portrait-frame{
 
@@ -114,13 +156,13 @@ body::before {
 .photo-1,
 .photo-2{
 
-    width:64% !important;
+    width:100% !important;
 
-    height:64% !important;
+    height:100% !important;
 
-    left:18% !important;
+    left:0% !important;
 
-    top:18% !important;
+    top:0% !important;
 
     border-radius:50%;
 
@@ -711,75 +753,3 @@ body::before {
 }
 
 
-/*==============================
-PORTRAIT RIPPLE
-==============================*/
-
-.portrait-ripple{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:0;
-    height:0;
-
-    border-radius:50%;
-
-    transform:translate(-50%,-50%);
-
-    pointer-events:none;
-
-    z-index:25;
-
-}
-
-.portrait-ripple.active{
-
-    animation:portraitRipple .95s ease-out forwards;
-
-}
-
-@keyframes portraitRipple{
-
-    0%{
-
-        width:0;
-        height:0;
-
-        opacity:.85;
-
-        box-shadow:
-        0 0 0 0 rgba(255,255,255,.45),
-        inset 0 0 25px rgba(255,255,255,.35);
-
-    }
-
-    45%{
-
-        width:140px;
-        height:140px;
-
-        opacity:.6;
-
-        box-shadow:
-        0 0 25px rgba(255,255,255,.45),
-        inset 0 0 35px rgba(255,255,255,.35);
-
-    }
-
-    100%{
-
-        width:340px;
-        height:340px;
-
-        opacity:0;
-
-        box-shadow:
-        0 0 55px rgba(255,255,255,0),
-        inset 0 0 0 rgba(255,255,255,0);
-
-    }
-
-}
