@@ -253,3 +253,176 @@ function createIntroParticle(){
 setInterval(createIntroParticle,180);
 
 
+
+/*==================================================
+PORTRAIT RIPPLE ENGINE
+==================================================*/
+
+let app;
+let portraitContainer;
+
+let photo1;
+let photo2;
+
+let displacementSprite;
+let displacementFilter;
+
+let showingFirst = true;
+
+
+
+async function initPortraitRipple(){
+
+    const holder = document.getElementById("portrait-canvas");
+
+    if(!holder) return;
+
+    app = new PIXI.Application({
+
+        resizeTo: holder,
+
+        backgroundAlpha: 0,
+
+        antialias: true,
+
+        autoDensity: true
+
+    });
+
+    await app.init();
+
+    holder.appendChild(app.canvas);
+
+    portraitContainer = new PIXI.Container();
+
+    app.stage.addChild(portraitContainer);
+
+    photo1 = PIXI.Sprite.from("backgogogo.png");
+
+    photo2 = PIXI.Sprite.from("backgroundpro.png");
+
+    photo2.alpha = 0;
+
+    portraitContainer.addChild(photo1);
+
+    portraitContainer.addChild(photo2);
+
+}
+
+
+
+function createDisplacement(){
+
+    displacementSprite = PIXI.Sprite.from("ripple-effect.png");
+
+    displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
+
+    displacementFilter.scale.set(0,0);
+
+    app.stage.addChild(displacementSprite);
+
+    portraitContainer.filters = [displacementFilter];
+
+    const w = app.screen.width;
+    const h = app.screen.height;
+
+    displacementSprite.width = w;
+    displacementSprite.height = h;
+
+    displacementSprite.anchor.set(0.5);
+
+    displacementSprite.position.set(w/2,h/2);
+
+    displacementSprite.visible = false;
+
+    app.ticker.add(()=>{
+
+        displacementSprite.rotation += 0.002;
+
+    });
+
+}
+
+
+
+function resizePortraits(){
+
+    const w = app.screen.width;
+    const h = app.screen.height;
+
+    photo1.width = w;
+    photo1.height = h;
+
+    photo2.width = w;
+    photo2.height = h;
+
+    photo1.x = 0;
+    photo1.y = 0;
+
+    photo2.x = 0;
+    photo2.y = 0;
+
+    photo1.anchor.set(0);
+    photo2.anchor.set(0);
+
+}
+
+
+
+function playRippleTransition(){
+
+    displacementSprite.visible = true;
+
+    displacementFilter.scale.set(220,220);
+
+    let progress = 0;
+
+    const startAlpha = showingFirst ? 1 : 0;
+    const endAlpha   = showingFirst ? 0 : 1;
+
+    app.ticker.add(rippleFrame);
+
+    function rippleFrame(delta){
+
+        progress += delta * 0.02;
+
+        displacementFilter.scale.x *= 0.94;
+        displacementFilter.scale.y *= 0.94;
+
+        displacementSprite.rotation += 0.02;
+
+        photo1.alpha = startAlpha + (endAlpha - startAlpha) * progress;
+        photo2.alpha = 1 - photo1.alpha;
+
+        if(progress >= 1){
+
+            photo1.alpha = showingFirst ? 0 : 1;
+            photo2.alpha = showingFirst ? 1 : 0;
+
+            displacementFilter.scale.set(0,0);
+
+            displacementSprite.visible = false;
+
+            showingFirst = !showingFirst;
+
+            app.ticker.remove(rippleFrame);
+
+        }
+
+    }
+
+}
+
+
+
+window.addEventListener("load", async () => {
+
+    await initPortraitRipple();
+
+    createDisplacement();
+
+    resizePortraits();
+
+    setInterval(playRippleTransition, 6000);
+
+});
