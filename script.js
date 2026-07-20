@@ -287,17 +287,16 @@ function rippleTransition(){
 
         const p = frame / 80;
 
-        displacement.setAttribute(
-            "scale",
-            Math.sin(p * Math.PI) * 70
-        );
+        const amount = Math.round(Math.sin(p * Math.PI) * 70);
 
-        turbulence.setAttribute(
-            "baseFrequency",
-            (0.010 + Math.sin(p * Math.PI) * 0.015) +
-            " " +
-            (0.010 + Math.sin(p * Math.PI) * 0.015)
-        );
+displacement.setAttribute("scale", amount);
+
+        const freq = 0.010 + Math.sin(p * Math.PI) * 0.015;
+
+turbulence.setAttribute(
+    "baseFrequency",
+    freq.toFixed(3) + " " + freq.toFixed(3)
+);
 
         if(showingFirst){
 
