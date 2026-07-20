@@ -289,8 +289,7 @@ async function initPortraitRipple(){
 
     });
 
-    await app.init();
-
+    
     holder.appendChild(app.canvas);
 
     portraitContainer = new PIXI.Container();
