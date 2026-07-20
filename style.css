@@ -24,13 +24,16 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-    background:
+    background-image:
         linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.7)),
-        url("library-bg2.png") center center / cover no-repeat;
+        url("library-bg2.png");
+    background-repeat:no-repeat;
+    background-size:max(100vw,100vh) auto;
+    background-position:center top;
     z-index:-1;
     transform:translateZ(0);
-    /*will-change:auto;*/
 }
+
 
 /* --- 2. CONTAINER & PHOTO (Enchanted Royal Gallery Frame) --- */
 .profile-photo{
