@@ -300,10 +300,16 @@ async function initPortraitRipple(){
 
     photo2 = PIXI.Sprite.from("backgroundpro.png");
 
+
+    photo1.anchor.set(0.5);
+    photo2.anchor.set(0.5);
+
+
+    photo1.alpha = 1;
     photo2.alpha = 0;
 
-    portraitContainer.addChild(photo1);
 
+    portraitContainer.addChild(photo1);
     portraitContainer.addChild(photo2);
 
 }
@@ -351,7 +357,9 @@ function resizePortraits(){
     const w = holder.clientWidth;
     const h = holder.clientHeight;
 
+
     app.renderer.resize(w,h);
+
 
     photo1.width = w;
     photo1.height = h;
@@ -359,13 +367,9 @@ function resizePortraits(){
     photo2.width = w;
     photo2.height = h;
 
-    photo1.position.set(0,0);
-    photo2.position.set(0,0);
 
-    displacementSprite.width = w;
-    displacementSprite.height = h;
-
-    displacementSprite.position.set(w/2,h/2);
+    photo1.position.set(w/2,h/2);
+    photo2.position.set(w/2,h/2);
 
 }
 
