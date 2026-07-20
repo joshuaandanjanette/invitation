@@ -285,7 +285,7 @@ function rippleTransition(){
 
         frame++;
 
-        const p = frame / 40;
+        const p = frame / 80;
 
         displacement.setAttribute(
             "scale",
@@ -311,7 +311,7 @@ function rippleTransition(){
 
         }
 
-        if(frame >= 40){
+        if(frame >= 80){
 
             clearInterval(ripple);
 
@@ -326,4 +326,4 @@ function rippleTransition(){
 
 }
 
-setInterval(rippleTransition,6000);
+setInterval(rippleTransition,8000);
