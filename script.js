@@ -255,7 +255,7 @@ setInterval(createIntroParticle,180);
 
 
 /*==================================================
-PORTRAIT RIPPLE ENGINE
+PORTRAIT RIPPLE ENGINE FIXED
 ==================================================*/
 
 let app;
@@ -264,32 +264,25 @@ let portraitContainer;
 let photo1;
 let photo2;
 
-let displacementSprite;
-let displacementFilter;
 
-let showingFirst = true;
-
-
-
-async function initPortraitRipple(){
+function initPortraitRipple(){
 
     const holder = document.getElementById("portrait-canvas");
 
     if(!holder) return;
 
 
-    app = new PIXI.Application({
-
+    app = new PIXI.Application(
+    {
         width: holder.clientWidth,
         height: holder.clientHeight,
-        backgroundAlpha: 0,
-        antialias: true,
-        resolution: window.devicePixelRatio || 1
-
+        transparent:true,
+        antialias:true,
+        resolution:window.devicePixelRatio || 1
     });
 
 
-    holder.appendChild(app.canvas);
+    holder.appendChild(app.view);
 
 
     portraitContainer = new PIXI.Container();
@@ -298,121 +291,32 @@ async function initPortraitRipple(){
 
 
 
-    photo1 = PIXI.Sprite.from("./backgogogo.png");
-    photo2 = PIXI.Sprite.from("./backgroundpro.png");
-    photo1.texture.baseTexture.on("loaded",()=>{
-    console.log("PHOTO 1 LOADED");
-    });
+    photo1 = PIXI.Sprite.from("backgogogo.png");
+    photo2 = PIXI.Sprite.from("backgroundpro.png");
 
-    photo2.texture.baseTexture.on("loaded",()=>{
-    console.log("PHOTO 2 LOADED");
-    });
-
-    photo1.texture.baseTexture.on("error",()=>{
-    console.log("PHOTO 1 FAILED");
-    });
-
-    photo2.texture.baseTexture.on("error",()=>{
-    console.log("PHOTO 2 FAILED");
-    });
 
     photo1.anchor.set(0.5);
     photo2.anchor.set(0.5);
 
 
-    photo1.alpha = 1;
-    photo2.alpha = 1;
+    photo1.x = holder.clientWidth / 2;
+    photo1.y = holder.clientHeight / 2;
 
 
-    portraitContainer.addChild(photo1);
-    portraitContainer.addChild(photo2);
+    photo2.x = holder.clientWidth / 2;
+    photo2.y = holder.clientHeight / 2;
 
 
 
-    photo1.position.set(
-        holder.clientWidth / 2,
-        holder.clientHeight / 2
-    );
-
-    photo2.position.set(
-        holder.clientWidth / 2,
-        holder.clientHeight / 2
+    let scale1 = Math.max(
+        holder.clientWidth / photo1.texture.width,
+        holder.clientHeight / photo1.texture.height
     );
 
 
-
-    photo1.scale.set(
-        holder.clientWidth / photo1.texture.width
-    );
-
-    photo2.scale.set(
-        holder.clientWidth / photo2.texture.width
-    );
-
-}
-
-
-
-function createDisplacement(){
-
-    displacementSprite = PIXI.Sprite.from("ripple-effect.png");
-
-    displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
-
-    displacementFilter.scale.set(0,0);
-
-    app.stage.addChild(displacementSprite);
-
-    portraitContainer.filters = [displacementFilter];
-
-    const w = app.screen.width;
-    const h = app.screen.height;
-
-    displacementSprite.width = w;
-    displacementSprite.height = h;
-
-    displacementSprite.anchor.set(0.5);
-
-    displacementSprite.position.set(w/2,h/2);
-
-    displacementSprite.visible = false;
-
-    app.ticker.add(()=>{
-
-        displacementSprite.rotation += 0.002;
-
-    });
-
-}
-
-
-
-function resizePortraits(){
-
-    const holder = document.getElementById("portrait-canvas");
-
-    const w = holder.clientWidth;
-    const h = holder.clientHeight;
-
-
-    app.renderer.resize(
-        w * 2,
-        h * 2
-    );
-
-
-    app.stage.scale.set(2);
-
-
-    const scale1 = Math.max(
-        w / photo1.texture.width,
-        h / photo1.texture.height
-    );
-
-
-    const scale2 = Math.max(
-        w / photo2.texture.width,
-        h / photo2.texture.height
+    let scale2 = Math.max(
+        holder.clientWidth / photo2.texture.width,
+        holder.clientHeight / photo2.texture.height
     );
 
 
@@ -420,79 +324,32 @@ function resizePortraits(){
     photo2.scale.set(scale2);
 
 
-    photo1.anchor.set(0.5);
-    photo2.anchor.set(0.5);
+
+    photo1.alpha = 1;
+    photo2.alpha = 0;
 
 
-    photo1.position.set(w/2,h/2);
-    photo2.position.set(w/2,h/2);
+    portraitContainer.addChild(photo1);
+    portraitContainer.addChild(photo2);
 
 }
+
 
 
 
 function playRippleTransition(){
 
-    let progress = 0;
-
-    displacementSprite.visible = true;
-
-    displacementFilter.scale.set(0,0);
-
-
-    app.ticker.add(rippleFrame);
-
-
-    function rippleFrame(delta){
-
-        progress += delta * 0.025;
-
-
-        let wave = Math.sin(progress * Math.PI);
-
-
-        displacementFilter.scale.set(
-            wave * 80,
-            wave * 80
-        );
-
-
-        photo1.alpha = 1 - progress;
-        photo2.alpha = progress;
-
-
-        displacementSprite.rotation += 0.01;
-
-
-        if(progress >= 1){
-
-            photo1.alpha = 0;
-            photo2.alpha = 1;
-
-
-            displacementFilter.scale.set(0,0);
-
-            displacementSprite.visible=false;
-
-
-            app.ticker.remove(rippleFrame);
-
-        }
-
-    }
+    photo1.alpha = 0;
+    photo2.alpha = 1;
 
 }
 
 
 
-window.addEventListener("load", async () => {
+window.addEventListener("load",()=>{
 
-    await initPortraitRipple();
+    initPortraitRipple();
 
-    createDisplacement();
-
-    resizePortraits();
-
-    setInterval(playRippleTransition, 6000);
+    setInterval(playRippleTransition,6000);
 
 });
