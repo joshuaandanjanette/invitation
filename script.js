@@ -255,101 +255,27 @@ setInterval(createIntroParticle,180);
 
 
 /*==================================================
-PORTRAIT RIPPLE ENGINE FIXED
+PORTRAIT SIMPLE TEST
 ==================================================*/
-
-let app;
-let portraitContainer;
-
-let photo1;
-let photo2;
-
-
-function initPortraitRipple(){
-
-    const holder = document.getElementById("portrait-canvas");
-
-    if(!holder) return;
-
-
-    app = new PIXI.Application(
-    {
-        width: holder.clientWidth,
-        height: holder.clientHeight,
-        transparent:true,
-        antialias:true,
-        resolution:window.devicePixelRatio || 1
-    });
-
-
-    holder.appendChild(app.view);
-
-
-    portraitContainer = new PIXI.Container();
-
-    app.stage.addChild(portraitContainer);
-
-
-
-    photo1 = PIXI.Sprite.from("backgogogo.png");
-    photo2 = PIXI.Sprite.from("backgroundpro.png");
-
-
-    photo1.anchor.set(0.5);
-    photo2.anchor.set(0.5);
-
-
-    photo1.x = holder.clientWidth / 2;
-    photo1.y = holder.clientHeight / 2;
-
-
-    photo2.x = holder.clientWidth / 2;
-    photo2.y = holder.clientHeight / 2;
-
-
-
-    let scale1 = Math.max(
-        holder.clientWidth / photo1.texture.width,
-        holder.clientHeight / photo1.texture.height
-    );
-
-
-    let scale2 = Math.max(
-        holder.clientWidth / photo2.texture.width,
-        holder.clientHeight / photo2.texture.height
-    );
-
-
-    photo1.scale.set(scale1);
-    photo2.scale.set(scale2);
-
-
-
-    photo1.alpha = 1;
-    photo2.alpha = 0;
-
-
-    portraitContainer.addChild(photo1);
-    portraitContainer.addChild(photo2);
-
-}
-
-
-
-
-function playRippleTransition(){
-
-    photo1.alpha = 0;
-    photo2.alpha = 1;
-
-}
-
-
 
 window.addEventListener("load",()=>{
 
-    initPortraitRipple();
+    const canvas = document.getElementById("portrait-canvas");
 
-    setInterval(playRippleTransition,6000);
+    if(!canvas) return;
+
+
+    const img = document.createElement("img");
+
+    img.src = "backgogogo.png";
+
+    img.style.position = "absolute";
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "cover";
+    img.style.borderRadius = "50%";
+
+
+    canvas.appendChild(img);
 
 });
