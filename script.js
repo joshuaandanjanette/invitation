@@ -253,22 +253,3 @@ function createIntroParticle(){
 setInterval(createIntroParticle,180);
 
 
-/*==============================
-PORTRAIT RIPPLE
-==============================*/
-
-function triggerPortraitRipple(){
-
-    const ripple=document.querySelector(".portrait-ripple");
-
-    if(!ripple) return;
-
-    ripple.classList.remove("active");
-
-    void ripple.offsetWidth;
-
-    ripple.classList.add("active");
-
-}
-
-setInterval(triggerPortraitRipple,6000);
