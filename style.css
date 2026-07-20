@@ -756,7 +756,7 @@ body::before {
     height:100%;
     object-fit:cover;
     border-radius:50%;
-    transition:opacity .65s linear;
+    
 }
 
 #portrait-canvas img{
