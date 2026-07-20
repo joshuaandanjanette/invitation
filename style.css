@@ -25,7 +25,7 @@ body::before{
         url("library-bg2.png") center center / cover no-repeat;
     z-index:-1;
     transform:translateZ(0);
-    will-change:auto;
+    /*will-change:auto;*/
 }
 
 /* --- 2. CONTAINER & PHOTO (Enchanted Royal Gallery Frame) --- */
