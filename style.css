@@ -37,7 +37,7 @@ body::before {
     width:340px;
     height:340px;
 
-    margin:0 auto 40px;
+    margin:0 auto 12px;
 
     display:flex;
     justify-content:center;
@@ -269,7 +269,12 @@ body::before {
 }
 
 /* --- 3. THE NAMES & TEXT --- */
-.names { display: flex; flex-direction: column; margin-bottom: 10px; }
+.names{
+    display:flex;
+    flex-direction:column;
+    margin-top:-24px;
+    margin-bottom:8px;
+}
 .top-name, .bottom-name {
     font-family: 'Pinyon Script', cursive !important; font-size: 5.5rem;
     color: #f7e08a; line-height: 1.1; text-shadow: 0 0 15px #B59410;
@@ -765,12 +770,45 @@ body::before {
 
 
 .wordmark{
-    width:min(92vw,620px);
-    margin:20px auto 35px;
+    width:420px;
+    max-width:92%;
+
+    filter:
+        drop-shadow(0 0 4px rgba(255,214,120,.45))
+        drop-shadow(0 0 10px rgba(255,220,140,.35))
+        drop-shadow(0 0 22px rgba(255,210,90,.18));
+
+    animation: enchantedGlow 4s ease-in-out infinite;
 }
 
 .wordmark img{
     display:block;
     width:100%;
     height:auto;
+}
+
+
+
+@keyframes enchantedGlow{
+
+    0%,100%{
+
+        filter:
+        drop-shadow(0 0 4px rgba(255,214,120,.45))
+        drop-shadow(0 0 10px rgba(255,220,140,.35))
+        drop-shadow(0 0 22px rgba(255,210,90,.18));
+
+        transform:translateY(0);
+    }
+
+    50%{
+
+        filter:
+        drop-shadow(0 0 8px rgba(255,240,180,.8))
+        drop-shadow(0 0 18px rgba(255,225,120,.7))
+        drop-shadow(0 0 40px rgba(255,210,90,.45));
+
+        transform:translateY(-1px);
+    }
+
 }
