@@ -279,18 +279,16 @@ async function initPortraitRipple(){
 
     app = new PIXI.Application({
 
-        resizeTo: holder,
+    width: holder.clientWidth,
+    height: holder.clientHeight,
+    transparent: true,
+    antialias: true,
+    autoDensity: true
 
-        backgroundAlpha: 0,
+});
 
-        antialias: true,
 
-        autoDensity: true
-
-    });
-
-    
-    holder.appendChild(app.canvas);
+    holder.appendChild(app.view);
 
     portraitContainer = new PIXI.Container();
 
