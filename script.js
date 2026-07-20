@@ -253,3 +253,115 @@ function createIntroParticle(){
 setInterval(createIntroParticle,180);
 
 
+/*==================================================
+PIXI PORTRAIT ENGINE
+==================================================*/
+
+let app;
+let portraitContainer;
+
+let photoA;
+let photoB;
+
+let displacementSprite;
+let displacementFilter;
+
+let showingFirst = true;
+
+async function initPortraitRipple(){
+
+    const holder=document.getElementById("portrait-canvas");
+
+    if(!holder) return;
+
+    app=new PIXI.Application({
+
+        resizeTo:holder,
+
+        transparent:true,
+
+        antialias:true,
+
+        autoDensity:true
+
+    });
+
+    holder.appendChild(app.view);
+
+    portraitContainer=new PIXI.Container();
+
+    app.stage.addChild(portraitContainer);
+
+    photoA=PIXI.Sprite.from("backgogogo.png");
+
+    photoB=PIXI.Sprite.from("backgroundpro.png");
+
+    displacementSprite=PIXI.Sprite.from("ripple-effect.png");
+
+    displacementFilter=new PIXI.filters.DisplacementFilter(displacementSprite);
+
+    displacementFilter.scale.set(0,0);
+
+    portraitContainer.addChild(photoA);
+
+    portraitContainer.addChild(photoB);
+
+    app.stage.addChild(displacementSprite);
+
+    portraitContainer.filters=[displacementFilter];
+
+    photoB.alpha=0;
+
+}
+
+
+/*==================================================
+SIZE THE PORTRAITS
+==================================================*/
+
+PIXI.Assets.load([
+    "backgogogo.png",
+    "backgroundpro.png",
+    "ripple-effect.png"
+]).then(()=>{
+
+    const w=document.getElementById("portrait-canvas").clientWidth;
+    const h=document.getElementById("portrait-canvas").clientHeight;
+
+    app.renderer.resize(w,h);
+
+    photoA.width=w;
+    photoA.height=h;
+
+    photoB.width=w;
+    photoB.height=h;
+
+    displacementSprite.width=w;
+    displacementSprite.height=h;
+
+    displacementSprite.anchor.set(0.5);
+
+    displacementSprite.position.set(w/2,h/2);
+
+    displacementSprite.visible=false;
+
+    app.ticker.add(()=>{
+
+        displacementSprite.rotation+=0.0015;
+
+    });
+
+    setInterval(playRippleTransition,6000);
+
+});
+
+
+/*==================================================
+START THE ENGINE
+==================================================*/
+
+window.addEventListener("load",()=>{
+
+    initPortraitRipple();
+
+});
