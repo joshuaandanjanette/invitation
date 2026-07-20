@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua & Anjanette | Save The Date</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <div id="intro-mist"></div>
+        <div id="intro-particles"></div>
+        
+        <div class="mirror-container">
+            <div class="magic-mirror">
+                <div class="mirror-glass">
+                    <div class="enchanted-rose-glow">
+                        <img src="introrose.png" alt="Enchanted Rose" class="enchanted-rose-img">
+                    </div>
+                    <p class="mirror-text">Be Our Guest</p>
+                </div>
+               <button id="wax-seal" aria-label="Open Invitation">
+                    <div class="seal-fingerprint-custom"></div>
+               </button>
+            </div>
+            <div class="mirror-base"></div>
+        </div>
+    </div>
+
+    <div id="petal-container"></div>
+  
+    <div class="container">
+           <div class="profile-photo">
+
+    <svg class="ripple-svg" xmlns="http://www.w3.org/2000/svg">
+
+        <filter id="waterRipple">
+
+            <feTurbulence
+                id="turbulence"
+                type="fractalNoise"
+                baseFrequency="0.010 0.010"
+                numOctaves="2"
+                seed="7"
+                result="noise"/>
+
+            <feDisplacementMap
+                id="displacement"
+                in="SourceGraphic"
+                in2="noise"
+                scale="0"
+                xChannelSelector="R"
+                yChannelSelector="G"/>
+
+        </filter>
+
+    </svg>
+
+    <div class="portrait-stage" style="filter:url(#waterRipple);">
+
+    <div id="portrait-canvas"></div>
+
+    </div>
+
+    <img src="antique-frame.png" class="portrait-frame">
+
+</div>
+            
+        <h1 class="names">
+            <span class="top-name">Joshua</span>
+            <span class="middle-word">&</span>
+            <span class="bottom-name">Anjanette</span>
+        </h1>
+
+
+        
+         <p class="subtitle">SEPTEMBER 19, 2026</p>
+        <div id="countdown">
+            <div class="time-box"><span id="days">00</span><small>DAYS</small></div>
+            <div class="time-box"><span id="hours">00</span><small>HRS</small></div>
+            <div class="time-box"><span id="minutes">00</span><small>MINS</small></div>
+            <div class="time-box"><span id="seconds">00</span><small>SECS</small></div>
+        </div>
+
+         <p class="subtitle">Save the Date</p>
+        <div class="event-details">
+           
+            <p><a href="https://maps.app.goo.gl/mng4FwANKHfpKCqJ7" target="_blank" class="venue-link">ST. MARK CATHEDRAL</a></p>
+            <p><a href="https://maps.app.goo.gl/iMftmGpHJFiLV1us9" target="_blank" class="venue-link">DOS VILLA</a></p>
+        </div>
+
+        <div class="palette-wrap">
+            <p class="palette-label">DRESS CODE:</p>
+            <div class="color-cubes">
+                <div class="cube" style="background: #FFFFFF;" title="White"></div>
+                <div class="cube" style="background: #000000;" title="Black"></div>
+                <div class="cube" style="background: #A57756;" title="Warm Taupe"></div>
+                <div class="cube" style="background: #CBAC8D;" title="Champagne"></div>
+            </div>
+        </div>
+
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScr-dKpNfhd4oMu4u3ymgh1kXsMvftQqggleZElVwtqb6UX3Q/viewform?usp=header" class="rsvp-btn">BE OUR GUEST</a>
+    </div>
+
+    <div id="player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+
+    
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>
