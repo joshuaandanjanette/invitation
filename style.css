@@ -272,7 +272,7 @@ body::before {
 .names{
     display:flex;
     flex-direction:column;
-    margin-top:-15px;
+    margin-top:-38px;
     margin-bottom:8px;
 }
 .top-name, .bottom-name {
