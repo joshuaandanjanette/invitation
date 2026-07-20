@@ -277,26 +277,28 @@ async function initPortraitRipple(){
 
     if(!holder) return;
 
+
     app = new PIXI.Application({
 
-    width: holder.clientWidth,
-    height: holder.clientHeight,
-    transparent: true,
-    antialias: true,
-    autoDensity: true,
-    resolution: window.devicePixelRatio || 2
+        width: holder.clientWidth,
+        height: holder.clientHeight,
+        backgroundAlpha: 0,
+        antialias: true,
+        resolution: window.devicePixelRatio || 1
 
-});
+    });
 
 
-    holder.appendChild(app.view);
+    holder.appendChild(app.canvas);
+
 
     portraitContainer = new PIXI.Container();
 
     app.stage.addChild(portraitContainer);
 
-    photo1 = PIXI.Sprite.from("backgogogo.png");
 
+
+    photo1 = PIXI.Sprite.from("backgogogo.png");
     photo2 = PIXI.Sprite.from("backgroundpro.png");
 
 
@@ -306,12 +308,32 @@ async function initPortraitRipple(){
 
     photo1.alpha = 1;
     photo2.alpha = 0;
-    photo1.texture.source.scaleMode = "linear";
-    photo2.texture.source.scaleMode = "linear";
 
 
     portraitContainer.addChild(photo1);
     portraitContainer.addChild(photo2);
+
+
+
+    photo1.position.set(
+        holder.clientWidth / 2,
+        holder.clientHeight / 2
+    );
+
+    photo2.position.set(
+        holder.clientWidth / 2,
+        holder.clientHeight / 2
+    );
+
+
+
+    photo1.scale.set(
+        holder.clientWidth / photo1.texture.width
+    );
+
+    photo2.scale.set(
+        holder.clientWidth / photo2.texture.width
+    );
 
 }
 
