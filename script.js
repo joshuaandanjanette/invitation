@@ -285,36 +285,40 @@ function rippleTransition(){
 
         frame++;
 
-        const amount = Math.sin(frame/20*Math.PI)*45;
+        const p = frame / 40;
 
-        displacement.setAttribute("scale", amount);
+        displacement.setAttribute(
+            "scale",
+            Math.sin(p * Math.PI) * 70
+        );
 
         turbulence.setAttribute(
             "baseFrequency",
-            0.010 + frame*0.00025 + " " +
-            (0.010 + frame*0.00025)
+            (0.010 + Math.sin(p * Math.PI) * 0.015) +
+            " " +
+            (0.010 + Math.sin(p * Math.PI) * 0.015)
         );
 
         if(showingFirst){
 
-            img1.style.opacity = 1 - frame/40;
-            img2.style.opacity = frame/40;
+            img1.style.opacity = 1 - p;
+            img2.style.opacity = p;
 
         }else{
 
-            img1.style.opacity = frame/40;
-            img2.style.opacity = 1 - frame/40;
+            img1.style.opacity = p;
+            img2.style.opacity = 1 - p;
 
         }
 
-        if(frame>=40){
+        if(frame >= 40){
 
             clearInterval(ripple);
 
             displacement.setAttribute("scale","0");
             turbulence.setAttribute("baseFrequency","0.010 0.010");
 
-            showingFirst=!showingFirst;
+            showingFirst = !showingFirst;
 
         }
 
