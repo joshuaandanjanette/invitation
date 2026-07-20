@@ -32,17 +32,43 @@
     <div id="petal-container"></div>
   
     <div class="container">
-            <div class="profile-photo">
+           <div class="profile-photo">
 
-                <div class="portrait-ripple"></div>
-                
-                <img src="backgogogo.png" class="photo-1">
+    <svg class="ripple-svg" xmlns="http://www.w3.org/2000/svg">
 
-                <img src="backgroundpro.png" class="photo-2">
+        <filter id="waterRipple">
 
-                <img src="antique-frame.png" class="portrait-frame">
+            <feTurbulence
+                id="turbulence"
+                type="fractalNoise"
+                baseFrequency="0.010 0.010"
+                numOctaves="2"
+                seed="7"
+                result="noise"/>
 
-            </div>
+            <feDisplacementMap
+                id="displacement"
+                in="SourceGraphic"
+                in2="noise"
+                scale="0"
+                xChannelSelector="R"
+                yChannelSelector="G"/>
+
+        </filter>
+
+    </svg>
+
+    <div class="portrait-stage">
+
+        <img src="backgogogo.png" class="photo-1">
+
+        <img src="backgroundpro.png" class="photo-2">
+
+    </div>
+
+    <img src="antique-frame.png" class="portrait-frame">
+
+</div>
             
         <h1 class="names">
             <span class="top-name">Joshua</span>
