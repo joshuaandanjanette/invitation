@@ -387,3 +387,98 @@ function scheduleMagicDust(){
 }
 
 scheduleMagicDust();
+
+
+/*==================================================
+ROYAL BUTTON MODAL
+==================================================*/
+
+const royalModal = document.getElementById("royalModal");
+const modalBody = document.getElementById("modalBody");
+const closeModal = document.getElementById("closeModal");
+
+function openRoyalModal(title, html){
+
+    modalBody.innerHTML = `
+        <h2>${title}</h2>
+        ${html}
+    `;
+
+    royalModal.classList.add("show");
+
+}
+
+function closeRoyalModal(){
+
+    royalModal.classList.remove("show");
+
+}
+
+closeModal.addEventListener("click", closeRoyalModal);
+
+royalModal.addEventListener("click",(e)=>{
+
+    if(e.target===royalModal){
+
+        closeRoyalModal();
+
+    }
+
+});
+
+
+/*==========================
+ENTOURAGE
+==========================*/
+
+document.getElementById("entourageBtn").addEventListener("click",()=>{
+
+    openRoyalModal(
+
+        "ENTOURAGE",
+
+        `
+        <p>Coming Soon</p>
+        `
+
+    );
+
+});
+
+
+/*==========================
+GALLERY
+==========================*/
+
+document.getElementById("galleryBtn").addEventListener("click",()=>{
+
+    openRoyalModal(
+
+        "GALLERY",
+
+        `
+        <p>Coming Soon</p>
+        `
+
+    );
+
+});
+
+
+/*==========================
+EXTRA
+==========================*/
+
+document.getElementById("extraBtn").addEventListener("click",()=>{
+
+    openRoyalModal(
+
+        "EXTRA",
+
+        `
+        <p>Coming Soon</p>
+        `
+
+    );
+
+});
