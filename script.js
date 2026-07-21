@@ -327,3 +327,63 @@ function rippleTransition(){
 }
 
 setInterval(rippleTransition,8000);
+
+
+
+
+const magicDust = document.getElementById("magic-dust");
+
+function createMagicOrbit(){
+
+    if(!magicDust) return;
+
+    const count = Math.floor(Math.random()*5)+4;
+
+    for(let i=0;i<count;i++){
+
+        const s=document.createElement("div");
+
+        s.className="magic-spark";
+
+        const angle=Math.random()*Math.PI*2;
+        const radius=120+Math.random()*60;
+
+        const x=Math.cos(angle)*radius;
+        const y=Math.sin(angle)*radius;
+
+        s.style.left="50%";
+        s.style.top="50%";
+
+        s.style.setProperty("--x",x+"px");
+        s.style.setProperty("--y",y+"px");
+
+        s.style.animationDelay=(i*0.08)+"s";
+
+        magicDust.appendChild(s);
+
+        setTimeout(()=>{
+
+            s.remove();
+
+        },2700);
+
+    }
+
+}
+
+
+function scheduleMagicDust(){
+
+    const delay = 12000 + Math.random() * 12000;
+
+    setTimeout(() => {
+
+        createMagicOrbit();
+
+        scheduleMagicDust();
+
+    }, delay);
+
+}
+
+scheduleMagicDust();
