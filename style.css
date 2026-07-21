@@ -772,6 +772,10 @@ body::before {
 .wordmark{
     width:420px;
     max-width:92%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     filter:
         drop-shadow(0 0 4px rgba(255,214,120,.45))
@@ -785,8 +789,84 @@ body::before {
     display:block;
     width:100%;
     height:auto;
+    
 }
 
+
+#magic-dust{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:visible;
+
+    z-index:20;
+
+}
+
+.magic-spark{
+
+    position:absolute;
+
+    width:5px;
+
+    height:5px;
+
+    border-radius:50%;
+
+    background:#fff4b0;
+
+    box-shadow:
+        0 0 6px #fff7c8,
+        0 0 12px #ffe28a,
+        0 0 24px #ffd04d;
+
+    opacity:0;
+
+}
+
+
+@keyframes fairyOrbit{
+
+    0%{
+
+        opacity:0;
+        transform:translate(-50%,-50%) scale(.2);
+
+    }
+
+    15%{
+
+        opacity:1;
+
+    }
+
+    85%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+        transform:translate(
+            calc(-50% + var(--x)),
+            calc(-50% + var(--y))
+        ) scale(0);
+
+    }
+
+}
+
+.magic-spark{
+
+    animation:fairyOrbit 2.6s ease-out forwards;
+
+}
 
 
 @keyframes enchantedGlow{
