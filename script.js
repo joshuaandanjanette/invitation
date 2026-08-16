@@ -476,7 +476,7 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
                 <section class="entourage-section">
                     <h3>GROOMSMEN</h3>
-                    <p>Jonathan Trenblay</p>
+                    <p>Jonathan Tremblay</p>
                     <p>John Joseph Baylon</p>
                     <p>Aaron Aguda</p>
                     <p>Renzo Mercado</p>
