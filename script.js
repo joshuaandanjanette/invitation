@@ -438,7 +438,149 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
         "ENTOURAGE",
 
         `
-        <p>Coming Soon</p>
+
+        <div class="entourage-list">
+
+            <section class="entourage-section">
+                <h3>OFFICIATING PRIEST</h3>
+                <p>Fr. Francis B. Lucas</p>
+            </section>
+
+            <section class="entourage-section">
+                <h3>PARENTS OF THE GROOM</h3>
+                <p>Jerold T. Baylon</p>
+                <p>Janet R. Baylon</p>
+            </section>
+
+            <section class="entourage-section">
+                <h3>PARENTS OF THE BRIDE</h3>
+                <p>Agustin T. Vargas</p>
+                <p>Yollanda M. Vargas</p>
+            </section>
+
+            <div class="entourage-grid">
+
+                <section class="entourage-section">
+                    <h3>BEST MAN</h3>
+                    <p>Regino Jose Merida</p>
+                </section>
+
+                <section class="entourage-section">
+                    <h3>MAID OF HONOR</h3>
+                    <p>Jeremiah Baylon</p>
+                </section>
+
+            </div>
+
+            <div class="entourage-grid">
+
+                <section class="entourage-section">
+                    <h3>GROOMSMEN</h3>
+                    <p>Jonathan Trenblay</p>
+                    <p>John Joseph Baylon</p>
+                    <p>Aaron Aguda</p>
+                    <p>Renzo Mercado</p>
+                    <p>John King Crisostomo</p>
+                    <p>John Jerill Revellame</p>
+                    <p>Gerald Cuballes</p>
+                    <p>John Carlo Baylon</p>
+                    <p>James Carlo Baylon</p>
+                    <p>Grecson Tena</p>
+                    <p>Vincent Moises</p>
+                    <p>Fitz Gerald Moises</p>
+                    <p>Russel Dela Cruz</p>
+                    <p>Heaven Joshua Sena</p>
+                    <p>John Lloyd Alteza</p>
+                </section>
+
+                <section class="entourage-section">
+                    <h3>BRIDESMAIDS</h3>
+                    <p>Jane Baylon</p>
+                    <p>Ceejay Mari Villanueva</p>
+                    <p>Jocel Ann Baylon</p>
+                    <p>Babylyn Alqueros</p>
+                    <p>Mabeth Juntereal</p>
+                    <p>Aira Juntereal</p>
+                    <p>Joy Novi Pearl Moises</p>
+                    <p>Rose Ann Peñamante</p>
+                    <p>Reyamor Evangelista</p>
+                    <p>Marian Joy Corpuz</p>
+                    <p>Queenie Soriano</p>
+                    <p>Cyrene Shane Caagbay</p>
+                    <p>Jannah Moises</p>
+                    <p>Kimberly Martell</p>
+                    <p>Charlene Kaye Moises</p>
+                </section>
+
+            </div>
+
+            <div class="entourage-grid">
+
+                <section class="entourage-section">
+                    <h3>RING BEARER</h3>
+                    <p>Name</p>
+                </section>
+
+                <section class="entourage-section">
+                    <h3>BIBLE BEARER</h3>
+                    <p>Name</p>
+                </section>
+
+                <section class="entourage-section">
+                    <h3>COIN BEARER</h3>
+                    <p>Name</p>
+                </section>
+
+            </div>
+
+            <section class="entourage-section">
+                <h3>FLOWER GIRLS</h3>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+            </section>
+
+            <section class="entourage-section principal-sponsors">
+                <h3>PRINCIPAL SPONSORS</h3>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+                <p>Name</p>
+            </section>
+
+        </div>
+
         `
 
     );
