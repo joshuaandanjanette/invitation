@@ -1243,3 +1243,62 @@ ROYAL MODAL
     }
 
 }
+
+
+
+/*==================================================
+ENTOURAGE
+==================================================*/
+
+.entourage-list{
+    max-width:750px;
+    margin:0 auto;
+    padding:10px 0;
+}
+
+.entourage-section{
+    margin:28px 0;
+}
+
+.entourage-section h3{
+    margin:0 0 12px;
+    color:#B59410;
+    font-size:.82rem;
+    letter-spacing:3px;
+    font-weight:700;
+}
+
+.entourage-section p{
+    margin:5px 0;
+    color:#F7F2E9;
+    font-size:.9rem;
+}
+
+.entourage-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:25px;
+    align-items:start;
+}
+
+.entourage-grid:has(.entourage-section:nth-child(3)){
+    grid-template-columns:repeat(3, 1fr);
+}
+
+.principal-sponsors{
+    padding-top:10px;
+}
+
+@media(max-width:700px){
+
+    .entourage-grid,
+    .entourage-grid:has(.entourage-section:nth-child(3)){
+        grid-template-columns:1fr;
+        gap:0;
+    }
+
+    .entourage-section{
+        margin:24px 0;
+    }
+
+}
