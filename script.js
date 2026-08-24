@@ -542,41 +542,8 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
             <section class="entourage-section principal-sponsors">
                 <h3>PRINCIPAL SPONSORS</h3>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
+                <p>Arriving shortly...</p>
+                
             </section>
 
         </div>
