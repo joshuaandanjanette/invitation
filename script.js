@@ -518,17 +518,17 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
                 <section class="entourage-section">
                     <h3>RING BEARER</h3>
-                    <p>Name</p>
+                    <p>Jace Amory Deacon Castro</p>
                 </section>
 
                 <section class="entourage-section">
                     <h3>BIBLE BEARER</h3>
-                    <p>Name</p>
+                    <p>Calum John Verbo</p>
                 </section>
 
                 <section class="entourage-section">
                     <h3>COIN BEARER</h3>
-                    <p>Name</p>
+                    <p>Jude Ulfred Rylie Castro</p>
                 </section>
 
             </div>
