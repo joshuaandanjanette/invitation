@@ -498,7 +498,7 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                     <p>Jane Baylon</p>
                     <p>Ceejay Mari Villanueva</p>
                     <p>Jocel Ann Baylon</p>
-                    <p>Babylyn Alqueros</p>
+                    <p>Jezza Mae Sunga</p>
                     <p>Mabeth Juntereal</p>
                     <p>Aira Juntereal</p>
                     <p>Joy Novi Pearl Moises</p>
