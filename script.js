@@ -558,12 +558,23 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
             <section class="entourage-section">
                 <h3>Junior Groomsmen & Bridesmaids</h3>
-                <p>Quinn Eros Moises & Victoria Queen Caagbay</p>
-                <p>Xian Kenzo Torres & Venice Cyanea Viado</p>
-                <p>Miguel Ebreo & Erin Beatrice Del Fierro</p>
-                <p>Earl Yohance Del Fierro & Maiza Felicia Babiera</p>
-                <p>Stephen James Adova & Akisha Elisha Orozco</p>
-                <p>Caleb Jay Verbo & Claire Syra Ritual</p>
+                <p>Quinn Eros Moises</p>
+                <p>Victoria Queen Caagbay</p>
+                <p>-</p>
+                <p>Xian Kenzo Torres</p>
+                <p>Venice Cyanea Viado</p>
+                <p>-</p>
+                <p>Miguel Ebreo</p>
+                <p>Erin Beatrice Del Fierro</p>
+                <p>-</p>
+                <p>Earl Yohance Del Fierro</p>
+                <p>Maiza Felicia Babiera</p>
+                <p>-</p>
+                <p>Stephen James Adova</p>
+                <p>Akisha Elisha Orozco</p>
+                <p>-</p>
+                <p>Caleb Jay Verbo</p>
+                <p>Claire Syra Ritual</p>
             </section>
 
             
