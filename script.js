@@ -475,16 +475,34 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
             <div class="entourage-grid">
 
                 <section class="entourage-section">
-                    <h3>GROOMSMEN</h3>
+                    <h3>Candle</h3>
                     <p>Jonathan Tremblay</p>
+                    <p>Jane Baylon</p>
+                </section>
+
+                <section class="entourage-section">
+                    <h3>veil</h3>
+                    <p>Gerald Cuballes</p>
+                    <p>Rose Ann Peñamante</p>
+                </section>
+
+                 <section class="entourage-section">
+                    <h3>Cord</h3>
                     <p>John Joseph Baylon</p>
+                    <p>Ceejay Mari Villanueva</p>
+                </section>
+
+            </div>
+
+            <div class="entourage-grid">
+
+                <section class="entourage-section">
+                    <h3>GROOMSMEN</h3>
                     <p>Aaron Aguda</p>
                     <p>Renzo Mercado</p>
                     <p>John King Crisostomo</p>
                     <p>John Jerill Revellame</p>
-                    <p>Gerald Cuballes</p>
                     <p>John Carlo Baylon</p>
-                    <p>James Carlo Baylon</p>
                     <p>Grecson Tena</p>
                     <p>Vincent Moises</p>
                     <p>Fitz Gerald Moises</p>
@@ -495,14 +513,11 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
                 <section class="entourage-section">
                     <h3>BRIDESMAIDS</h3>
-                    <p>Jane Baylon</p>
-                    <p>Ceejay Mari Villanueva</p>
                     <p>Jocel Ann Baylon</p>
                     <p>Jezza Mae Sunga</p>
                     <p>Mabeth Juntereal</p>
                     <p>Aira Juntereal</p>
                     <p>Joy Novi Pearl Moises</p>
-                    <p>Rose Ann Peñamante</p>
                     <p>Reyamor Evangelista</p>
                     <p>Marian Joy Corpuz</p>
                     <p>Queenie Soriano</p>
