@@ -304,7 +304,7 @@ body::before {
 .palette-wrap { margin: 20px 0; }
 .palette-label { font-size: 0.9rem; letter-spacing: 2px; color: #f7e08a; margin-bottom: 10px; }
 .color-cubes { display: flex; justify-content: center; gap: 10px; }
-.cube { width: 30px; height: 30px; border: 1px solid rgba(181, 148, 16, 0.4); border-radius: 4px; }
+.cube { width: 60px; height: 60px; border: 1px solid rgba(181, 148, 16, 0.4); border-radius: 4px; }
 
 /* --- 6. RSVP BUTTON --- */
 .rsvp-btn { display: inline-block; background: #6B0F1A; color: #E8DCC4; text-decoration: none; border: 1px solid #B59410; padding: 14px 45px; margin-top: 15px; letter-spacing: 2px; border-radius: 5px; transition: 0.3s; font-weight: bold; }
