@@ -499,32 +499,32 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                 <section class="entourage-section">
                     <h3>GROOMSMEN</h3>
                     <p>Aaron Aguda</p>
-                    <p>Renzo Mercado</p>
-                    <p>John King Crisostomo</p>
-                    <p>John Jerill Revellame</p>
-                    <p>John Carlo Baylon</p>
-                    <p>Grecson Tena</p>
-                    <p>Vincent Moises</p>
-                    <p>Fitz Gerald Moises</p>
-                    <p>Russel Dela Cruz</p>
-                    <p>Heaven Joshua Sena</p>
                     <p>John Lloyd Alteza</p>
+                    <p>John Carlo Baylon</p>
+                    <p>John King Crisostomo</p>
+                    <p>Russel Dela Cruz</p>
+                    <p>Renzo Mercado</p>
+                    <p>Fitz Gerald Moises</p>
+                    <p>Vincent Moises</p>
+                    <p>John Jerill Revellame</p>
+                    <p>Heaven Joshua Sena</p>
+                    <p>Grecson Tena</p>
                 </section>
 
                 <section class="entourage-section">
                     <h3>BRIDESMAIDS</h3>
                     <p>Jocel Ann Baylon</p>
-                    <p>Jezza Mae Sunga</p>
-                    <p>Mabeth Juntereal</p>
-                    <p>Aira Juntereal</p>
-                    <p>Joy Novi Pearl Moises</p>
-                    <p>Reyamor Evangelista</p>
-                    <p>Marian Joy Corpuz</p>
-                    <p>Queenie Soriano</p>
                     <p>Cyrene Shane Caagbay</p>
-                    <p>Jannah Moises</p>
+                    <p>Marian Joy Corpuz</p>
+                    <p>Reyamor Evangelista</p>
+                    <p>Aira Juntereal</p>
+                    <p>Mabeth Juntereal</p>
                     <p>Kimberly Martell</p>
+                    <p>Joy Novi Pearl Moises</p>
                     <p>Charlene Kaye Moises</p>
+                    <p>Jannah Moises</p>
+                    <p>Queenie Soriano</p>
+                    <p>Jezza Mae Sunga</p>
                 </section>
 
             </div>
@@ -550,10 +550,23 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
             <section class="entourage-section">
                 <h3>FLOWER GIRLS</h3>
-                <p>Name</p>
-                <p>Name</p>
-                <p>Name</p>
+                <p>Jaq Athena Gabrielle Castro</p>
+                <p>Amirah Bella Dean</p>
+                <p>Maliya Recahuerta</p>
+                <p>Marvina Revellame</p>
             </section>
+
+            <section class="entourage-section">
+                <h3>Junior Groomsmen & Bridesmaids</h3>
+                <p>Quinn Eros Moises & Victoria Queen Caagbay</p>
+                <p>Xian Kenzo Torres & Venice Cyanea Viado</p>
+                <p>Miguel Ebreo & Erin Beatrice Del Fierro</p>
+                <p>Earl Yohance Del Fierro & Maiza Felicia Babiera</p>
+                <p>Stephen James Adova & Akisha Elisha Orozco</p>
+                <p>Caleb Jay Verbo & Claire Syra Ritual</p>
+            </section>
+
+            
 
             <section class="entourage-section principal-sponsors">
                 <h3>PRINCIPAL SPONSORS</h3>
