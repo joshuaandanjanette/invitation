@@ -458,6 +458,12 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                 <p>Yollanda M. Vargas</p>
             </section>
 
+            <section class="entourage-section principal-sponsors">
+                <h3>PRINCIPAL SPONSORS</h3>
+                <p>Arriving shortly...</p>
+                
+            </section>
+
             <div class="entourage-grid">
 
                 <section class="entourage-section">
@@ -579,11 +585,7 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
             
 
-            <section class="entourage-section principal-sponsors">
-                <h3>PRINCIPAL SPONSORS</h3>
-                <p>Arriving shortly...</p>
-                
-            </section>
+            
 
         </div>
 
