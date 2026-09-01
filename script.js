@@ -448,32 +448,81 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
             <section class="entourage-section">
                 <h3>PARENTS OF THE GROOM</h3>
-                <p>Jerold T. Baylon</p>
-                <p>Janet R. Baylon</p>
+                <p>Mr. Jerold T. Baylon</p>
+                <p>Mrs. Janet R. Baylon</p>
             </section>
 
             <section class="entourage-section">
                 <h3>PARENTS OF THE BRIDE</h3>
-                <p>Agustin T. Vargas</p>
-                <p>Yollanda M. Vargas</p>
+                <p>Mr. Agustin T. Vargas</p>
+                <p>Mrs. Yollanda M. Vargas</p>
             </section>
 
-            <section class="entourage-section principal-sponsors">
-                <h3>PRINCIPAL SPONSORS</h3>
-                <p>Arriving shortly...</p>
-                
-            </section>
+
+            <div class="entourage-grid">
+
+                <section class="entourage-section principal-sponsors">
+                    <h3>NINONG</h3>
+                    <p>Fr. Fransic B. Lucas</p>
+                    <p>Mayor Alfredo J. Pujeda</p>
+                    <p>Mayor Lord Arnel L. Ruanto</p>
+                    <p>Mr. Remigio B. Alteza Jr.</p>
+                    <p>Mr. Arnel P. Astoveza</p>
+                    <p>Mr. Juanito J. Balboa</p>
+                    <p>Mr. Jose T. Baylon</p>
+                    <p>Capt. David Black</p>
+                    <p>Mr. Celso A. Buerano</p>
+                    <p>Mr. Rodel D. Conde</p>
+                    <p>Mr. Violeto N. Coronacion</p>
+                    <p>Mr. Conrado P. Corpuz</p>
+                    <p>Mr. Nilo A. Cuerdo</p>
+                    <p>Mr. Sandro D. Delos Santos</p>
+                    <p>Mr. Cunard Pearson</p>
+                    <p>Mr. Luis L. Peñamora</p>
+                    <p>Brgy. Capt. Joart E. Purpura</p>
+                </section>
+
+                <section class="entourage-section principal-sponsors">
+                    <h3>NINANG</h3>
+                    <p>Mrs. Leny T. Aumentado</p>
+                    <p>Mrs. Lorena J. Bautista</p>
+                    <p>Mrs. Riza M. Caagbay</p>
+                    <p>Mrs. Rizel G. Caranto</p>
+                    <p>Mrs. Janette C. Coralde</p>
+                    <p>Mrs. Gina B. Escara</p>
+                    <p>Mrs. Chita T. Martell</p>
+                    <p>Coun. Cherry C. Macasaet</p>
+                    <p>Mrs. Aleli A. Portales</p>
+                    <p>Coun. Laiza S. Ramos</p>
+                    <p>Mrs. Blesilda P. Ruanto</p>
+                    <p>Mrs. Eurose R. Coronacion</p>
+                    <p>Mrs. Georgina C. Tayangona</p>
+                    <p>Mrs. Grace D. Tena</p>
+                    <p>Dra. Hermajin A. Tena</p>
+                    <p>Mrs. Salvina O. Turgo</p>
+                    <p>Mrs. Mitos Amadel S. Villamor</p>
+                </section>
+
+            </div>
+
+
+
+
+
+
+
+            
 
             <div class="entourage-grid">
 
                 <section class="entourage-section">
                     <h3>BEST MAN</h3>
-                    <p>Regino Jose Merida</p>
+                    <p>Mr. Regino Jose Merida</p>
                 </section>
 
                 <section class="entourage-section">
                     <h3>MAID OF HONOR</h3>
-                    <p>Jeremiah Baylon</p>
+                    <p>Ms. Jeremiah Baylon</p>
                 </section>
 
             </div>
@@ -481,21 +530,21 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
             <div class="entourage-grid">
 
                 <section class="entourage-section">
-                    <h3>Candle</h3>
-                    <p>Jonathan Tremblay</p>
-                    <p>Jane Baylon</p>
+                    <h3>to Light OUR Path</h3>
+                    <p>Mr. Jonathan Tremblay</p>
+                    <p>Ms. Jane Baylon</p>
                 </section>
 
                 <section class="entourage-section">
-                    <h3>veil</h3>
-                    <p>Gerald Cuballes</p>
-                    <p>Rose Ann Peñamante</p>
+                    <h3>to Clothe US as ONE</h3>
+                    <p>Mr. Keith Jacka Caagbay</p>
+                    <p>Ms. Rose Ann Peñamante</p>
                 </section>
 
                  <section class="entourage-section">
-                    <h3>Cord</h3>
-                    <p>John Joseph Baylon</p>
-                    <p>Ceejay Mari Villanueva</p>
+                    <h3>to Bind US Together</h3>
+                    <p>Mr. John Joseph Baylon</p>
+                    <p>Ms. Ceejay Mari Villanueva</p>
                 </section>
 
             </div>
@@ -504,33 +553,33 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
                 <section class="entourage-section">
                     <h3>GROOMSMEN</h3>
-                    <p>Aaron Aguda</p>
-                    <p>John Lloyd Alteza</p>
-                    <p>John Carlo Baylon</p>
-                    <p>John King Crisostomo</p>
-                    <p>Russel Dela Cruz</p>
-                    <p>Renzo Mercado</p>
-                    <p>Fitz Gerald Moises</p>
-                    <p>Vincent Moises</p>
-                    <p>John Jerill Revellame</p>
-                    <p>Heaven Joshua Sena</p>
-                    <p>Grecson Tena</p>
+                    <p>Mr. Aaron Aguda</p>
+                    <p>Mr. John Lloyd Alteza</p>
+                    <p>Mr. John Carlo Baylon</p>
+                    <p>Engr. John King Crisostomo</p>
+                    <p>Mr. Russel Dela Cruz</p>
+                    <p>Engr. Renzo Mercado</p>
+                    <p>Mr. Fitz Gerald Moises</p>
+                    <p>Mr. Vincent Moises</p>
+                    <p>Mr. John Jerill Revellame</p>
+                    <p>Mr. Heaven Joshua Sena</p>
+                    <p>Mr. Grecson Tena</p>
                 </section>
 
                 <section class="entourage-section">
                     <h3>BRIDESMAIDS</h3>
-                    <p>Jocel Ann Baylon</p>
-                    <p>Cyrene Shane Caagbay</p>
-                    <p>Marian Joy Corpuz</p>
-                    <p>Reyamor Evangelista</p>
-                    <p>Aira Juntereal</p>
-                    <p>Mabeth Juntereal</p>
-                    <p>Kimberly Martell</p>
-                    <p>Joy Novi Pearl Moises</p>
-                    <p>Charlene Kaye Moises</p>
-                    <p>Jannah Moises</p>
-                    <p>Queenie Soriano</p>
-                    <p>Jezza Mae Sunga</p>
+                    <p>Ms. Jocel Ann Baylon</p>
+                    <p>Ms. Cyrene Shane Caagbay</p>
+                    <p>Ms. Marian Joy Corpuz</p>
+                    <p>Ms. Reyamor Evangelista</p>
+                    <p>Ms. Aira Juntereal</p>
+                    <p>Ms. Mabeth Juntereal</p>
+                    <p>Ms. Kimberly Martell</p>
+                    <p>Ms. Joy Novi Pearl Moises</p>
+                    <p>Ms. Charlene Kaye Moises</p>
+                    <p>Ms. Jannah Moises</p>
+                    <p>Ms. Queenie Soriano</p>
+                    <p>Atty. Jezza Mae Sunga</p>
                 </section>
 
             </div>
