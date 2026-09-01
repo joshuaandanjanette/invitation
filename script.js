@@ -506,11 +506,6 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
             </div>
 
 
-
-
-
-
-
             
 
             <div class="entourage-grid">
@@ -523,6 +518,12 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                 <section class="entourage-section">
                     <h3>MAID OF HONOR</h3>
                     <p>Ms. Jeremiah Baylon</p>
+                </section>
+
+                <section class="entourage-section">
+                    <h3>MATRONS OF HONOR</h3>
+                    <p>Ms. Kristine Jade Castro</p>
+                    <p>Ms. Cherry Jane Verbo</p>
                 </section>
 
             </div>
@@ -564,6 +565,9 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                     <p>Mr. John Jerill Revellame</p>
                     <p>Mr. Heaven Joshua Sena</p>
                     <p>Mr. Grecson Tena</p>
+                    <p>☆</p>
+                    <p>Mr. Jury Castro</p>
+                    <p>Mr. Jaypee Verbo</p>
                 </section>
 
                 <section class="entourage-section">
