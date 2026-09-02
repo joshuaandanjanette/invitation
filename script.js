@@ -565,15 +565,16 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                     <p>Mr. John Jerill Revellame</p>
                     <p>Mr. Heaven Joshua Sena</p>
                     <p>Mr. Grecson Tena</p>
-                    <p>☆</p>
+                    <p>-</p>
                     <p>Mr. Jury Castro</p>
                     <p>Mr. Jaypee Verbo</p>
                 </section>
 
                 <section class="entourage-section">
                     <h3>BRIDESMAIDS</h3>
-                    <p>Ms. Jocel Ann Baylon</p>
                     <p>Ms. Cyrene Shane Caagbay</p>
+                    <p>-</p>
+                    <p>Ms. Jocel Ann Baylon</p>
                     <p>Ms. Marian Joy Corpuz</p>
                     <p>Ms. Reyamor Evangelista</p>
                     <p>Ms. Aira Juntereal</p>
