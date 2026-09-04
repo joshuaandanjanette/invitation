@@ -614,8 +614,9 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                 <p>Amirah Bella Dean</p>
                 <p>Maliya Recahuerta</p>
                 <p>Marvina Revellame</p>
-                <p>Sofia Denise Revellame</p>
                 <p>Michiko Huertazuela</p>
+                <p>Sofia Denise Revellame</p>
+                
             </section>
 
             <section class="entourage-section">
