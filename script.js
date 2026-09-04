@@ -455,7 +455,7 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
             <section class="entourage-section">
                 <h3>PARENTS OF THE BRIDE</h3>
                 <p>Mr. Agustin T. Vargas</p>
-                <p>Mrs. Yollanda M. Vargas</p>
+                <p>Mrs. Yolanda M. Vargas</p>
             </section>
 
 
@@ -614,6 +614,8 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                 <p>Amirah Bella Dean</p>
                 <p>Maliya Recahuerta</p>
                 <p>Marvina Revellame</p>
+                <p>Sofia Denise Revellame</p>
+                <p>Michiko Huertazuela</p>
             </section>
 
             <section class="entourage-section">
