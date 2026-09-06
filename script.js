@@ -493,8 +493,8 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                     <p>Mrs. Janette C. Coralde</p>
                     <p>Mrs. Eurose R. Coronacion</p>
                     <p>Mrs. Gina B. Escara</p>
-                    <p>Mrs. Chita T. Martell</p>
                     <p>Coun. Cherry C. Macasaet</p>
+                    <p>Mrs. Chita T. Martell</p>
                     <p>Mrs. Aleli A. Portales</p>
                     <p>Coun. Laiza S. Ramos</p>
                     <p>Mrs. Blesilda P. Ruanto</p>
