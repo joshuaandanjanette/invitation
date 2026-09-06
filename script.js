@@ -463,7 +463,7 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
 
                 <section class="entourage-section principal-sponsors">
                     <h3>NINONG</h3>
-                    <p>Fr. Fransic B. Lucas</p>
+                    <p>Fr. Francis B. Lucas</p>
                     <p>Mayor Alfredo J. Pujeda</p>
                     <p>Mayor Lord Arnel L. Ruanto</p>
                     <p>Mr. Remigio B. Alteza Jr.</p>
@@ -475,11 +475,13 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                     <p>Mr. Rodel D. Conde</p>
                     <p>Mr. Violeto N. Coronacion</p>
                     <p>Mr. Conrado P. Corpuz</p>
+                    <p>Mr. Melchor D. Cuento</p>
                     <p>Mr. Nilo A. Cuerdo</p>
                     <p>Mr. Sandro D. Delos Santos</p>
                     <p>Mr. Cunard Pearson</p>
                     <p>Mr. Luis L. Peñamora</p>
                     <p>Brgy. Capt. Joart E. Purpura</p>
+                    
                 </section>
 
                 <section class="entourage-section principal-sponsors">
@@ -489,13 +491,14 @@ document.getElementById("entourageBtn").addEventListener("click",()=>{
                     <p>Mrs. Riza M. Caagbay</p>
                     <p>Mrs. Rizel G. Caranto</p>
                     <p>Mrs. Janette C. Coralde</p>
+                    <p>Mrs. Eurose R. Coronacion</p>
                     <p>Mrs. Gina B. Escara</p>
                     <p>Mrs. Chita T. Martell</p>
                     <p>Coun. Cherry C. Macasaet</p>
                     <p>Mrs. Aleli A. Portales</p>
                     <p>Coun. Laiza S. Ramos</p>
                     <p>Mrs. Blesilda P. Ruanto</p>
-                    <p>Mrs. Eurose R. Coronacion</p>
+                    <p>Coun. Magie M. Sabiduria</p>
                     <p>Mrs. Georgina C. Tayangona</p>
                     <p>Mrs. Grace D. Tena</p>
                     <p>Dra. Hermajin A. Tena</p>
